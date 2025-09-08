@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="src/icon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Iniciar sesion</title>
+    <title>Registrarse</title>
   </head>
 
   <body>
@@ -14,20 +14,22 @@
         <img src="src/logo.png" id="logo" width= "132rem" height="auto">
       </div>
     </nav>
-    <main class="login_main">
+    <main class="signup_main">
       <div class="div_form">
         <h1>
-          Iniciar sesion
+          Registrarse
         </h1>
-        <form class="form_inputs" action="/submit" method="POST">
+        <div class="form_inputs">
+          <input type="text" name="names" placeholder="Nombres">
+          <input type="text" name="surnames" placeholder="Apellidos">
+          <input type="number" name="age" placeholder="Edad">
           <input type="email" name="email" placeholder="ejemplo@gmail.com">
           <input type="password" name="password" placeholder="Contraseña">
-        </form>
-        <a href="fpassword.html">¿Olvidaste tu contraseña?</a>
-        <div class="submit_button">
-          <input type="submit" onclick="" value="Ingresar">
+          <input type="password" name="cpassword" placeholder="Confirmar contraseña">
         </div>
-        <a href="signup.html">Crear una cuenta</a>
+        <div class="submit_button">
+          <input type="submit" value="Crear cuenta">
+        </div>
       </div>
       <div class="div_logo">
         <img src="src/logo.png" width= "300rem" height="auto">
