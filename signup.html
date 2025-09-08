@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="src/signup.js"></script>
     <title>Registrarse</title>
   </head>
 
@@ -15,12 +16,12 @@
           Registrarse
         </h1>
         <div class="form_inputs">
-          <input type="text" name="names" placeholder="Nombres">
-          <input type="text" name="surnames" placeholder="Apellidos">
-          <input type="number" name="age" placeholder="Edad">
-          <input type="email" name="email" placeholder="ejemplo@gmail.com">
-          <input type="password" name="password" placeholder="Contraseña">
-          <input type="password" name="cpassword" placeholder="Confirmar contraseña">
+          <input type="text" name="nombres" placeholder="Nombres">
+          <input type="text" name="apellidos" placeholder="Apellidos">
+          <input type="number" name="edad" placeholder="Edad" inputmode="numeric" pattern="[0-9]*" onkeydown="if(event.key === 'e' || event.key === 'E' || event.key === '+' || event.key === '-') event.preventDefault();">
+          <input type="email" name="correo" placeholder="ejemplo@gmail.com">
+          <input type="password" name="contrasena" placeholder="Contraseña">
+          <input type="password" name="confirmarContrasena" placeholder="Confirmar contraseña">
         </div>
         <div class="submit_button">
           <input type="submit" value="Crear cuenta">
