@@ -1,0 +1,14 @@
+body{
+    background-color: #D5D5D5;
+}
+
+main {
+    border-radius: 5%;
+    background-color:#007A91;
+    padding: 1.5rem;
+    width: 40rem;
+    height: 24rem;
+    margin-top: 10rem;
+    margin-left: auto;
+    margin-right: auto;
+}
