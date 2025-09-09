@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do Center</title>
+    <link rel="stylesheet" href="src/stylenewtask.css">
+</head>
+<body>
+    <div class="head">
+        <div class="logo">
+            <a href="taskpage.html">
+                <img src="images/todo.png" alt="Mi Logo" class="logo-img">
+            </a>
+        </div>
+        <nav class="navbar">
+            <a href="#">User</a>
+            <a href="#">Sing Out</a>
+        </nav>
+    </div>
+    <div class="container">
+        <h2>Task Information</h2>
+        
+        <form id="task-form">
+        <input type="text" placeholder="What is the name of your task?..." id="task-name" required>
+        <textarea placeholder="What is your task about?..." id="task-desc"></textarea>
+
+        <div class="form-row">
+            <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="task-date" required>
+            </div>
+            <div class="form-group">
+            <label>Start Time</label>
+            <input type="time" id="start-time" required>
+            </div>
+            <div class="form-group">
+            <label>End Time</label>
+            <input type="time" id="end-time" required>
+            </div>
+            <div class="form-group">
+            <label>Task Status</label>
+            <select id="task-status">
+                <option value="Pending" selected>Pending</option>
+                <option value="InProcess">In Process</option>
+                <option value="Completed">Completed</option>
+            </select>
+            </div>
+        </div>
+
+        <button type="submit" class="create-btn">Create Task</button>
+        </form>
+    </div>
+
+  <script src="src/newtask.js"></script>
+    
+</body>
+</html>

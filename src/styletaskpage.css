@@ -1,0 +1,559 @@
+:root {
+	--dark: #374151;
+	--darker: #1F2937;
+	--darkest: #111827;
+	--grey: #6B7280;
+	--pink: #EC4899;
+	--purple: #8B5CF6;
+	--light: #EEE;
+}
+
+* {
+	margin: 0;
+	box-sizing: border-box;
+	font-family: "Fira sans", sans-serif;
+    padding: 0; 
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 55px;
+    background: #007A91;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
+.logo {
+    margin-left: 30px;
+}
+
+.logo-img {
+    height: 50px;   
+    width: auto;    /* mantiene proporciones */
+}
+
+
+.navbar {
+    display: flex;
+    margin-right: 0px;
+}
+
+.navbar a {
+    padding: 19px 20px;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+
+.navbar a:hover {
+    background: #153e5a;
+}
+
+.search {
+    margin-top: 67px; /* Igual a la altura de .head */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#search-task-form {
+	display: flex;
+}
+#search-task {
+    flex: 1 1 0%;
+    width: 1200px; /* Puedes ajustar este valor */
+    height: 2.45rem;
+	background-color: #F4ECEC;
+	padding: 1rem;
+	border-radius: 1rem;
+	margin-right: 1rem;
+	color: #000;
+	font-size: 1.2rem;
+    margin: 0 15px;
+
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items:  center;
+    justify-content: center;
+    max-width: 10px; /* Ajusta este valor según la altura de tu header */
+    margin: 20px auto 0 auto;
+}
+
+.stats-container {
+    padding:  20px;
+    border-radius: 20px;
+    background: #00475cb4;
+    display: flex;
+    gap: 20px;
+    width: 1200px;
+    justify-content: space-between;
+}
+.details {
+    width: 100%;
+}
+#progressBar {
+    width: 600px;
+    height: 20px;
+    border: 2px solid #024755;
+    border-radius: 10px;
+    margin-top: 18px;
+    background: #ccc;
+}
+
+#progress {
+    height: 100%;
+    width: 80%;
+    background: crimson;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+#numbers {
+    width: 100px;
+    height: 100px;
+    background: #024755;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 30px;
+    font-weight:  bold;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 200vh;
+	color: #FFF;
+	background-color: #D5D5D5
+}
+
+header {
+	max-width: 1200px;
+	width: 100%;
+	margin: 0 auto;
+    margin-top: 40px;
+}
+
+header h1{ 
+	font-size: 2.3rem;
+	color: #000;
+    font-weight:  bold;
+
+}
+
+#new-task-form {
+	display: flex;;
+}
+
+input, button {
+	appearance: none;
+	border: none;
+	outline: none;
+	background: none;
+}
+
+#new-task-input {
+	flex: 1 1 0%;
+	background-color: var(--darker);
+	padding: 1rem;
+	border-radius: 1rem;
+	margin-right: 1rem;
+	color: var(--light);
+	font-size: 1.25rem;
+}
+
+#new-task-input::placeholder {
+	color: var(--grey);
+}
+
+#new-task-submit {
+	color: var(--pink);
+	font-size: 1.25rem;
+	font-weight: 700;
+	background-image: linear-gradient(to right, var(--pink), var(--purple));
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	cursor: pointer;
+	transition: 0.4s;
+}
+
+#new-task-submit:hover {
+	opacity: 0.8;
+}
+
+#new-task-submit:active {
+	opacity: 0.6;
+}
+
+main {
+	flex: 1 1 0%;
+	margin: 0 auto;
+    margin-top: 40px;
+    width: 100%;   
+    display: flex;
+    justify-content: center; 
+}
+
+
+.tasks-columns {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    align-items: flex-start;
+    width: 70%;
+    margin: 0 auto;     /* centra el bloque que tiene max-width */
+    padding: 0 16px;    /* margen lateral responsive */
+    box-sizing: border-box;
+}
+
+.task-list {
+    flex: 1 1 0;
+    min-width: 380px;
+    max-width: 900px;
+    border-radius: 1rem;
+    padding: 1rem;
+    border: #000 2px solid;
+    background-color: #F6ECEC;
+}
+
+.task-list h1 {
+	margin-bottom: 1rem;
+    color: #000;
+}
+
+.task-list h2 {
+	font-size: 1.5rem;
+	font-weight: 300;
+	color: var(--grey);
+	margin-bottom: 1rem;
+}
+
+
+#tasks-pending .task,
+#tasks-inprocess .task,
+#tasks-completed .task {
+	display: flex;
+	justify-content: space-between;
+	background-color: #cecece;
+	padding: 1rem;
+	border-radius: 1rem;
+	margin-bottom: 1rem;
+    flex-direction: column;    /* apila elementos en columna */
+    gap: 6px; 
+}
+
+.description {
+    display: flex;
+    flex-direction: column; /* título arriba, descripción abajo */
+    gap: 4px;
+    flex: 1; /* ocupa todo el espacio disponible */
+}
+
+.content,
+.description,
+.actions {
+    margin-bottom: 10px; /* espacio entre cada bloque */
+}
+
+.task .content {
+	flex: 1 1 0%;
+    position: relative;
+}
+
+.task .description .text{
+    font-size: 1.1rem;
+    color: #000000;
+    text-align: center;
+    text-align: left; /* en lugar de center */
+    margin-left: 40px; /* alineado con el texto */
+}
+
+#tasks-pending .task .content::before,
+#tasks-inprocess .task .content::before,
+#tasks-completed .task .content::before {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    border: 2px solid #000;
+    border-color: #000;
+    background-image: url(images/unchecked.png);
+    background-size: cover;
+    background-position: center;
+    left: 3px;
+}
+
+#tasks-pending .task .content.checked .textchecked {
+    color: #000000;
+    text-decoration: line-through;
+}
+
+#tasks-pending .task .content.checked::before {
+    background-image: url(images/checked.png);
+}
+
+.task .content .text {
+	color: #000;
+	font-size: 1.25rem;
+    padding-left: 60px;
+	width: 100%;
+	display: block;
+	transition: 0.4s;
+    margin-top: 4px;
+    font-weight:  bold;
+}
+
+.task .content .text:not(:read-only) {
+	color: var(--pink);
+}
+
+.task .actions {
+	display: flex;
+	margin: 0 -0.2rem;
+    justify-content: flex-end;  
+}
+
+.task .actions button {
+	cursor: pointer;
+	margin: 0 0.5rem;
+	font-size: 1.125rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	transition: 0.4s;
+}
+
+.task .actions button:hover {
+	opacity: 0.8;
+}
+
+.task .actions button:active {
+	opacity: 0.6;
+}
+
+.task .actions .edit {
+    color: var(--darker)
+}
+
+.task .actions .delete {
+	color: crimson;
+}
+
+
+.boton-fijo {
+      position: fixed;    /* hace que no se mueva con el scroll */
+      bottom: 20px;       /* distancia desde abajo */
+      right: 20px;        /* distancia desde la derecha */
+
+      width: 70px;
+      height: 70px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #007A91;
+      color: #fff;
+      font-size: 60px;
+      outline: none;
+    }
+
+    .boton-fijo:hover {
+      background-color: #05274d;
+    }
+
+
+
+/* ========== MEDIA QUERIES RESPONSIVAS ========== */
+
+/* TABLET - 1024px hacia abajo */
+@media (max-width: 1024px) {
+    .logo {
+        margin-left: 20px;
+    }
+    
+    .navbar a {
+        padding: 19px 15px;
+        font-size: 14px;
+    }
+    
+    #search-task {
+        width: 95%;
+        max-width: 800px;
+    }
+    
+    .stats-container {
+        width: 95%;
+        max-width: 800px;
+        padding: 15px;
+    }
+    
+    #progressBar {
+        width: 100%;
+        max-width: 500px;
+    }
+    
+    #numbers {
+        width: 80px;
+        height: 80px;
+        font-size: 24px;
+    }
+    
+    header {
+        max-width: 95%;
+        padding: 0 20px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .tasks-columns {
+        width: 95%;
+        gap: 1rem;
+    }
+    
+    .task-list {
+        min-width: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .head {
+        height: 55px;
+        padding: 0 5px;
+    }
+    
+    .logo {
+        margin-left: 5px;
+    }
+    
+    .logo-img {
+        height: 45px;
+    }
+    
+    .navbar {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .navbar a {
+        padding: 17px 14px;
+        font-size: 17px;
+    }
+
+    .navbar :hover {
+        background: #215481;
+    }
+    
+    .search {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    #search-task {
+        font-size: 1rem;
+        height: 2.2rem;
+        padding: 0.8rem;
+        width: 340px;
+        max-width: 100%;
+        margin: 0 15px;
+    }
+    
+    .container {
+        margin: 15px auto 0 auto;
+        width: 100%;
+    }
+    
+    .stats-container {
+        margin: 0 15px;
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        width: 340px;
+    }
+    
+    .details {
+        order: 2;
+        width: 100%;
+    }
+    
+    #numbers {
+        order: 1;
+        margin: 0 auto;
+        width: 70px;
+        height: 70px;
+        font-size: 20px;
+    }
+    
+    #progressBar {
+        width: 100%;
+        margin-top: 15px;
+    }
+    
+    header {
+        max-width: calc(100% - 30px);
+        margin-top: 30px;
+        padding: 0 15px;
+    }
+    
+    header h1 {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    
+    main {
+        margin-top: 140px;
+        width: 100%;
+    }
+    
+    .tasks-columns {
+        flex-direction: column;
+        width: calc(100% - 30px);
+        margin: 0 15px;
+        gap: 1rem;
+        height: 40px;
+    }
+    
+    .task-list {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .task-list h1 {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+    
+    .task .content .text {
+        font-size: 1.1rem;
+        padding-left: 50px;
+    }
+    
+    .task .description .text {
+        margin-left: 30px;
+        font-size: 1rem;
+    }
+    
+    .task .actions button {
+        font-size: 1rem;
+        margin: 0 0.2rem;
+    }
+    
+    .boton-fijo {
+        width: 60px;
+        height: 60px;
+        font-size: 45px;
+        bottom: 15px;
+        right: 15px;
+    }
+}
