@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do Center</title>
+    <link rel="stylesheet" href="src/styletaskpage.css">
+</head>
+<body>
+    <div class="head">
+        <div class="logo">
+            <a href="#">
+                <img src="images/todo.png" alt="Mi Logo" class="logo-img">
+            </a>
+        </div>
+        <nav class="navbar">
+            <a href="#">User</a>
+            <a href="#">Sing Out</a>
+        </nav>
+    </div>
+    <div class="search">
+        <form id="search-task-form">
+            <input type="text" id="search-task" placeholder="Search...">
+        </form>
+    </div>
+    <div class="container">
+        <div class="stats-container">
+            <div class="details">
+                <h1>Todo Done</h3>
+                <p>You are almost done go ahead</p>
+                <div id="progressBar">
+                    <div id="progress"></div>
+                </div>
+            </div>
+            <div class="stats-numbers">
+                <p id="numbers">2/3</p>
+            </div>
+        </div>
+    </div>
+    <header>
+        <h1>Today’s Task</h1>
+        <!-- 
+        <form id="new-task-form">
+            <input type="text" id="new-task-input" placeholder="Enter a new task">
+            <input type="submit" id="new-task-submit" value="Add Task">
+        </form>
+        -->
+    </header>
+    <main>
+        <!--
+        <section class="task-list">
+            <h1>Task List</h1>
+            <div id="tasks">
+                <div class="task">
+                    <div class="content">
+                        <input type="text" class="text" value="Sample Task" readonly>
+                    </div>
+                    <div class="actions">
+                        <button class="edit">Edit</button>
+                        <button class="delete">Delete</button>
+                    </div>
+
+                </div>
+                <div class="task">
+                    <div class="content checked">
+                        <input type="text" class="text textchecked" value="Sample Task 2" readonly>
+                    </div>
+                    <div class="actions">
+                        <button class="edit">Edit</button>
+                        <button class="delete">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </section>-->
+        <div class="tasks-columns">
+            <section class="task-list">
+                <h1>Pending</h1>
+                <div id="tasks-pending">
+                    <!--
+                     <div class="task">
+                        <div class="content">
+                        <input type="text" class="text" value="Sample Task" readonly>
+                        </div>
+                        <div class="description">
+                                <input type="text" class="text" value="Description of the completed task" readonly>
+                        </div>
+                        <div class="actions">
+                            <button class="edit">Edit</button>
+                            <button class="delete">Delete</button>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </section>
+            <section class="task-list">
+                <h1>In Process</h1>
+                <div id="tasks-inprocess">
+                    <!-- ... -->
+                </div>
+            </section>
+            <section class="task-list">
+                <h1>Completed</h1>
+                <div id="tasks-completed">
+                    <!-- ... -->
+                </div>
+            </section>
+        </div>
+    </main>
+    <button class="boton-fijo" onclick="window.location.href='newtask.html'">+</button>
+    
+    <script src="src/taskpage.js"></script>
+    
+</body>
+</html>
