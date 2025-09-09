@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       try {
-        await fetch('http://localhost:8080/api/auth/logout', {
+        await fetch('https://todo-center-back.onreder.com/api/auth/logout', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`
