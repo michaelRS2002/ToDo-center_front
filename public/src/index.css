@@ -8,6 +8,395 @@ body{
     overflow-x: hidden;
 }
 
+main{
+    background-color: #007A91;
+    border-radius: 5%;
+    margin-left: auto;
+    margin-right: auto
+}
+
+h1{
+    font-family: calibri;
+    color:#FDF6F0;
+}
+
+.index_flex{
+    margin-top: 10rem;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.index_flex > div {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto
+}
+
+a {
+    font-family: calibri;
+    color: #FDF6F0;
+}
+
+nav {
+    position:absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color:#007A91;
+    text-align: right;
+    padding: 1.25rem
+}
+
+
+.index_nav>a{
+    margin-left: 0.6rem;
+    margin-right: 0.6rem;
+    font-size: 1.25rem;
+}
+
+.index_main {
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+    width: 24rem;
+    height: 24rem;
+}
+
+.index_main>p{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.sitemap_main{
+    display: flex;
+    flex-wrap: nowrap;
+    place-items: center;
+    border-radius: 5%;
+    background-color:#007A91;
+    padding: 1.5rem;
+    width: 48rem;
+    height: 24rem;
+    margin-top: 10rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sitemap_main>div{
+  text-align: center;
+  margin-top: 0rem;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sitemap_main>div>p{
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+@media only screen and (max-width: 939px){
+    .index_nav{
+        display:none
+    }
+
+    .sitemap_nav{
+       display:grid;
+       align-items: center;
+    }
+
+    .mobile_nav{
+        display:grid;
+        align-items: center;
+    }
+
+    .div_agenda{
+        display:none
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+    
+    .index_main {
+        max-width: 100%;
+        max-height: 100%;
+        overflow-x: hidden;
+        height: 36rem;
+    }
+
+    .sitemap_title{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .sitemap_logo{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .sitemap_main{
+        max-width: 90%;
+        overflow-x: hidden;
+        height: 36rem;
+    }
+
+    .sitemap_main>h1{
+        font-weight: 700;
+        font-size: 2rem;
+    }
+
+    .index_main>button{
+        font-size: 1.5rem;
+        color: #00456C;
+        font-family: calibri;
+        padding: 0.4rem;
+        width: 80%;
+        margin-bottom: 1.25rem;
+    }
+
+    .div_logo{
+        display:none
+    }
+
+    .login_main{
+        display: grid;
+        place-items: center;
+        max-width: 90%;
+        padding: 1.5rem;
+        width: 40rem;
+        height: 32rem;
+        margin-top: 8rem;
+    }
+
+    .signup_main{
+        display: grid;
+        place-items: center;
+        padding: 1.5rem;
+        max-width: 90%;
+        overflow-x: hidden;
+        width: 40rem;
+        height: 36rem;
+        margin-top: 10rem;
+    }
+
+    .login_main{
+        display: grid;
+        place-items: center;
+        max-width: 90%;
+        padding: 1.5rem;
+        width: 40rem;
+        height: 32rem;
+        margin-top: 12rem;
+    }
+
+    .fpassword_main{
+        display: grid;
+        place-items: center;
+        max-width: 90%;
+        padding: 1.5rem;
+        width: 40rem;
+        height: 24rem;
+        margin-top: 12rem;
+    }
+
+    .form_inputs{
+        margin-top: 2rem;
+        margin-left: auto;
+        margin-right: auto
+    }
+
+    .form_inputs>input{
+        margin-bottom: 2rem;
+        padding:0.5rem;
+        width:100%;
+        border: none;
+        font-family: calibri;
+        text-align: left;
+        background-color: #c3c2c2;
+        color: #000000
+    }
+
+    .div_form>a{
+        color:#FDF6F0;
+        font-size: 1rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .submit_button{
+        margin-top: 0rem;
+        margin-bottom: 2.5rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .submit_button>input{
+        width:100%;
+        border: none;
+        border-radius: 4%;
+        font-family: calibri;
+        font-size: 1rem;
+        padding: 1.5rem;
+        cursor: pointer;
+    }
+
+
+    .sitemap_main{
+        margin-top: 12rem;
+    }
+
+    footer{
+        display: none
+    }
+}
+
+@media only screen and (min-width: 940px){
+
+    .index_main>button{
+        display:none
+    }
+
+    .mobile_nav{
+        display:none
+    }
+
+    .login_main{
+        padding: 1.5rem;
+        width: 40rem;
+        height: 24rem;
+        display: flex;
+        flex-wrap: nowrap;
+        margin-top: 10rem;
+    }
+
+    .fpassword_main{
+        padding: 1.5rem;
+        width: 40rem;
+        height: 16rem;
+        display: flex;
+        flex-wrap: nowrap;
+        margin-top: 10rem;
+    }
+
+    .signup_main{
+        padding: 1.5rem;
+        width: 40rem;
+        height: 28rem;
+        display: flex;
+        flex-wrap: nowrap;
+        margin-top: 8rem;
+    }
+
+    .form_inputs{
+        margin-top: 2rem;
+        margin-left: auto;
+        margin-right: auto
+    }
+
+    .form_inputs>input{
+        margin-bottom: 1.5rem;
+        padding:0.25rem;
+        width:100%;
+        border: none;
+        font-family: calibri;
+        text-align: left;
+        background-color: #c3c2c2;
+        color: #000000
+    }
+
+    .div_form>a{
+        color:#FDF6F0;
+        font-size: 0.75rem;
+        margin-bottom: 2rem;
+    }
+
+    .submit_button{
+        margin-top: 0rem;
+        margin-bottom: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .submit_button>input{
+        width:100%;
+        border: none;
+        border-radius: 4%;
+        font-family: calibri;
+        font-size: 1rem;
+        padding: 0.5rem;
+        cursor: pointer;
+    }
+
+    .sitemap_nav{
+        display:flex;
+        flex-wrap: nowrap;
+    }
+
+    .sitemap_title{
+        position: absolute;
+        left:0;
+        right:0;
+    }
+
+    nav>h1{
+        font-size: 2rem;
+        text-align: center;
+    }
+}
+
+.div_form {
+  display:grid;
+  place-items: center;
+  text-align: center;
+  margin-top: 0rem;
+  margin-bottom: auto;
+  margin-left: 0.5rem;
+  margin-right: 2rem;
+}
+
+.div_form>h1{
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+
+.div_logo {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p {
+    font-family: calibri;
+    color: #FDF6F0
+}
+
+
+
+footer {
+    position: fixed;
+    background-color: rgb(58, 58, 58);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.01rem;
+}
+
+footer>a{
+    font-size: 1rem;
+    color: #FDF6F0
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body{
+    background-color: #D5D5D5;
+    overflow-x: hidden;
+}
+
 .flex_main{
     margin-top: 10rem;
     display: flex;
@@ -175,12 +564,12 @@ a {
 .div_form>a{
     color:#FDF6F0;
     font-size: 0.75rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0.55rem;
 }
 
 .submit_button{
     margin-top: 0rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     margin-left: auto;
     margin-right: auto;
 }
@@ -236,3 +625,18 @@ footer>a{
   display: none;
   box-shadow: 0 2px 8px rgba(40,167,69,0.15);
 }
+
+#error-message {
+  background: #ffd6d6;
+  color: #a94442;
+  border: 2px solid #a94442;
+  border-radius: 6px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  font-family: calibri;
+  font-size: 1rem;
+  text-align: center;
+  display: none;
+  box-shadow: 0 2px 8px rgba(169,68,66,0.15);
+}
+
