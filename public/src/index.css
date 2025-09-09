@@ -631,7 +631,7 @@ footer>a{
   color: #a94442;
   border: 2px solid #a94442;
   border-radius: 6px;
-  padding: 0,5rem;
+  padding: 0.5rem;
   margin-bottom: 1rem;
   font-family: calibri;
   font-size: 1rem;
@@ -639,3 +639,4 @@ footer>a{
   display: none;
   box-shadow: 0 2px 8px rgba(169,68,66,0.15);
 }
+
