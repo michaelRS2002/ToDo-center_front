@@ -201,7 +201,8 @@ window.addEventListener('load', () => {
     loadTasksFromStorage();
 
     // Event listener para el formulario (tareas creadas localmente)
-    form.addEventListener('submit', (e) => {
+    if (form) {
+      form.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const task = input.value;
@@ -212,7 +213,8 @@ window.addEventListener('load', () => {
         
         input.value = '';
         updateStats();
-    });
+      });
+    }
 
     // Opcional: Escuchar cambios en localStorage para sincronizar en tiempo real
     window.addEventListener('storage', (e) => {
@@ -224,4 +226,63 @@ window.addEventListener('load', () => {
             loadTasksFromStorage();
         }
     });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    window.location.href = 'login.html';
+    return;
+  }
+
+  function isTokenExpired(token) {
+    if (!token) return true;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return Date.now() >= payload.exp * 1000;
+    } catch {
+      return true;
+    }
+  }
+
+  if (!token || isTokenExpired(token)) {
+    localStorage.removeItem('token');
+    window.location.href = 'login.html';
+  }
+
+  const logoutLink = document.getElementById('logout-link');
+  if (logoutLink) {
+    logoutLink.addEventListener('click', async function (e) {
+      e.preventDefault();
+
+      // Usar o crear el div de mensaje de éxito con el mismo estilo que en index
+      let successDiv = document.getElementById('success-message');
+      if (!successDiv) {
+        successDiv = document.createElement('div');
+        successDiv.id = 'success-message';
+        successDiv.style.display = 'none';
+        document.body.insertBefore(successDiv, document.body.firstChild);
+      }
+
+      try {
+        await fetch('http://localhost:8080/api/auth/logout', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          credentials: 'include'
+        });
+        successDiv.textContent = '¡Cerraste sesión exitosamente! Redirigiendo...';
+        successDiv.classList.add('show');
+        setTimeout(() => {
+          successDiv.classList.remove('show');
+          window.location.href = 'login.html';
+        }, 2000);
+      } catch (err) {
+        alert('No se pudo conectar con el servidor.');
+      } finally {
+        localStorage.removeItem('token');
+      }
+    });
+  }
 });

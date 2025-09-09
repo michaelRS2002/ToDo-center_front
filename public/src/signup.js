@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Validaciones básicas
     if (!nombres || !apellidos || !edad || !correo || !contrasena || !confirmarContrasena) {
       errorDiv.textContent = 'Por favor, completa todos los campos.';
+      errorDiv.style.display = 'block';
+      successDiv.style.display = 'none';
       // Limpiar los campos vacíos
       if (!nombres) nombresInput.value = '';
       if (!apellidos) apellidosInput.value = '';
@@ -55,11 +57,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // Validar nombres y apellidos mínimo 2 caracteres
     if (nombres.length < 2) {
       errorDiv.textContent = 'El nombre debe tener al menos 2 caracteres.';
+      errorDiv.style.display = 'block';
+      successDiv.style.display = 'none';
       nombresInput.value = '';
       return;
     }
     if (apellidos.length < 2) {
       errorDiv.textContent = 'El apellido debe tener al menos 2 caracteres.';
+      errorDiv.style.display = 'block';
+      successDiv.style.display = 'none';
       apellidosInput.value = '';
       return;
     }
@@ -68,6 +74,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const edadNumber = Number(edad);
     if (isNaN(edadNumber) || edadNumber < 13 || edadNumber > 120) {
       errorDiv.textContent = 'La edad debe estar entre 13 y 120.';
+      errorDiv.style.display = 'block';
+      successDiv.style.display = 'none';
       edadInput.value = '';
       return;
     }
@@ -75,6 +83,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(correo)) {
       errorDiv.textContent = 'Por favor, ingresa un correo electrónico válido.';
+      errorDiv.style.display = 'block';
+      successDiv.style.display = 'none';
       correoInput.value = '';
       return;
     }
@@ -83,6 +93,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#]).{8,}$/;
     if (!passwordRegex.test(contrasena)) {
       errorDiv.textContent = 'La contraseña debe tener al menos 8 caracteres, incluyendo 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial.';
+      errorDiv.style.display = 'block';
+      successDiv.style.display = 'none';
       contrasenaInput.value = '';
       confirmarContrasenaInput.value = '';
       return;
@@ -90,6 +102,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (contrasena !== confirmarContrasena) {
       errorDiv.textContent = 'Las contraseñas no coinciden.';
+      errorDiv.style.display = 'block';
+      successDiv.style.display = 'none';
       contrasenaInput.value = '';
       confirmarContrasenaInput.value = '';
       return;
@@ -97,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Petición al backend
     try {
-      const response = await fetch('https://todo-center-back.onrender.com/api/auth/register', {
+      const response = await fetch('http://localhost:8080/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -113,6 +127,8 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log(data);
       if (!response.ok) {
         errorDiv.textContent = data.message || 'Error al registrar usuario.';
+        errorDiv.style.display = 'block';
+        successDiv.style.display = 'none';
       } else {
         successDiv.textContent = '¡Registro exitoso! Redirigiendo a inicio de sesión...';
         successDiv.style.display = 'block';
@@ -124,6 +140,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     } catch (err) {
       errorDiv.textContent = 'No se pudo conectar con el servidor.';
+      errorDiv.style.display = 'block';
+      successDiv.style.display = 'none';
     }
   });
 });

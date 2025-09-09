@@ -387,7 +387,6 @@ footer>a{
     color: #FDF6F0
 }
 
-=======
 * {
   margin: 0;
   box-sizing: border-box;
@@ -565,12 +564,12 @@ a {
 .div_form>a{
     color:#FDF6F0;
     font-size: 0.75rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0.55rem;
 }
 
 .submit_button{
     margin-top: 0rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     margin-left: auto;
     margin-right: auto;
 }
@@ -625,4 +624,18 @@ footer>a{
   text-align: center;
   display: none;
   box-shadow: 0 2px 8px rgba(40,167,69,0.15);
+}
+
+#error-message {
+  background: #ffd6d6;
+  color: #a94442;
+  border: 2px solid #a94442;
+  border-radius: 6px;
+  padding: 0,5rem;
+  margin-bottom: 1rem;
+  font-family: calibri;
+  font-size: 1rem;
+  text-align: center;
+  display: none;
+  box-shadow: 0 2px 8px rgba(169,68,66,0.15);
 }

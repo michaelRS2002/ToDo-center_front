@@ -1,31 +1,43 @@
-document.getElementById("task-form").addEventListener("submit", (e) => {
-  e.preventDefault();
+document.addEventListener('DOMContentLoaded', function () {
+  const token = localStorage.getItem('token');
+  console.log("Token retrieved:", token); // Verifica que el token se esté obteniendo correctamente
+  if (!token) {
+    window.location.href = 'login.html';
+    return;
+  }
 
-  const task = {
-    id: Date.now(), // ID único para la tarea
-    name: document.getElementById("task-name").value,
-    desc: document.getElementById("task-desc").value,
-    date: document.getElementById("task-date").value,
-    start: document.getElementById("start-time").value,
-    end: document.getElementById("end-time").value,
-    status: document.getElementById("task-status").value,
-  };
+  document.getElementById("task-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  // Obtener tareas existentes o crear array vacío
-  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-  
-  // Agregar nueva tarea
-  tasks.push(task);
-  
-  // Guardar en localStorage
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+    const task = {
+      name: document.getElementById("task-name").value,
+      desc: document.getElementById("task-desc").value,
+      date: document.getElementById("task-date").value,
+      start: document.getElementById("start-time").value,
+      end: document.getElementById("end-time").value,
+      status: document.getElementById("task-status").value,
+    };
 
-  console.log("Nueva tarea creada:", task);
-  alert(`Task "${task.name}" created successfully!`);
+    try {
+      const response = await fetch('http://localhost:8080/api/tasks/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(task)
+      });
 
-  // Opcional: redirigir a página principal
-  window.location.href = 'taskpage.html'; // o tu página principal
-  
-  // O limpiar formulario si te quedas en la misma página
-  e.target.reset();
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(`Task "${task.name}" created successfully!`);
+        window.location.href = 'taskpage.html';
+      } else {
+        alert(data.message || 'Error al crear la tarea');
+      }
+    } catch (err) {
+      alert('No se pudo conectar con el servidor.');
+    }
+  });
 });
