@@ -1,9 +1,12 @@
 import Home from './home.js';
-import Login from './login.js';
-import Signup from './signup.js';
 export const routes = {
-
   '/': Home,
-  '/login': Login,
-  '/signup': Signup,
+  '/login': async () => {
+    const response = await fetch('/login/login.html');
+    if (response.ok) {
+      return await response.text();
+    }
+    return '<h1>404</h1><p>Página no encontrada.</p>';
+  },
+
 };

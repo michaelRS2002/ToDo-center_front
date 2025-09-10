@@ -31,8 +31,23 @@ function capitalize(str) {
 const template =
   `export default function ${capitalize(pageName)}() {\n  return \`<h1>${capitalize(pageName)}</h1><p>Esta es la página ${pageName}.</p>\`;\n}\n`;
 
+
 fs.writeFileSync(filePath, template);
 console.log(`Archivo ${fileName} creado en src/pages.`);
+
+// --- Crear carpeta y archivo HTML correspondiente en src/public/nombre/nombre.html ---
+const publicModuleDir = path.join(__dirname, 'src', 'public', pageName);
+if (!fs.existsSync(publicModuleDir)) {
+  fs.mkdirSync(publicModuleDir, { recursive: true });
+  console.log(`Carpeta src/public/${pageName} creada.`);
+}
+const htmlFileName = `${pageName}.html`;
+const htmlFilePath = path.join(publicModuleDir, htmlFileName);
+if (!fs.existsSync(htmlFilePath)) {
+  const htmlTemplate = `<!doctype html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>${capitalize(pageName)}</title>\n    <link rel=\"stylesheet\" href=\"../../styles/index.css\">\n    <script src=\"../../pages/${pageName}.js\" type=\"module\"></script>\n  </head>\n  <body>\n    <div id=\"app\"></div>\n  </body>\n</html>\n`;
+  fs.writeFileSync(htmlFilePath, htmlTemplate);
+  console.log(`Archivo ${htmlFileName} creado en src/public/${pageName}.`);
+}
 
 // --- Actualizar routes.js ---
 const routesPath = path.join(pagesDir, 'routes.js');

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  <link rel="stylesheet" href="/styles/index.css" />
+</head>
+<body>
+  <main class="login_main">
+    <div class="div_form">
+      <h1>Iniciar sesión</h1>
+      <form class="form_inputs" action="/submit" method="POST">
+        <input type="email" name="email" placeholder="ejemplo@gmail.com">
+        <input type="password" name="password" placeholder="Contraseña">
+        <div class="submit_button">
+          <input type="submit" value="Ingresar">
+        </div>
+      </form>
+      <a href="/fpassword">¿Olvidaste tu contraseña?</a>
+      <a href="/signup">Crear una cuenta</a>
+    </div>
+    <div class="div_logo">
+      <img src="src/public/images/logo.png" width="300rem" height="auto">
+    </div>
+    <footer>
+      <a href="/sitemap">Sitemap</a>
+    </footer>
+  </main>
+  <script type="module" src="./login.js"></script>
+</body>
+</html>

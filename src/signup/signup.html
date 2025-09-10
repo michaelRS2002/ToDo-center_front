@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Signup</title>
+  <link rel="stylesheet" href="/styles/index.css" />
+</head>
+<body>
+  <main class="signup_main">
+    <div class="div_form">
+      <h1>Crear cuenta</h1>
+      <form class="form_inputs" action="/submit" method="POST">
+        <input type="email" name="email" placeholder="ejemplo@gmail.com">
+        <input type="password" name="password" placeholder="Contraseña">
+        <div class="submit_button">
+          <input type="submit" value="Registrarse">
+        </div>
+      </form>
+      <a href="/login">¿Ya tienes cuenta? Inicia sesión</a>
+    </div>
+    <div class="div_logo">
+      <img src="/images/logo.png" width="300rem" height="auto">
+    </div>
+    <footer>
+      <a href="/sitemap">Sitemap</a>
+    </footer>
+  </main>
+  <script type="module" src="./signup.js"></script>
+</body>
+</html>
