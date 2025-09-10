@@ -2,35 +2,37 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="src/icon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Sign up</title>
   </head>
 
   <body>
     <link rel="stylesheet" href="src/index.css">
     <nav class="mobile_nav">
       <div class="sitemap_logo">
-        <img src="src/logo.png" class="mobile_logo" width= "132rem" height="auto">
+        <img src="src/logo.png" id="logo" width= "132rem" height="auto">
       </div>
     </nav>
-    <main class="login_main">
+    <main class="signup_main">
       <div class="div_form">
         <h1>
-          Login
+          Sign up
         </h1>
-        <form class="form_inputs" action="/submit" method="POST">
+        <div class="form_inputs">
+          <input type="text" name="names" placeholder="Names">
+          <input type="text" name="surnames" placeholder="Surname">
+          <input type="number" name="age" placeholder="Age">
           <input type="email" name="email" placeholder="example@gmail.com">
           <input type="password" name="password" placeholder="Password">
-        </form>
-        <a href="fpassword.html">Forgot your password?</a>
-        <div class="submit_button">
-          <input type="submit" onclick="" value="Access">
+          <input type="password" name="cpassword" placeholder="Confirm password">
         </div>
-        <a href="signup.html">Create an account</a>
+        <div class="submit_button">
+          <input type="submit" value="Create account">
+        </div>
       </div>
       <div class="div_logo">
-        <img src="src/logo.png" class="logo" width= "300rem" height="auto">
+        <img src="src/logo.png" width= "300rem" height="auto">
       </div>
     
     <footer>
