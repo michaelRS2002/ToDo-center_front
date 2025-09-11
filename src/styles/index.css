@@ -9,7 +9,6 @@
 html {
     scroll-behavior: smooth;
     overflow-x: hidden; 
-
 }
 
 .logo img {
@@ -18,10 +17,77 @@ html {
 }
 
 body {
+    background-color: #303030;
     text-align: center;
     font-family: sans-serif;
     overflow-x: hidden; /* evita scroll horizontal */
+}
 
+main{
+    background-color: #171717;
+    border-radius: 5%;
+    margin-left: auto;
+    margin-right: auto
+}
+
+h1{
+    font-family: calibri;
+    color:#FDF6F0;
+}
+
+.sitemap_main{
+    display: flex;
+    flex-wrap: nowrap;
+    place-items: center;
+    padding: 1.5rem;
+    width: 48rem;
+    height: 24rem;
+    margin-top: 10rem;
+}
+
+.sitemap_main>div{
+  width: 33%;
+  text-align: center;
+  margin-top: 0rem;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sitemap_main>div>p{
+    position: inherit;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    padding: 0;
+
+}
+
+.div_form {
+  display:grid;
+  place-items: center;
+  text-align: center;
+  margin-right: 2rem;
+  width: 100%
+}
+
+.div_form>h1{
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.div_logo {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a {
+    font-family: calibri;
+    color: #FDF6F0;
 }
 
 .head {
@@ -40,9 +106,6 @@ body {
     margin-right: 10px;
 }
 
-.logo {
-    margin-left: 30px;
-}
 
 .logo a {
     color: #fff;
@@ -296,6 +359,126 @@ p {
     justify-content: center;
 }
 
+footer {
+    text-align: left;
+    position: fixed;
+    background-color: rgb(58, 58, 58);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.01rem;
+}
+
+footer>a{
+    font-size: 1rem;
+    color: #FDF6F0
+}
+
+.div_logo{
+    width: 75%;
+}
+
+.logo{
+    width: 100%;
+    height: auto;
+ }
+
+.login_main{
+    padding: 1.5rem;
+    width: 45%;
+    height: 30rem;
+    display: flex;
+    flex-wrap: nowrap;
+    margin-top: 8%;
+}
+
+.fpassword_main{
+    padding: 1.5rem;
+    width: 40rem;
+    height: 24rem;
+    display: flex;
+    flex-wrap: nowrap;
+    margin-top: 10rem;
+}
+
+    .signup_main{
+        padding: 1.5rem;
+        width: 40rem;
+        height: 32rem;
+        display: flex;
+        flex-wrap: nowrap;
+        margin-top: 7%;
+    }
+
+    .form_inputs{
+        margin-top: 1.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    .form_inputs>input{
+        margin-bottom: 1.75rem;
+        padding:0.5rem;
+        width: 75%;
+        border: none;
+        font-family: calibri;
+        text-align: left;
+        background-color: #c3c2c2;
+        color: #000000
+    }
+
+    .div_form>h1{
+        font-size: 1.5rem;
+        margin-bottom: 0rem;
+    }
+
+    .div_form>a{
+        color:#FDF6F0;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .submit_button{
+        margin-top: 0rem;
+        margin-bottom: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    .submit_button>input{
+        width: 75%;
+        border: none;
+        border-radius: 4%;
+        font-family: calibri;
+        font-size: 1.25rem;
+        text-shadow: 1px 1px 5px #464545ae;
+        padding: 0.75rem;
+        cursor: pointer;
+    }
+
+    .fpassword_button{
+        width: 100%;
+        margin-top: 5%;
+    }
+
+    .fpassword_button>input{
+        width: 75%;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5%;
+        text-shadow: 1px 1px 5px #464545ae;
+    }
+
+
+    .sitemap_title{
+        position: absolute;
+        left:0;
+        right:0;
+    }
+
 
 @media (max-width: 768px) {
     .head{
@@ -357,6 +540,142 @@ p {
     .navbar a {
         padding: 10px 80px;
         font-size: 16px;
+    }
+
+
+    .div_agenda{
+        display:none
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .div_logo{
+        display:none
+    }
+
+    .div_form{
+        margin-right:0
+    }
+
+    .div_form>a{
+        color:#FDF6F0;
+        font-size: 1rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .div_form>h1{
+        font-size: 1.75rem
+    }
+
+    .login_main{
+        display: grid;
+        place-items: center;
+        max-width: 90%;
+        padding: 1.5rem;
+        width: 40rem;
+        height: 32rem;
+        margin-top: 35%;
+    }
+
+    .signup_main{
+        display: grid;
+        place-items: center;
+        padding: 1.5rem;
+        max-width: 90%;
+        overflow-x: hidden;
+        width: 40rem;
+        height: 36rem;
+        margin-top: 35%;
+    }
+
+    .fpassword_main{
+        display: grid;
+        place-items: center;
+        max-width: 90%;
+        padding: 1.5rem;
+        width: 40rem;
+        height: 24rem;
+        margin-top: 35%;
+    }
+
+    .fpassword_main>.div_form{
+        height: 100%;
+    }
+
+    .form_inputs{
+        width: 100%;
+        margin-top: 2rem;
+        margin-left: auto;
+        margin-right: auto
+    }
+
+    .form_inputs>input{
+        margin-bottom: 2rem;
+        font-size: 1rem;
+        padding:0.75rem;
+        width: 75%;
+        border: none;
+        font-family: calibri;
+        text-align: left;
+        background-color: #c3c2c2;
+        color: #000000
+    }
+
+    .submit_button{
+        margin-top: 0rem;
+        margin-bottom: 2.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    .submit_button>input{
+        width: 75%;
+        border: none;
+        border-radius: 4%;
+        font-family: calibri;
+        font-size: 1.25rem;
+        padding: 1.5rem;
+        cursor: pointer;
+    }
+    
+    .fpassword_button{
+        width: 100%;
+    }
+    .fpassword_button>input{
+        width: 75%;
+        padding: 1rem;
+        font-size: 1.25rem;
+    }
+
+    .sitemap_main{
+        margin-top: 12rem;
+    }
+
+    .sitemap_title{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .sitemap_logo{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .sitemap_main{
+        max-width: 90%;
+        overflow-x: hidden;
+        height: 36rem;
+    }
+
+    .sitemap_main>h1{
+        font-weight: 700;
+        font-size: 2rem;
+    }
+
+    footer{
+        display: none
     }
 }
 
@@ -656,4 +975,248 @@ p {
   .f-enlaces a {
     margin: 8px 0;
   }
+
+  .logo{
+        width: 12rem;
+    }
+
+    .div_logo{
+        display:none
+    }
+
+    .login_main{
+        display: grid;
+        place-items: center;
+        max-width: 90%;
+        padding: 1.2rem;
+        width: 40rem;
+        height: 24rem;
+        margin-top: 8rem;
+    }
+
+    .signup_main{
+        display: grid;
+        place-items: center;
+        padding: 1.5rem;
+        max-width: 90%;
+        overflow-x: hidden;
+        width: 40rem;
+        height: 24rem;
+        margin-top: 8rem;
+    }
+
+    .fpassword_main{
+        display: grid;
+        place-items: center;
+        max-width: 90%;
+        padding: 1.5rem;
+        width: 40rem;
+        height: 16rem;
+        margin-top: 8.5rem;
+    }
+
+    .fpassword_main>.div_form>h1{
+        font-size: 1.25rem;
+    }
+
+
+    .form_inputs{
+        margin-top: 1rem;
+        margin-left: auto;
+        margin-right: auto
+    }
+
+    .form_inputs>input{
+        margin-bottom: 1.5rem;
+        padding:0.25rem;
+        width:100%;
+        border: none;
+        font-family: calibri;
+        text-align: left;
+        background-color: #c3c2c2;
+        color: #000000
+    }
+
+    .div_form>a{
+        color:#FDF6F0;
+        font-size: 1rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .submit_button{
+        margin-top: 0rem;
+        margin-bottom: 2rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .submit_button>input{
+        width:100%;
+        border: none;
+        border-radius: 4%;
+        font-family: calibri;
+        font-size: 1rem;
+        padding: 1rem;
+        cursor: pointer;
+    }
+
+    .fpassword_button{
+        margin-top: 0rem;
+        margin-bottom: 0rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .fpassword_button>input{
+        width:100%;
+        border: none;
+        border-radius: 4%;
+        font-family: calibri;
+        font-size: 1rem;
+        padding: 1rem;
+        cursor: pointer;
+    }
+
+    .sitemap_main{
+        margin-top: 12rem;
+    }
+
+    .sitemap_title{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .sitemap_logo{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .sitemap_main{
+        max-width: 90%;
+        overflow-x: hidden;
+        height: 36rem;
+    }
+
+    .sitemap_main>h1{
+        font-weight: 700;
+        font-size: 2rem;
+    }
+
+    footer{
+        display: none
+    }
+
 }
+
+
+@media only screen and (min-width: 769px) and (max-width: 1024px){
+    .login_main{
+        padding: 1.5rem;
+        width: 80%;
+        height: 32rem;
+        display: flex;
+        flex-wrap: nowrap;
+        margin-top: 35%;
+    }
+
+    .fpassword_main{
+        padding: 1.5rem;
+        width: 40rem;
+        height: 24rem;
+        display: flex;
+        flex-wrap: nowrap;
+        margin-top: 14rem;
+    }
+
+    .signup_main{
+        padding: 1.5rem;
+        width: 40rem;
+        height: 36rem;
+        display: flex;
+        flex-wrap: nowrap;
+        margin-top: 12rem;
+    }
+
+    .form_inputs{
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    .form_inputs>input{
+        margin-bottom: 1.5rem;
+        padding:0.5rem;
+        width: 75%;
+        border: none;
+        font-family: calibri;
+        text-align: left;
+        background-color: #c3c2c2;
+        color: #000000
+    }
+
+    .div_form>h1{
+        font-size: 1.75rem;
+    }
+
+    .div_form>a{
+        color:#FDF6F0;
+        font-size: 1rem;
+    }
+
+    .submit_button{
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0.5rem;
+    }
+
+    .submit_button>input{
+        width: 75%;
+        border: none;
+        border-radius: 4%;
+        font-family: calibri;
+        font-size: 1.25rem;
+        padding: 0.75rem;
+        cursor: pointer;
+    }
+
+    .fpassword_button{
+        width: 100%;
+        margin-top: 5%;
+    }
+
+    .fpassword_button>input{
+        width: 75%;
+        padding: 0.5rem;
+        font-size: 1rem;
+    }
+
+
+    .sitemap_main>div>p{
+        font-size: 1.5rem;
+    }   
+
+    .sitemap_main>div>a{
+        font-size: 1.25rem;
+    }    
+
+    .sitemap_title{
+        position: absolute;
+        left:0;
+        right:0;
+    }
+    
+    .agenda{
+        margin-top: 12%;
+        width: 70%;
+        height: auto;
+    }
+
+    .sitemap_footer{
+        font-size: 2rem;
+    }
+
+    footer>a{
+        font-size: 2rem;
+    }
+}
+

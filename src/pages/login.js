@@ -97,21 +97,36 @@ export default function Login() {
   }, 0);
 
   return `
-    <main>
-      <h1>Iniciar sesión</h1>
-      <form class="form_inputs">
-        <div>
-          <label for="email">Correo electrónico:</label>
-          <input  type="email" name="email" required />
-        </div>
-        <div>
-          <label for="password">Contraseña:</label>
-          <input type="password" name="password" required />
-        </div>
+    <body>
+    <link rel="stylesheet" href="src/index.css">
+    <nav class="mobile_nav">
+      <div class="sitemap_logo">
+        <img src="src/logo.png" class="mobile_logo" width= "132rem" height="auto">
+      </div>
+    </nav>
+    <main class="login_main">
+      <div class="div_form">
+        <h1>
+          Login
+        </h1>
+        <form class="form_inputs" action="/submit" method="POST">
+          <input type="email" name="email" placeholder="example@gmail.com">
+          <input type="password" name="password" placeholder="Password">
+        </form>
+        <a href="/fpassword">Forgot your password?</a>
         <div class="submit_button">
-          <input class="btn red circular" type="submit" value="Entrar" />
+          <input type="submit" onclick="" value="Access">
         </div>
-      </form>
+        <a href="/signup">Create an account</a>
+      </div>
+      <div class="div_logo">
+        <img src="public/images/logo.png" class="logo" width= "300rem" height="auto">
+      </div>
+    
+    <footer>
+      <a href="/sitemap">Sitemap</a> 
+    </footer>
     </main>
+  </body>
   `;
 }
