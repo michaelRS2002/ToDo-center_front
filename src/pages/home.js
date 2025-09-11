@@ -1,24 +1,9 @@
 export default function Home() {
-  return `<div class="head">
-        <div class="logo">
-            <a href="#">
-                <img src="public/images/icon.png" alt="Logo">
-            </a>
-        </div>
-        <nav class="navbar">
-            <a href="#">Home</a>
-            <a href="#">Registrer</a>
-            <a href="#">Login</a>
-        </nav>
-    </div>
-    <div class="search">
-        <input type="search" id="search-box" placeholder="Search here...">
-    </div>
-
+  return `
     <header class="content header" id="header">
             <div class="icon">
                 <a href="#">
-                    <img src="public/images/todo ne.png" alt="Logo">
+                    <img src="public/images/todo ne.png" alt="icon">
                 </a>
             </div>
             <p>Turn your ideas into actions.</p>
