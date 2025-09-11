@@ -6,6 +6,7 @@
  */
 export default function Home() {
   return `
+    <!-- HEADER: Main header with logo, slogan, and button -->
     <header class="content header" id="header">
             <div class="icon">
                 <a href="#">
@@ -15,7 +16,7 @@ export default function Home() {
             <p>Turn your ideas into actions.</p>
             <a href="#sau" class="btn">Learn more</a>
     </header>
-
+    <!-- SECTION: Services / Products -->
     <section class="content sau" id="sau">
             <h2 class="title">Services</h2>
             <p>In ToDo-center you will find a page to help you remember your obligations, since you can create and 
@@ -43,7 +44,7 @@ export default function Home() {
                 </div>
             </div>
     </section>
-
+    <!-- SECTION: About the web -->
     <section class="content about" id ="about">
             <article class="contain">
                 <h2 class="title">About us</h2>
@@ -51,7 +52,7 @@ export default function Home() {
                 <a href="#contact" class="btn">Contact us</a>
             </article>
     </section>
-
+    <!-- SECTION: Opinions if customers -->
     <section class="content opinion">
             <h2 class="title">opinions</h2>
             <p>Learn about some of our clients' options.</p>
@@ -92,7 +93,7 @@ export default function Home() {
                 </div>
             </div>
      </section>
-
+     <!-- SECTION: Contact-->
     <section class="content contact" id ="contact">
         <h2 class="title">Contact</h2>
         <div class="footer-section">

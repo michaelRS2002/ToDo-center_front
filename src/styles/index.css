@@ -296,7 +296,7 @@ p {
     justify-content: center;
 }
 
-
+/* Windows of 768px */
 @media (max-width: 768px) {
     .head{
         flex-direction: column;
@@ -361,7 +361,7 @@ p {
 }
 
 
-/* Móviles grandes (480px y menos) */
+/* Cellphones 480px and less */
 @media screen and (max-width: 480px) {
     .head {
         height: 60px;
@@ -528,10 +528,10 @@ p {
 }
 
 
-/* 📱 Estilos para pantallas pequeñas (hasta 320px) */
+/* Windws  up to 320px */
 @media (max-width: 375px) {
   .head {
-    flex-direction: row;         /* Logo a la izq, menú a la der */
+    flex-direction: row;        
     justify-content: space-between;
     padding: 10px 0px;
     height: auto;
