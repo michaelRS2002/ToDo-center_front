@@ -1,3 +1,9 @@
+/**
+ * Home Component
+ * ----------------
+ * This function exports the main HTML structure of the ToDo-Center homepage.
+ * It returns a string containing the different sections of the page: Header, Services, About, Opinions, and Contact.
+ */
 export default function Home() {
   return `
     <header class="content header" id="header">

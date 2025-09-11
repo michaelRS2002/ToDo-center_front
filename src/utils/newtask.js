@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/api/tasks/', {
+      const response = await fetch('https://todo-center-back.onreder.com/api/tasks', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
