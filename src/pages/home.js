@@ -13,7 +13,7 @@ export default function Home() {
                 </a>
             </div>
             <p>Turn your ideas into actions.</p>
-            <a href="#sau" class="btn">Learn more</a>
+            <a href="#sau" class="btn btn-primary">Learn more</a>
     </header>
 
     <section class="content sau" id="sau">
@@ -48,7 +48,7 @@ export default function Home() {
             <article class="contain">
                 <h2 class="title">About us</h2>
                 <p>Our main objective is to facilitate personal or group productivity and organization, avoiding forgetting pending tasks and allowing clear monitoring of progress.</p>
-                <a href="#contact" class="btn">Contact us</a>
+                <a href="#contact" class="btn btn-primary">Contact us</a>
             </article>
     </section>
 

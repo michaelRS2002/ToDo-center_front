@@ -58,9 +58,8 @@ export default function Login() {
     if (!errorDiv) {
       errorDiv = document.createElement('div');
       errorDiv.id = 'error-message';
-      errorDiv.style.color = 'red';
-      errorDiv.style.marginTop = '10px';
-      const form = document.querySelector('.form_inputs');
+      errorDiv.className = 'message message-error';
+      const form = document.querySelector('.auth-form');
       form.parentNode.insertBefore(errorDiv, form.nextSibling);
     }
     errorDiv.textContent = message;
@@ -72,9 +71,8 @@ export default function Login() {
     if (!successDiv) {
       successDiv = document.createElement('div');
       successDiv.id = 'success-message';
-      successDiv.style.color = 'green';
-      successDiv.style.marginTop = '10px';
-      const form = document.querySelector('.form_inputs');
+      successDiv.className = 'message message-success';
+      const form = document.querySelector('.auth-form');
       form.parentNode.insertBefore(successDiv, form.nextSibling);
     }
     successDiv.textContent = message;
@@ -83,50 +81,71 @@ export default function Login() {
 
   // Configurar event listeners después de que el DOM esté listo
   setTimeout(() => {
-    const form = document.querySelector('.form_inputs');
-    const submitBtn = document.querySelector('.submit_button input[type="submit"]');
+    const form = document.querySelector('.auth-form');
+    const submitBtn = document.querySelector('button[type="submit"]');
     
-    if (submitBtn) {
+    if (submitBtn && form) {
       submitBtn.addEventListener('click', async (e) => {
         e.preventDefault();
-        const email = form.querySelector('input[name="email"]').value.trim();
-        const password = form.querySelector('input[name="password"]').value;
+        const email = form.querySelector('input[type="email"]').value.trim();
+        const password = form.querySelector('input[type="password"]').value;
         await handleLogin(email, password);
       });
     }
   }, 0);
 
   return `
-    <body>
-    <link rel="stylesheet" href="src/index.css">
-    <nav class="mobile_nav">
-      <div class="sitemap_logo">
-        <img src="src/logo.png" class="mobile_logo" width= "132rem" height="auto">
-      </div>
-    </nav>
-    <main class="login_main">
-      <div class="div_form">
-        <h1>
-          Login
-        </h1>
-        <form class="form_inputs" action="/submit" method="POST">
-          <input type="email" name="email" placeholder="example@gmail.com">
-          <input type="password" name="password" placeholder="Password">
-        </form>
-        <a href="/fpassword">Forgot your password?</a>
-        <div class="submit_button">
-          <input type="submit" onclick="" value="Access">
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- Form Section -->
+            <div class="auth-form-section">
+                <div class="auth-form-content">
+                    <h1 class="auth-title">Iniciar Sesión</h1>
+                    <p class="auth-subtitle">Bienvenido de vuelta</p>
+                    
+                    <form class="auth-form">
+                        <div class="form-group">
+                            <label class="label label-required">Email</label>
+                            <input type="email" name="email" class="input" placeholder="tu@email.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="label label-required">Contraseña</label>
+                            <input type="password" name="password" class="input" placeholder="••••••••" required>
+                        </div>
+                        
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" class="checkbox">
+                                Recordarme
+                            </label>
+                            <a href="/forgot-password" class="forgot-link">¿Olvidaste tu contraseña?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+                        
+                        <div class="auth-switch">
+                            <span>¿No tienes cuenta?</span>
+                            <a href="/signup">Regístrate</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Logo Section -->
+            <div class="auth-logo-section">
+                <div class="auth-logo-content">
+                    <div class="logo-container">
+                        <div class="auth-logo-text">
+                            <div class="logo-main">ToDo</div>
+                            <div class="logo-sub">CENTER</div>
+                        </div>
+                    </div>
+                    <h2 class="logo-title">Gestión de Tareas</h2>
+                    <p class="logo-description">Organiza tu día, aumenta tu productividad y alcanza tus objetivos</p>
+                </div>
+            </div>
         </div>
-        <a href="/signup">Create an account</a>
-      </div>
-      <div class="div_logo">
-        <img src="public/images/logo.png" class="logo" width= "300rem" height="auto">
-      </div>
-    
-    <footer>
-      <a href="/sitemap">Sitemap</a> 
-    </footer>
-    </main>
-  </body>
+    </div>
   `;
 }
