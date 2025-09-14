@@ -6,61 +6,61 @@
  */
 export default function Home() {
   return `
-    <!-- HEADER: Main header with logo, slogan, and button -->
+    <!-- HEADER: Encabezado principal con logo, eslogan y botón -->
     <header class="content header" id="header">
             <div class="icon">
                 <a href="#">
-                    <img src="public/images/todo ne.png" alt="icon">
+                    <img src="public/images/todo ne.png" alt="icono">
                 </a>
             </div>
-            <p>Turn your ideas into actions.</p>
-            <a href="#sau" class="btn">Learn more</a>
+            <p>Convierte tus ideas en acciones.</p>
+            <a href="#sau" class="btn">Conoce más</a>
     </header>
-    <!-- SECTION: Services / Products -->
+    <!-- SECTION: Servicios / Productos -->
     <section class="content sau" id="sau">
-            <h2 class="title">Services</h2>
-            <p>In ToDo-center you will find a page to help you remember your obligations, since you can create and 
-                organize your tasks in different categories depending on the progress you have made in their completion.</p>
+            <h2 class="title">Servicios</h2>
+            <p>En ToDo-center encontrarás una página que te ayudará a recordar tus obligaciones, ya que puedes crear y 
+                organizar tus tareas en diferentes categorías dependiendo del progreso que hayas hecho en su cumplimiento.</p>
 
             <div class="box-container">
                 <div class="box">
                     <i class="fas fa-book"></i>
-                    <h3>Product 1</h3>
-                    <p>Task management.</p>
+                    <h3>Producto 1</h3>
+                    <p>Gestión de tareas.</p>
 
                 </div>
 
                 <div class="box">
                     <i class="fas fa-pencil-alt"></i>
-                    <h3>Product 2</h3>
-                    <p>Task Customization.</p>
+                    <h3>Producto 2</h3>
+                    <p>Personalización de tareas.</p>
 
                 </div>
 
                 <div class="box">
                     <i class="fas fa-mobile-alt"></i>
-                    <h3>Product 3</h3>
-                    <p>Available from any device.</p>
+                    <h3>Producto 3</h3>
+                    <p>Disponible desde cualquier dispositivo.</p>
                 </div>
             </div>
     </section>
-    <!-- SECTION: About the web -->
+    <!-- SECTION: Acerca de la web -->
     <section class="content about" id ="about">
             <article class="contain">
-                <h2 class="title">About us</h2>
-                <p>Our main objective is to facilitate personal or group productivity and organization, avoiding forgetting pending tasks and allowing clear monitoring of progress.</p>
-                <a href="#contact" class="btn">Contact us</a>
+                <h2 class="title">Acerca de nosotros</h2>
+                <p>Nuestro objetivo principal es facilitar la productividad y organización personal o grupal, evitando olvidar tareas pendientes y permitiendo un seguimiento claro del progreso.</p>
+                <a href="#contact" class="btn">Contáctanos</a>
             </article>
     </section>
-    <!-- SECTION: Opinions if customers -->
+    <!-- SECTION: Opiniones de clientes -->
     <section class="content opinion">
-            <h2 class="title">opinions</h2>
-            <p>Learn about some of our clients' options.</p>
+            <h2 class="title">Opiniones</h2>
+            <p>Conoce algunas opiniones de nuestros clientes.</p>
             <div class="box-container2">
                 <div class="box">
                     <img src="public/images/pic1.jpg" alt="">
-                    <h3>Juan Jose</h3>
-                    <p>It hel me a lot  with my taks.</p>
+                    <h3>Juan José</h3>
+                    <p>Me ayudó mucho con mis tareas.</p>
                     <div class="stars">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -71,8 +71,8 @@ export default function Home() {
 
                 <div class="box">
                     <img src="public/images/pic2.jpg" alt="">
-                    <h3>Ana Sofia</h3>
-                    <p>A really nice web for taks.</p>
+                    <h3>Ana Sofía</h3>
+                    <p>Una página realmente genial para tareas.</p>
                     <div class="stars">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -83,7 +83,7 @@ export default function Home() {
                 <div class="box">
                     <img src="public/images/pic1.jpg" alt="">
                     <h3>Cristian Camilo</h3>
-                    <p>I have never be more tidy.</p>
+                    <p>Nunca he estado más organizado.</p>
                     <div class="stars">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -93,14 +93,14 @@ export default function Home() {
                 </div>
             </div>
      </section>
-     <!-- SECTION: Contact-->
+     <!-- SECTION: Contacto-->
     <section class="content contact" id ="contact">
-        <h2 class="title">Contact</h2>
+        <h2 class="title">Contacto</h2>
         <div class="footer-section">
             <div class="f-enlaces">
-                <a href="#header">Home</a>
-                <a href="#about">About</a>
-                <a href="#sau">Services</a>
+                <a href="#header">Inicio</a>
+                <a href="#about">Acerca de</a>
+                <a href="#sau">Servicios</a>
             </div>
         </div>
         <div class="social-icons">

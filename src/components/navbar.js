@@ -1,4 +1,7 @@
 export default function Navbar() {
+    const page = document.body.dataset.page;
+    console.log(page)
+
   return `<div class="head">
         <div class="logo">
             <a href="#">
@@ -6,9 +9,9 @@ export default function Navbar() {
             </a>
         </div>
         <nav class="navbar">
-            <a href="#">Home</a>
-            <a href="#">Registrer</a>
-            <a href="#">Login</a>
+            <a href="/">Inicio</a>
+            ${page === "tasks" || page === "newtask"? `<a href="/">Usario</a>` : `<a href="/">Iniciar Sesión</a>`}
+            ${page === "tasks" || page === "newtask"? `<a href="/">Cerrar Sesion</a>` : `<a href="/">Registrarse</a>`}
         </nav>
     </div>
   `;

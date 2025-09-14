@@ -1,8 +1,33 @@
 import { routes } from './pages/routes.js';
 import Navbar from './components/navbar.js';
 
+
 function render(path) {
-  document.getElementById('app').innerHTML = routes[path] ? routes[path]() : '<h1>404</h1><p>Página no encontrada.</p>';
+  const app = document.getElementById('app');
+
+  if (routes[path]) {
+    app.innerHTML = routes[path]();
+
+    // ⚡ Enganchar lógica especial según la ruta
+    if (path === "/tasks") {
+      import("/utils/taskpage.js")
+        .then(module => module.default?.())
+        .catch(err => console.error("Error cargando taskpage.js:", err));
+    }
+    else if (path === "/newtask") {
+      import("/utils/newtask.js")
+        .then(module => module.default?.())
+        .catch(err => console.error("Error cargando newtask.js:", err));
+    }
+    else if (path === "/editask") {
+      import("/utils/editTask.js")
+        .then(module => module.default?.())
+        .catch(err => console.error("Error cargando newtask.js:", err));
+    }
+
+  } else {
+    app.innerHTML = '<h1>404</h1><p>Página no encontrada.</p>';
+  }
 }
 
 function onNavClick(e) {
@@ -17,5 +42,8 @@ function onNavClick(e) {
 window.addEventListener('popstate', () => render(window.location.pathname));
 document.addEventListener('click', onNavClick);
 
+// Navbar siempre fijo
 document.getElementById('navbar').innerHTML = Navbar();
+
+// Render inicial
 render(window.location.pathname);

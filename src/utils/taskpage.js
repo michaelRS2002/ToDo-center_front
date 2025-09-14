@@ -2,6 +2,53 @@ window.addEventListener('load', () => {
 	const form = document.querySelector("#new-task-form");
 	const input = document.querySelector("#new-task-input");
 	const list_el = document.querySelector("#tasks-pending");
+  const completedListEl = document.getElementById("tasks-completed");
+  const inprocessListEl = document.getElementById("tasks-inprocess");
+  // Selecciona el input del buscador
+  const searchInput = document.querySelector(".search-input");
+
+  // Crear un mensaje dinámico (inicialmente oculto)
+  let noResultsMsg = document.createElement("p");
+  noResultsMsg.id = "no-results";
+  noResultsMsg.textContent = "No se encontró ninguna tarea.";
+  noResultsMsg.style.display = "none";
+  noResultsMsg.style.textAlign = "center";
+  noResultsMsg.style.color = "crimson";
+  noResultsMsg.style.fontWeight = "bold";
+
+  // Insertamos el mensaje dentro de .tasksection
+  const taskSection = document.querySelector(".tasksection");
+  if (taskSection) {
+    taskSection.appendChild(noResultsMsg);
+  }
+
+  // Escucha lo que el usuario escribe
+  searchInput.addEventListener("input", () => {
+    const term = searchInput.value.toLowerCase().trim();
+    const tasks = document.querySelectorAll(".task");
+
+    let found = false;
+
+    tasks.forEach(task => {
+      const title = task.querySelector(".content .text")?.value?.toLowerCase() || "";
+      const description = task.querySelector(".description .text")?.value?.toLowerCase() || "";
+
+      if (title.includes(term) || description.includes(term)) {
+        task.style.display = "flex"; // muestra coincidencia
+        found = true;
+      } else {
+        task.style.display = "none"; // oculta lo que no coincide
+      }
+    });
+
+    // Mostrar mensaje si no hay coincidencias
+    if (!found && term !== "") {
+      noResultsMsg.style.display = "block";
+    } else {
+      noResultsMsg.style.display = "none";
+    }
+  });
+
 
     // valores iniciales
     let totalTasks = 0;
@@ -31,6 +78,18 @@ window.addEventListener('load', () => {
         } else {
             progressEl.style.background = "limegreen";
         }
+
+        if (completedTasks == totalTasks && totalTasks && totalTasks > 0){
+          launchConfetti()
+        }
+    }
+      
+    function launchConfetti() {
+      confetti({
+        particleCount: 150,     // cantidad de partículas
+        spread: 70,             // ángulo de dispersión
+        origin: { y: 0.6 }      // punto de inicio (0 = arriba, 1 = abajo)
+      });
     }
 
     // Función para convertir hora de 24h a 12h
@@ -104,13 +163,13 @@ window.addEventListener('load', () => {
         
         const task_edit_el = document.createElement('button');
         task_edit_el.classList.add('edit');
-        task_edit_el.innerText = 'Edit';
+        task_edit_el.innerHTML = '<i class="fas fa-edit"></i>';
 
         const task_delete_el = document.createElement('button');
         task_delete_el.classList.add('delete');
-        task_delete_el.innerText = 'Delete';
+        task_delete_el.innerHTML = '<i class="fas fa-trash"></i>';
 
-        //task_actions_el.appendChild(task_edit_el);
+        task_actions_el.appendChild(task_edit_el);
         task_actions_el.appendChild(task_delete_el);
         task_el.appendChild(task_actions_el);
 
@@ -122,30 +181,47 @@ window.addEventListener('load', () => {
 
             if (task_content_el.classList.contains("checked")) {
                 completedTasks = Math.min(completedTasks + 1, totalTasks);
-            } else {
+                // mover al contenedor de completados
+                completedListEl.appendChild(task_el);
+
+                // actualizar estado en localStorage
+                if (isFromStorage && taskData.id) {
+                    updateTaskStatusInStorage(taskData.id, "completed");
+            }} else {
                 completedTasks = Math.max(completedTasks - 1, 0);
+                // devolver al contenedor de pendientes
+                list_el.appendChild(task_el);
+
+                if (isFromStorage && taskData.id) {
+                    updateTaskStatusInStorage(taskData.id, "pending");
+                }
             }
             updateStats();
         });
 
-        task_edit_el.addEventListener('click', (e) => {
-            if (task_edit_el.innerText.toLowerCase() == "edit") {
-                task_edit_el.innerText = "Save";
-                task_input_el.removeAttribute("readonly");
-                task_input_el.focus();
-            } else {
-                task_edit_el.innerText = "Edit";
-                task_input_el.setAttribute("readonly", "readonly");
-                
-                // Si es una tarea de localStorage, actualizar también el storage
-                if (isFromStorage && taskData.id) {
-                    updateTaskInStorage(taskData.id, task_input_el.value);
-                }
-            }
-        });
+      task_edit_el.addEventListener('click', (e) => {
+          if (task_edit_el.dataset.mode === "edit") {
+              // Cambiar a modo guardar
+              task_edit_el.dataset.mode = "save";
+              task_edit_el.innerHTML = '<i class="fas fa-save"></i>'; // Ícono de guardar
+              task_input_el.removeAttribute("readonly");
+              task_input_el.focus();
+          } else {
+              // Cambiar a modo editar
+              task_edit_el.dataset.mode = "edit";
+              task_edit_el.innerHTML = '<i class="fas fa-edit"></i>'; // Ícono de editar
+              task_input_el.setAttribute("readonly", "readonly");
 
-        task_delete_el.addEventListener('click', (e) => {
-            const confirmDelete = confirm(`Are you sure you want to delete the task "${task_input_el.value}"?`);
+              // Si es una tarea de localStorage, actualizar también el storage
+              if (isFromStorage && taskData.id) {
+                  updateTaskStatusInStorage(taskData.id, task_input_el.value);
+              }
+          }
+      });
+
+
+      task_delete_el.addEventListener('click', (e) => {
+            const confirmDelete = confirm(`🗑️ ¿Eliminar la tarea "${task_input_el.value}"?`);
     
             if (!confirmDelete) return; // si el usuario cancela, no hacemos nada
             
@@ -160,19 +236,18 @@ window.addEventListener('load', () => {
                 deleteTaskFromStorage(taskData.id);
             }
             
-            list_el.removeChild(task_el);
+            task_el.remove();
         });
 
         return task_el;
     }
 
     // Función para actualizar tarea en localStorage
-    function updateTaskInStorage(taskId, newValue) {
+    function updateTaskStatusInStorage(taskId, newStatus) {
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         const taskIndex = tasks.findIndex(task => task.id == taskId);
         if (taskIndex !== -1) {
-            // Actualizar solo el nombre, mantener otros datos
-            tasks[taskIndex].name = newValue;
+            tasks[taskIndex].status = newStatus;
             localStorage.setItem('tasks', JSON.stringify(tasks));
         }
     }
@@ -187,46 +262,95 @@ window.addEventListener('load', () => {
     // Función para cargar tareas desde localStorage
     function loadTasksFromStorage() {
         const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        
+
         tasks.forEach(task => {
             const task_el = createTaskElement(task, true);
-            list_el.appendChild(task_el);
+            const task_content_el = task_el.querySelector('.content');
+            const task_input_el = task_el.querySelector('.text');
+
+            if (task.status === "completed") {
+              task_content_el.classList.add("checked");
+              task_input_el.classList.add("textchecked");
+              completedListEl.appendChild(task_el);
+              completedTasks++;
+            } else if (task.status === "inprocess") {
+              inprocessListEl.appendChild(task_el);
+            } else {
+              list_el.appendChild(task_el); // pendiente
+            }
+
             totalTasks++;
         });
-        
         updateStats();
     }
 
     // Cargar tareas existentes al inicializar
     loadTasksFromStorage();
+    console.log("Tarea cargada")
 
     // Event listener para el formulario (tareas creadas localmente)
     if (form) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
+        const status = document.getElementById("task-status").value;
+        const taskData = {
+          id: Date.now(),
+          name: input.value,
+          desc: "",
+          date: "",
+          start: "",
+          end: "",
+          status: status
+        };
 
-        const task = input.value;
+        // Guardar en localStorage
+        let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        tasks.push(taskData);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+
+        // Crear y mostrar inmediatamente en el DOM
+        const task_el = createTaskElement(taskData, true);
+        
+        // Colocar la tarea en el contenedor correcto según su estado
+        if (status === "completed") {
+            task_el.querySelector('.content').classList.add("checked");
+            task_el.querySelector('.text').classList.add("textchecked");
+            completedListEl.appendChild(task_el);
+            completedTasks++;
+        } else if (status === "inprocess") {
+            inprocessListEl.appendChild(task_el);
+        } else {
+            list_el.appendChild(task_el); // pendiente
+        }
+        
+        // Actualizar contadores
         totalTasks++;
-        
-        const task_el = createTaskElement(task, false);
-        list_el.appendChild(task_el);
-        
-        input.value = '';
         updateStats();
+
+        // Limpiar input
+        input.value = '';
       });
     }
 
     // Opcional: Escuchar cambios en localStorage para sincronizar en tiempo real
     window.addEventListener('storage', (e) => {
         if (e.key === 'tasks') {
-            // Recargar todas las tareas si hay cambios
+            // Limpiar contenedores
             list_el.innerHTML = '';
+            completedListEl.innerHTML = '';
+            inprocessListEl.innerHTML = '';
             totalTasks = 0;
             completedTasks = 0;
+            // Recargar todas las tareas
             loadTasksFromStorage();
         }
-    });
+      });
+
 });
+
+
+
+/*
 
 document.addEventListener('DOMContentLoaded', function () {
   const token = localStorage.getItem('token');
@@ -285,4 +409,5 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
-});
+}); // 👈 aquí cerramos bien
+*/
