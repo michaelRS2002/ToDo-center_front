@@ -23,32 +23,33 @@ window.addEventListener('load', () => {
   }
 
   // Escucha lo que el usuario escribe
-  searchInput.addEventListener("input", () => {
-    const term = searchInput.value.toLowerCase().trim();
-    const tasks = document.querySelectorAll(".task");
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      const term = searchInput.value.toLowerCase().trim();
+      const tasks = document.querySelectorAll(".task");
 
-    let found = false;
+      let found = false;
 
-    tasks.forEach(task => {
-      const title = task.querySelector(".content .text")?.value?.toLowerCase() || "";
-      const description = task.querySelector(".description .text")?.value?.toLowerCase() || "";
+      tasks.forEach(task => {
+        const title = task.querySelector(".content .text")?.value?.toLowerCase() || "";
+        const description = task.querySelector(".description .text")?.value?.toLowerCase() || "";
 
-      if (title.includes(term) || description.includes(term)) {
-        task.style.display = "flex"; // muestra coincidencia
-        found = true;
+        if (title.includes(term) || description.includes(term)) {
+          task.style.display = "flex"; // muestra coincidencia
+          found = true;
+        } else {
+          task.style.display = "none"; // oculta lo que no coincide
+        }
+      });
+
+      // Mostrar mensaje si no hay coincidencias
+      if (!found && term !== "") {
+        noResultsMsg.style.display = "block";
       } else {
-        task.style.display = "none"; // oculta lo que no coincide
+        noResultsMsg.style.display = "none";
       }
     });
-
-    // Mostrar mensaje si no hay coincidencias
-    if (!found && term !== "") {
-      noResultsMsg.style.display = "block";
-    } else {
-      noResultsMsg.style.display = "none";
-    }
-  });
-
+  }
 
     // valores iniciales
     let totalTasks = 0;
@@ -62,36 +63,38 @@ window.addEventListener('load', () => {
     function updateStats() {
         // actualizar número total
         // actualizar fracción (completadas / total)
-        numbersEl.textContent = `${completedTasks}/${totalTasks}`;
+        if (numbersEl) {
+          numbersEl.textContent = `${completedTasks}/${totalTasks}`;
+        }
 
         // porcentaje de progreso (evitamos división por cero)
         const percent = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
 
         // actualizar ancho de la barra
-        progressEl.style.width = percent + "%";
+        if (progressEl) {
+          progressEl.style.width = percent + "%";
 
-        // color dinámico opcional
-        if (percent < 50) {
-            progressEl.style.background = "crimson";
-        } else if (percent < 100) {
-            progressEl.style.background = "orange";
-        } else {
-            progressEl.style.background = "limegreen";
+          // color dinámico opcional
+          if (percent < 50) {
+              progressEl.style.background = "crimson";
+          } else if (percent < 100) {
+              progressEl.style.background = "orange";
+          } else {
+              progressEl.style.background = "limegreen";
+          }
         }
 
         if (completedTasks == totalTasks && totalTasks && totalTasks > 0){
-          launchConfetti()
+          if (typeof confetti === 'function') {
+            confetti({
+                particleCount: 150,     // cantidad de partículas
+                spread: 70,             // ángulo de dispersión
+                origin: { y: 0.6 }      // punto de inicio (0 = arriba, 1 = abajo)
+              });
+          }
         }
     }
-      
-    function launchConfetti() {
-      confetti({
-        particleCount: 150,     // cantidad de partículas
-        spread: 70,             // ángulo de dispersión
-        origin: { y: 0.6 }      // punto de inicio (0 = arriba, 1 = abajo)
-      });
-    }
-
+    
     // Función para convertir hora de 24h a 12h
     function convertTo12Hour(time24) {
         if (!time24) return '';
@@ -182,7 +185,9 @@ window.addEventListener('load', () => {
             if (task_content_el.classList.contains("checked")) {
                 completedTasks = Math.min(completedTasks + 1, totalTasks);
                 // mover al contenedor de completados
-                completedListEl.appendChild(task_el);
+                if (completedListEl) {
+                  completedListEl.appendChild(task_el);
+                }
 
                 // actualizar estado en localStorage
                 if (isFromStorage && taskData.id) {
@@ -190,7 +195,9 @@ window.addEventListener('load', () => {
             }} else {
                 completedTasks = Math.max(completedTasks - 1, 0);
                 // devolver al contenedor de pendientes
-                list_el.appendChild(task_el);
+                if (list_el) {
+                  list_el.appendChild(task_el);
+                }
 
                 if (isFromStorage && taskData.id) {
                     updateTaskStatusInStorage(taskData.id, "pending");
@@ -214,11 +221,10 @@ window.addEventListener('load', () => {
 
               // Si es una tarea de localStorage, actualizar también el storage
               if (isFromStorage && taskData.id) {
-                  updateTaskStatusInStorage(taskData.id, task_input_el.value);
+                  updateTaskNameInStorage(taskData.id, task_input_el.value);
               }
           }
       });
-
 
       task_delete_el.addEventListener('click', (e) => {
             const confirmDelete = confirm(`🗑️ ¿Eliminar la tarea "${task_input_el.value}"?`);
@@ -242,12 +248,22 @@ window.addEventListener('load', () => {
         return task_el;
     }
 
-    // Función para actualizar tarea en localStorage
+    // Función para actualizar el estatus de tarea en localStorage
     function updateTaskStatusInStorage(taskId, newStatus) {
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         const taskIndex = tasks.findIndex(task => task.id == taskId);
         if (taskIndex !== -1) {
             tasks[taskIndex].status = newStatus;
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+    }
+
+    // Función para actualizar el nombre de tarea en localStorage
+    function updateTaskNameInStorage(taskId, newName) {
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        const taskIndex = tasks.findIndex(task => task.id == taskId);
+        if (taskIndex !== -1) {
+            tasks[taskIndex].name = newName;
             localStorage.setItem('tasks', JSON.stringify(tasks));
         }
     }
@@ -259,8 +275,20 @@ window.addEventListener('load', () => {
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
+    // Función para limpiar contenedores
+    function clearAllContainers() {
+        if (list_el) list_el.innerHTML = '';
+        if (completedListEl) completedListEl.innerHTML = '';
+        if (inprocessListEl) inprocessListEl.innerHTML = '';
+        totalTasks = 0;
+        completedTasks = 0;
+    }
+
     // Función para cargar tareas desde localStorage
     function loadTasksFromStorage() {
+        // Primero limpiar contenedores para evitar duplicados
+        clearAllContainers();
+        
         const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
         tasks.forEach(task => {
@@ -271,12 +299,18 @@ window.addEventListener('load', () => {
             if (task.status === "completed") {
               task_content_el.classList.add("checked");
               task_input_el.classList.add("textchecked");
-              completedListEl.appendChild(task_el);
+              if (completedListEl) {
+                completedListEl.appendChild(task_el);
+              }
               completedTasks++;
             } else if (task.status === "inprocess") {
-              inprocessListEl.appendChild(task_el);
+              if (inprocessListEl) {
+                inprocessListEl.appendChild(task_el);
+              }
             } else {
-              list_el.appendChild(task_el); // pendiente
+              if (list_el) {
+                list_el.appendChild(task_el); // pendiente
+              }
             }
 
             totalTasks++;
@@ -286,16 +320,24 @@ window.addEventListener('load', () => {
 
     // Cargar tareas existentes al inicializar
     loadTasksFromStorage();
-    console.log("Tarea cargada")
+    console.log("Tareas cargadas");
 
     // Event listener para el formulario (tareas creadas localmente)
     if (form) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const status = document.getElementById("task-status").value;
+        
+        if (!input.value.trim()) {
+          alert('Por favor ingresa un nombre para la tarea');
+          return;
+        }
+        
+        const status = document.getElementById("task-status") ? 
+                      document.getElementById("task-status").value : "pending";
+        
         const taskData = {
           id: Date.now(),
-          name: input.value,
+          name: input.value.trim(),
           desc: "",
           date: "",
           start: "",
@@ -308,46 +350,47 @@ window.addEventListener('load', () => {
         tasks.push(taskData);
         localStorage.setItem("tasks", JSON.stringify(tasks));
 
-        // Crear y mostrar inmediatamente en el DOM
+        // OPCIÓN 1: Recargar página (tu método actual)
+        // location.reload();
+
+        // OPCIÓN 2: Mostrar inmediatamente sin recargar (más eficiente)
         const task_el = createTaskElement(taskData, true);
         
-        // Colocar la tarea en el contenedor correcto según su estado
         if (status === "completed") {
-            task_el.querySelector('.content').classList.add("checked");
-            task_el.querySelector('.text').classList.add("textchecked");
+          task_el.querySelector('.content').classList.add("checked");
+          task_el.querySelector('.text').classList.add("textchecked");
+          if (completedListEl) {
             completedListEl.appendChild(task_el);
-            completedTasks++;
+          }
+          completedTasks++;
         } else if (status === "inprocess") {
+          if (inprocessListEl) {
             inprocessListEl.appendChild(task_el);
+          }
         } else {
-            list_el.appendChild(task_el); // pendiente
+          if (list_el) {
+            list_el.appendChild(task_el);
+          }
         }
         
-        // Actualizar contadores
         totalTasks++;
         updateStats();
-
+        
         // Limpiar input
         input.value = '';
+        
+        console.log('Nueva tarea creada:', taskData);
       });
     }
 
-    // Opcional: Escuchar cambios en localStorage para sincronizar en tiempo real
+    // Escuchar cambios en localStorage para sincronizar en tiempo real
     window.addEventListener('storage', (e) => {
         if (e.key === 'tasks') {
-            // Limpiar contenedores
-            list_el.innerHTML = '';
-            completedListEl.innerHTML = '';
-            inprocessListEl.innerHTML = '';
-            totalTasks = 0;
-            completedTasks = 0;
-            // Recargar todas las tareas
+            console.log('Cambio detectado en localStorage');
             loadTasksFromStorage();
         }
-      });
-
+    });
 });
-
 
 
 /*

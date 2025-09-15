@@ -9,18 +9,8 @@ function render(path) {
     app.innerHTML = routes[path]();
 
     // ⚡ Enganchar lógica especial según la ruta
-    if (path === "/tasks") {
-      import("/utils/taskpage.js")
-        .then(module => module.default?.())
-        .catch(err => console.error("Error cargando taskpage.js:", err));
-    }
-    else if (path === "/newtask") {
+    if (path === "/newtask") {
       import("/utils/newtask.js")
-        .then(module => module.default?.())
-        .catch(err => console.error("Error cargando newtask.js:", err));
-    }
-    else if (path === "/editask") {
-      import("/utils/editTask.js")
         .then(module => module.default?.())
         .catch(err => console.error("Error cargando newtask.js:", err));
     }

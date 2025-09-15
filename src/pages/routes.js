@@ -14,6 +14,5 @@ export const routes = {
   '/fpassword': Fpassword,
   '/sitemap': Sitemap,
   '/tasks': Tasks,
-  '/newtask': Newtask,
-  '/editask': Editask,
+  '/newtask': Newtask
 };
