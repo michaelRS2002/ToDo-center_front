@@ -4,13 +4,14 @@ export default function Fpassword() {
     <main class="fpassword_main">
       <div class="div_form">
         <h1>
-          Recover password
+          Recuperar contraseña
         </h1>
         <div class="form_inputs">
-          <input type="email" name="email" placeholder="example@gmail.com">
+          <label class="label label-required">Correo</label>
+          <input type="email" name="email" placeholder="ejemplo@gmail.com" class="input">
         </div>
         <div class="fpassword_button">
-          <input type="submit" value="Send email">
+          <input class="btn btn-primary" type="submit" value="Enviar correo">
         </div>
       </div>
       <div class="div_logo">

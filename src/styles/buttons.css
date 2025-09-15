@@ -348,9 +348,11 @@
 }
 
 /* Utilidades adicionales */
+/*Esto me desalinea un boton en el view profile
+/*
 .btn + .btn {
   margin-left: 0.5rem;
-}
+}*/
 
 .btn-toolbar {
   display: flex;

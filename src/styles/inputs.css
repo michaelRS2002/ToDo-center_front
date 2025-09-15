@@ -10,7 +10,7 @@
   --input-border-focus: #3b82f6;
   --input-border-error: #ef4444;
   --input-border-success: #10b981;
-  --input-text: #1f2937;
+  --input-text: #dbdbdbcf;
   --input-placeholder: #9ca3af;
   --input-disabled-bg: #f9fafb;
   --input-disabled-text: #6b7280;
@@ -34,7 +34,7 @@
   border-radius: var(--input-border-radius);
   transition: var(--input-transition);
   padding: 0.5rem 0.75rem;
-  min-height: 2.5rem;
+
 }
 
 .input::placeholder {
@@ -78,6 +78,12 @@
 .input-sm {
   padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
+  min-height: 2rem;
+}
+
+.input-md {
+  padding: 0.5rem 0.5rem;
+  font-size: 1rem;
   min-height: 2rem;
 }
 
@@ -200,7 +206,7 @@
 /* Labels */
 .label {
   display: block;
-  font-size: 23px;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--input-text);
   margin-bottom: 0.25rem;
@@ -471,6 +477,11 @@
 }
 
 /* Utilidades */
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
 
 .form-col {
   flex: 1;
@@ -482,4 +493,7 @@
     gap: 0;
   }
   
+  .form-row .form-group {
+    margin-bottom: 1rem;
+  }
 }

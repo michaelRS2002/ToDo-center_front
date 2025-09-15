@@ -4,17 +4,23 @@ import Signup from './signup.js';
 import Fpassword from './fpassword.js';
 import Sitemap from './sitemap.js'
 import Tasks from './tasks.js';
+import User from './user.js';
+import UserEdit from './user-edit.js';
 import Newtask from './newtask.js';
 import Editask from './editask.js';
+import Reset from './reset.js';
 import Examples from './examples.js';
 export const routes = {
 
   '/': Home,
   '/login': Login,
   '/signup': Signup,
-  '/fpassword': Fpassword,
+  '/forgot-password': Fpassword,
   '/sitemap': Sitemap,
+  '/profile': User,
+  '/profile/edit': UserEdit,
   '/tasks': Tasks,
   '/newtask': Newtask,
+  '/reset': Reset,
   '/examples': Examples,
 };

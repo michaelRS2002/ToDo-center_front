@@ -74,7 +74,6 @@ h1{
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
     padding: 0;
-
 }
 
 .div_form {
@@ -136,8 +135,11 @@ a {
     justify-content: center;
     align-items: center;
     background: url(../public/images/header.jpg) no-repeat center;
-    background-position: center 40%; 
+    background-position: left top; 
+    background-color: rgb(255 255 255 / 30%);
+    backdrop-filter: blur(50px);
     background-size: cover;
+    opacity: 0.9;
     padding: 110px 0;
 }
 
@@ -145,6 +147,7 @@ a {
 .header p{
     color: #000000;
     font-weight: bolder;
+    backdrop-filter: blur(10px);
 }
 
 .title {
@@ -170,6 +173,21 @@ p {
     margin-top: 40px;
 }
 
+.btn {
+    margin-top: 15px;
+    padding: 10px 40px;
+    border: 2px solid #1c3dcc;
+    color: #fff;
+    text-decoration: none;
+    background: #1c3dcc;
+    text-align: center;
+    font-size: 20px;
+}
+
+.btn:hover {
+    background: #020202;
+    color: #1634b9;
+}
 
 .content {
     height: 50vh;
@@ -225,7 +243,7 @@ p {
     margin-top: 10px;
 }
 .about {
-    background: url(..\public\images\about.jpg) no-repeat center;
+    background: url(..\public\images\about.png) no-repeat center;
     background-size: cover;
     background-attachment: fixed;
     text-align: center;
@@ -385,83 +403,85 @@ footer>a{
     margin-top: 10rem;
 }
 
-    .signup_main{
-        padding: 1.5rem;
-        width: 40rem;
-        height: 32rem;
-        display: flex;
-        flex-wrap: nowrap;
-        margin-top: 7%;
-    }
+.signup_main{
+    padding: 2rem;
+    width: 40rem;
+    height: 38rem;
+    display: flex;
+    flex-wrap: nowrap;
+    margin-top: 6%;
+}
 
-    .form_inputs{
-        margin-top: 1.5rem;
-        margin-left: auto;
-        margin-right: auto;
-        width: 100%;
-    }
+.form_inputs{
+    margin-top: 1.5rem;
+    display:grid;
+    place-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
 
-    .form_inputs>input{
-        margin-bottom: 1.75rem;
-        padding:0.5rem;
-        width: 75%;
-        border: none;
-        font-family: calibri;
-        text-align: left;
-        background-color: #c3c2c2;
-        color: #000000
-    }
+.form_inputs>input{
+    margin-bottom: 1.5rem;
+    padding:0.5rem;
+    width: 75%;
+    border: none;
+    font-family: calibri;
+    text-align: left;
+    background-color: #c3c2c2;
+    color: #000000
+}
 
-    .div_form>h1{
-        font-size: 1.5rem;
-        margin-bottom: 0rem;
-    }
+.div_form>h1{
+    font-size: 1.5rem;
+    margin-bottom: 0rem;
+}
 
-    .div_form>a{
-        color:#FDF6F0;
-        font-size: 1rem;
-        margin-bottom: 1rem;
-    }
+.div_form>a{
+    color:#FDF6F0;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
 
-    .submit_button{
-        margin-top: 0rem;
-        margin-bottom: 1rem;
-        margin-left: auto;
-        margin-right: auto;
-        width: 100%;
-    }
+.submit_button{
+    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
 
-    .submit_button>input{
-        width: 75%;
-        border: none;
-        border-radius: 4%;
-        font-family: calibri;
-        font-size: 1.25rem;
-        text-shadow: 1px 1px 5px #464545ae;
-        padding: 0.75rem;
-        cursor: pointer;
-    }
+.submit_button>input{
+    margin-bottom: 0.75rem;
+    width: 75%;
+    border: none;
+    border-radius: 4%;
+    font-family: calibri;
+    font-size: 1.25rem;
+    text-shadow: 1px 1px 5px #464545ae;
+    padding: 0.5rem;
+    cursor: pointer;
+}
 
-    .fpassword_button{
-        width: 100%;
-        margin-top: 5%;
-    }
+.fpassword_button{
+    width: 100%;
+    margin-top: 5%;
+}
 
-    .fpassword_button>input{
-        width: 75%;
-        padding: 0.5rem;
-        font-size: 1rem;
-        border: none;
-        border-radius: 5%;
-        text-shadow: 1px 1px 5px #464545ae;
-    }
+.fpassword_button>input{
+    width: 75%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5%;
+    text-shadow: 1px 1px 5px #464545ae;
+}
 
 
-    .sitemap_title{
-        position: absolute;
-        left:0;
-        right:0;
-    }
+.sitemap_title{
+    position: absolute;
+    left:0;
+    right:0;
+}
 
 
 /* Windows of 768px */
@@ -571,7 +591,7 @@ footer>a{
         max-width: 90%;
         overflow-x: hidden;
         width: 40rem;
-        height: 36rem;
+        height: 38rem;
         margin-top: 35%;
     }
 
@@ -601,29 +621,20 @@ footer>a{
         font-size: 1rem;
         padding:0.75rem;
         width: 75%;
-        border: none;
-        font-family: calibri;
         text-align: left;
-        background-color: #c3c2c2;
-        color: #000000
     }
 
     .submit_button{
         margin-top: 0rem;
-        margin-bottom: 2.5rem;
+        margin-bottom: 1.5rem;
         margin-left: auto;
         margin-right: auto;
         width: 100%;
     }
 
     .submit_button>input{
-        width: 75%;
-        border: none;
-        border-radius: 4%;
-        font-family: calibri;
         font-size: 1.25rem;
-        padding: 1.5rem;
-        cursor: pointer;
+        padding: 1rem;
     }
     
     .fpassword_button{
@@ -714,6 +725,11 @@ footer>a{
         margin-top: 20px;
     }
     
+    .btn {
+        padding: 8px 25px;
+        font-size: 16px;
+        margin-top: 10px;
+    }
     
     .content {
         height: auto;
@@ -869,6 +885,11 @@ footer>a{
     padding: 0 10px;
   }
 
+  .btn {
+    font-size: 14px;
+    padding: 8px 20px;
+  }
+
   .icon {
     margin-top: 30px;
   }
@@ -950,6 +971,9 @@ footer>a{
   .f-enlaces a {
     margin: 8px 0;
   }
+
+
+
     .div_logo{
         display:none
     }
@@ -1192,6 +1216,7 @@ footer>a{
 
 /* Task */
 
+
 /* Formulario buscador */
 .search-card{
     padding: 0px 21px;
@@ -1307,6 +1332,7 @@ footer>a{
     width: 11%;
 }
 
+
 .tittle-task {
 	width: 100%;
 }
@@ -1415,14 +1441,15 @@ input, button {
 }
 
 #tasks-pending .task {
-    background-color: #FFCDD2   ;
-}
-#tasks-inprocess .task {
-    background-color: #BBDEFB    
+    background-color: #3d5bf1f6   ;
 }
 
 #tasks-completed .task  {
-    background-color: #C8E6C9   
+    background-color: #142883e7   
+}
+
+#tasks-inprocess .task {
+    background-color: #1c3cccf3   
 }
 
 element.style {
@@ -1522,11 +1549,7 @@ element.style {
 }
 
 .task .actions .delete {
-	color: #F44336 
-}
-
-.task .actions .edit {
-	color: #121212    
+	color: rgb(220, 20, 60);
 }
 
 .boton-fijo {
