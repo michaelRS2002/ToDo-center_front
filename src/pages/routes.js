@@ -6,6 +6,7 @@ import Sitemap from './sitemap.js'
 import Tasks from './tasks.js';
 import Newtask from './newtask.js';
 import Editask from './editask.js';
+import Examples from './examples.js';
 export const routes = {
 
   '/': Home,
@@ -14,5 +15,6 @@ export const routes = {
   '/fpassword': Fpassword,
   '/sitemap': Sitemap,
   '/tasks': Tasks,
-  '/newtask': Newtask
+  '/newtask': Newtask,
+  '/examples': Examples,
 };

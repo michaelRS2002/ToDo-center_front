@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="src/styles/buttons.css" />
+<link rel="stylesheet" href="src/styles/inputs.css" />
+<link rel="stylesheet" href="src/styles/card.css">
+<link rel="stylesheet" href="src/styles/spacing.css">
+<link rel="stylesheet" href="src/styles/containers.css">
+<!-- Contenedores -->
+<div class="container-lg">Contenedor con max-width responsive</div>
+<div class="container-fluid">Contenedor de ancho completo</div>
+
+<!-- Centrado con flexbox -->
+<div class="center-flex h-screen">
+  <div>Contenido centrado horizontal y verticalmente</div>
+</div>
+
+<!-- Grid responsive -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</div>
+
+<!-- Flexbox responsive -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-4">
+  <div>Izquierda</div>
+  <div>Derecha</div>
+</div>
+
+<!-- Centrado horizontal -->
+<div class="max-w-4xl center-x">
+  <h1>Contenido centrado</h1>
+</div>
+
+<!-- Layout completo -->
+<div class="container-xl">
+  <header class="flex items-center justify-between py-4">
+    <div>Logo</div>
+    <nav class="hidden md:flex gap-6">
+      <a href="#">Inicio</a>
+      <a href="#">Acerca</a>
+    </nav>
+  </header>
+  
+  <main class="grid grid-cols-1 lg:grid-cols-3 gap-8 py-12">
+    <div class="lg:col-span-2">Contenido principal</div>
+    <aside>Sidebar</aside>
+  </main>
+</div>

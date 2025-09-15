@@ -170,23 +170,6 @@ p {
     margin-top: 40px;
 }
 
-.btn {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 40px;
-    border: 2px solid #1c3dcc;
-    color: #fff;
-    text-decoration: none;
-    background: #1c3dcc;
-
-    text-align: center;
-    font-size: 20px;
-}
-
-.btn:hover {
-    background: #020202;
-    color: #1634b9;
-}
 
 .content {
     height: 50vh;
@@ -731,11 +714,6 @@ footer>a{
         margin-top: 20px;
     }
     
-    .btn {
-        padding: 8px 25px;
-        font-size: 16px;
-        margin-top: 10px;
-    }
     
     .content {
         height: auto;
@@ -889,11 +867,6 @@ footer>a{
   .header p {
     font-size: 14px;
     padding: 0 10px;
-  }
-
-  .btn {
-    font-size: 14px;
-    padding: 8px 20px;
   }
 
   .icon {
@@ -1218,7 +1191,6 @@ footer>a{
 }
 
 /* Task */
-
 
 /* Formulario buscador */
 .search-card{
@@ -1879,7 +1851,7 @@ textarea {
   background: #142983;
   color: #fff;
   font-size: 20px;
-  padding: 8px 224px ;
+  padding: 12px 224px ;
   border: none;
   border-radius: 12px;
   cursor: pointer;
@@ -1942,7 +1914,7 @@ textarea {
     font-size: 22px;
   }
   #task-form label {
-    font-size: 16px;
+    font-size: 19px;
   }
   .input100,
   textarea,
