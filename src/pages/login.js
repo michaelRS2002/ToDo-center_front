@@ -95,6 +95,7 @@ export default function Login() {
   }, 0);
 
   return `
+<<<<<<< Updated upstream
     <div class="auth-container">
         <div class="auth-card">
             <!-- Form Section -->
@@ -147,5 +148,32 @@ export default function Login() {
             </div>
         </div>
     </div>
+=======
+    <main class="login_main">
+      <div class="div_form">
+        <h1>
+          Iniciar sesión
+        </h1>
+        <form class="form_inputs" action="/submit" method="POST">
+            <label class="label label-required">Correo</label>
+            <input type="email" name="email" placeholder="ejemplo@gmail.com" class="input">
+            <label class="label label-required">Contraseña</label>
+            <input type="password" name="password" placeholder="*******" class="input">
+        </form>
+        <a href="/forgot-password">¿Olvidaste tu contraseña?</a>
+        <div class="submit_button">
+          <input type="submit" class="btn btn-primary btn-block" value="Acceder">
+        </div>
+        <a href="/signup">Crear una cuenta</a>
+      </div>
+      <div class="div_logo">
+        <img src="public/images/logo.png" class="logo" width= "300rem" height="auto">
+      </div>
+    
+    <footer>
+      <a href="/sitemap">Sitemap</a> 
+    </footer>
+    </main>
+>>>>>>> Stashed changes
   `;
 }

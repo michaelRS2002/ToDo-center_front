@@ -10,7 +10,11 @@
   --input-border-focus: #3b82f6;
   --input-border-error: #ef4444;
   --input-border-success: #10b981;
+<<<<<<< Updated upstream
   --input-text: #1f2937;
+=======
+  --input-text: #dbdbdbcf;
+>>>>>>> Stashed changes
   --input-placeholder: #9ca3af;
   --input-disabled-bg: #f9fafb;
   --input-disabled-text: #6b7280;
@@ -34,7 +38,11 @@
   border-radius: var(--input-border-radius);
   transition: var(--input-transition);
   padding: 0.5rem 0.75rem;
+<<<<<<< Updated upstream
   min-height: 2.5rem;
+=======
+
+>>>>>>> Stashed changes
 }
 
 .input::placeholder {
@@ -81,6 +89,15 @@
   min-height: 2rem;
 }
 
+<<<<<<< Updated upstream
+=======
+.input-md {
+  padding: 0.5rem 0.5rem;
+  font-size: 1rem;
+  min-height: 2rem;
+}
+
+>>>>>>> Stashed changes
 .input-lg {
   padding: 0.75rem 1rem;
   font-size: 1rem;

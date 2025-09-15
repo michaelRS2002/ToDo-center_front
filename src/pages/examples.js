@@ -1,5 +1,9 @@
 export default function Examples() {
   return `
+<<<<<<< Updated upstream
+=======
+  <div class="py-52">
+>>>>>>> Stashed changes
   <!-- Botones básicos -->
 <button class="btn btn-primary">Primario</button>
 <button class="btn btn-secondary">Secundario</button>
@@ -35,5 +39,9 @@ export default function Examples() {
 <button class="btn btn-primary" disabled>Deshabilitado</button>
 <button class="btn btn-outline-warning" disabled>Outline Deshabilitado</button>
    
+<<<<<<< Updated upstream
+=======
+  </div>
+>>>>>>> Stashed changes
   `;
 }

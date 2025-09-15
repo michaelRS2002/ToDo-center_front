@@ -348,9 +348,17 @@
 }
 
 /* Utilidades adicionales */
+<<<<<<< Updated upstream
 .btn + .btn {
   margin-left: 0.5rem;
 }
+=======
+/*Esto me desalinea un boton en el view profile
+/*
+.btn + .btn {
+  margin-left: 0.5rem;
+}*/
+>>>>>>> Stashed changes
 
 .btn-toolbar {
   display: flex;

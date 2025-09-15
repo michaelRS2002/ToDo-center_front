@@ -62,7 +62,6 @@ h1{
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
     padding: 0;
-
 }
 
 .div_form {
@@ -166,6 +165,24 @@ p {
     margin-top: 40px;
 }
 
+<<<<<<< Updated upstream
+=======
+.btn {
+    margin-top: 15px;
+    padding: 10px 40px;
+    border: 2px solid #1c3dcc;
+    color: #fff;
+    text-decoration: none;
+    background: #1c3dcc;
+    text-align: center;
+    font-size: 20px;
+}
+
+.btn:hover {
+    background: #020202;
+    color: #1634b9;
+}
+>>>>>>> Stashed changes
 
 .content {
     height: 50vh;
@@ -384,83 +401,85 @@ footer>a{
     margin-top: 10rem;
 }
 
-    .signup_main{
-        padding: 1.5rem;
-        width: 40rem;
-        height: 32rem;
-        display: flex;
-        flex-wrap: nowrap;
-        margin-top: 7%;
-    }
+.signup_main{
+    padding: 2rem;
+    width: 40rem;
+    height: 38rem;
+    display: flex;
+    flex-wrap: nowrap;
+    margin-top: 6%;
+}
 
-    .form_inputs{
-        margin-top: 1.5rem;
-        margin-left: auto;
-        margin-right: auto;
-        width: 100%;
-    }
+.form_inputs{
+    margin-top: 1.5rem;
+    display:grid;
+    place-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
 
-    .form_inputs>input{
-        margin-bottom: 1.75rem;
-        padding:0.5rem;
-        width: 75%;
-        border: none;
-        font-family: calibri;
-        text-align: left;
-        background-color: #c3c2c2;
-        color: #000000
-    }
+.form_inputs>input{
+    margin-bottom: 1.5rem;
+    padding:0.5rem;
+    width: 75%;
+    border: none;
+    font-family: calibri;
+    text-align: left;
+    background-color: #c3c2c2;
+    color: #000000
+}
 
-    .div_form>h1{
-        font-size: 1.5rem;
-        margin-bottom: 0rem;
-    }
+.div_form>h1{
+    font-size: 1.5rem;
+    margin-bottom: 0rem;
+}
 
-    .div_form>a{
-        color:#FDF6F0;
-        font-size: 1rem;
-        margin-bottom: 1rem;
-    }
+.div_form>a{
+    color:#FDF6F0;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
 
-    .submit_button{
-        margin-top: 0rem;
-        margin-bottom: 1rem;
-        margin-left: auto;
-        margin-right: auto;
-        width: 100%;
-    }
+.submit_button{
+    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
 
-    .submit_button>input{
-        width: 75%;
-        border: none;
-        border-radius: 4%;
-        font-family: calibri;
-        font-size: 1.25rem;
-        text-shadow: 1px 1px 5px #464545ae;
-        padding: 0.75rem;
-        cursor: pointer;
-    }
+.submit_button>input{
+    margin-bottom: 0.75rem;
+    width: 75%;
+    border: none;
+    border-radius: 4%;
+    font-family: calibri;
+    font-size: 1.25rem;
+    text-shadow: 1px 1px 5px #464545ae;
+    padding: 0.5rem;
+    cursor: pointer;
+}
 
-    .fpassword_button{
-        width: 100%;
-        margin-top: 5%;
-    }
+.fpassword_button{
+    width: 100%;
+    margin-top: 5%;
+}
 
-    .fpassword_button>input{
-        width: 75%;
-        padding: 0.5rem;
-        font-size: 1rem;
-        border: none;
-        border-radius: 5%;
-        text-shadow: 1px 1px 5px #464545ae;
-    }
+.fpassword_button>input{
+    width: 75%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5%;
+    text-shadow: 1px 1px 5px #464545ae;
+}
 
 
-    .sitemap_title{
-        position: absolute;
-        left:0;
-        right:0;
-    }
+.sitemap_title{
+    position: absolute;
+    left:0;
+    right:0;
+}
 
 
 @media (max-width: 768px) {
@@ -569,7 +588,7 @@ footer>a{
         max-width: 90%;
         overflow-x: hidden;
         width: 40rem;
-        height: 36rem;
+        height: 38rem;
         margin-top: 35%;
     }
 
@@ -599,29 +618,20 @@ footer>a{
         font-size: 1rem;
         padding:0.75rem;
         width: 75%;
-        border: none;
-        font-family: calibri;
         text-align: left;
-        background-color: #c3c2c2;
-        color: #000000
     }
 
     .submit_button{
         margin-top: 0rem;
-        margin-bottom: 2.5rem;
+        margin-bottom: 1.5rem;
         margin-left: auto;
         margin-right: auto;
         width: 100%;
     }
 
     .submit_button>input{
-        width: 75%;
-        border: none;
-        border-radius: 4%;
-        font-family: calibri;
         font-size: 1.25rem;
-        padding: 1.5rem;
-        cursor: pointer;
+        padding: 1rem;
     }
     
     .fpassword_button{

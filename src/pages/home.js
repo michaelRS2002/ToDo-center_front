@@ -97,9 +97,16 @@ export default function Home() {
         <h2 class="title">Contact</h2>
         <div class="footer-section">
             <div class="f-enlaces">
+<<<<<<< Updated upstream
                 <a href="#header">Home</a>
                 <a href="#about">About</a>
                 <a href="#sau">Services</a>
+=======
+                <a href="#header">Inicio</a>
+                <a href="#about">Acerca de</a>
+                <a href="#sau">Servicios</a>
+                <a href="/sitemap">Mapa del sitio</a>
+>>>>>>> Stashed changes
             </div>
         </div>
         <div class="social-icons">

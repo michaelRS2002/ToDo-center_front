@@ -1,8 +1,38 @@
 export default function Signup() {
+<<<<<<< Updated upstream
   // Función para manejar el registro
   const handleSignup = async (formData) => {
     const errorDiv = document.getElementById('error-message');
     const successDiv = document.getElementById('success-message');
+=======
+  return `
+    <main class="signup_main">
+      <div class="div_form">
+        <h1>
+          Registrarse
+        </h1>
+        <div class="form_inputs">
+          <label class="label label-required">Nombre</label>
+          <input type="text" name="names" placeholder="Juan Perez" class="input">
+          <label class="label label-required">Apellido</label>
+          <input type="text" name="surnames" placeholder="Gonzalez Lopez" class="input">
+          <label class="label label-required">Edad</label>
+          <input type="text" name="age" placeholder="24" class="input">
+          <label class="label label-required">Correo</label>
+          <input type="email" name="email" placeholder="ejemplo@gmail.com" class="input">
+          <label class="label label-required">Contraseña</label>
+          <input type="password" name="password" placeholder="*******" class="input">
+          <label class="label label-required">Confirmar contraseña</label>
+          <input type="password" name="cpassword" placeholder="*******" class="input">
+        </div>
+        <div class="submit_button">
+          <input class="btn btn-primary btn-block" type="submit" value="Crear cuenta">
+        </div>
+      </div>
+      <div class="div_logo">
+        <img src="public/images/logo.png" width= "300rem" height="auto">
+      </div>
+>>>>>>> Stashed changes
     
     // Limpiar mensajes anteriores
     if (errorDiv) {
