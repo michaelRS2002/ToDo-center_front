@@ -101,6 +101,7 @@ export default function Home() {
                 <a href="#header">Inicio</a>
                 <a href="#about">Acerca de</a>
                 <a href="#sau">Servicios</a>
+                <a href="/sitemap">Mapa del sitio</a>
             </div>
         </div>
         <div class="social-icons">

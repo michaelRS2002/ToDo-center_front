@@ -95,57 +95,30 @@ export default function Login() {
   }, 0);
 
   return `
-    <div class="auth-container">
-        <div class="auth-card">
-            <!-- Form Section -->
-            <div class="auth-form-section">
-                <div class="auth-form-content">
-                    <h1 class="auth-title">Iniciar Sesión</h1>
-                    <p class="auth-subtitle">Bienvenido de vuelta</p>
-                    
-                    <form class="auth-form">
-                        <div class="form-group">
-                            <label class="label label-required">Email</label>
-                            <input type="email" name="email" class="input" placeholder="tu@email.com" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="label label-required">Contraseña</label>
-                            <input type="password" name="password" class="input" placeholder="••••••••" required>
-                        </div>
-                        
-                        <div class="form-options">
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="checkbox">
-                                Recordarme
-                            </label>
-                            <a href="/forgot-password" class="forgot-link">¿Olvidaste tu contraseña?</a>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
-                        
-                        <div class="auth-switch">
-                            <span>¿No tienes cuenta?</span>
-                            <a href="/signup">Regístrate</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            
-            <!-- Logo Section -->
-            <div class="auth-logo-section">
-                <div class="auth-logo-content">
-                    <div class="logo-container">
-                        <div class="auth-logo-text">
-                            <div class="logo-main">ToDo</div>
-                            <div class="logo-sub">CENTER</div>
-                        </div>
-                    </div>
-                    <h2 class="logo-title">Gestión de Tareas</h2>
-                    <p class="logo-description">Organiza tu día, aumenta tu productividad y alcanza tus objetivos</p>
-                </div>
-            </div>
+    <main class="login_main">
+      <div class="div_form">
+        <h1>
+          Iniciar sesión
+        </h1>
+        <form class="form_inputs" action="/submit" method="POST">
+            <label class="label label-required">Correo</label>
+            <input type="email" name="email" placeholder="ejemplo@gmail.com" class="input">
+            <label class="label label-required">Contraseña</label>
+            <input type="password" name="password" placeholder="*******" class="input">
+        </form>
+        <a href="/forgot-password">¿Olvidaste tu contraseña?</a>
+        <div class="submit_button">
+          <input type="submit" class="btn btn-primary btn-block" value="Acceder">
         </div>
-    </div>
+        <a href="/signup">Crear una cuenta</a>
+      </div>
+      <div class="div_logo">
+        <img src="public/images/logo.png" class="logo" width= "300rem" height="auto">
+      </div>
+    
+    <footer>
+      <a href="/sitemap">Sitemap</a> 
+    </footer>
+    </main>
   `;
 }

@@ -10,8 +10,8 @@ export default function Navbar() {
         </div>
         <nav class="navbar">
             <a href="/">Inicio</a>
-            ${page === "tasks" || page === "newtask"? `<a href="/">Usario</a>` : `<a href="/">Iniciar Sesión</a>`}
-            ${page === "tasks" || page === "newtask"? `<a href="/">Cerrar Sesion</a>` : `<a href="/">Registrarse</a>`}
+            ${page === "tasks" || page === "newtask"? `<a href="/">Usuario</a>` : `<a href="/login">Iniciar Sesión</a>`}
+            ${page === "tasks" || page === "newtask"? `<a href="/">Cerrar Sesion</a>` : `<a href="/signup">Registrarse</a>`}
         </nav>
     </div>
   `;

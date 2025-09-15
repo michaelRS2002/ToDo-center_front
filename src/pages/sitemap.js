@@ -2,18 +2,20 @@ export default function Sitemap() {
     return `
     <main class="sitemap_main">
       <div>
-        <a href="/">Main page</a>
+        <a href="/">Pagina principal</a>
       </div>
       <div>
-        <p>Account:</p><br>
-        <a href="/login">Login</a><br><br>
-        <a href="/signup">Sign up</a><br><br>
-        <a href="/fpassword">Change password</a> 
+        <p>Cuenta:</p><br>
+        <a href="/login">Iniciar sesión</a><br><br>
+        <a href="/signup">Registrarse</a><br><br>
+        <a href="/forgot-password">Cambiar contraseña</a> <br><br>
+        <a href="/profile">Ver perfil</a><br><br>
+        <a href="/profile/edit">Editar perfil</a>  
       </div>
       <div>
-        <p>Tasks:</p><br>
-        <a href ="">Task page</a><br><br>
-        <a href ="">Create task</a>
+        <p>Tareas:</p><br>
+        <a href ="/tasks">Página de tareas</a><br><br>
+        <a href ="/newtask">Crear tarea</a>
       </div>
     </main>
 
