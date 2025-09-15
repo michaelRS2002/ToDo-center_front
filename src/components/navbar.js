@@ -25,7 +25,13 @@ export default function Navbar() {
             </a>
         </div>
         <nav class="navbar">
+<<<<<<< HEAD
             ${navLinks}
+=======
+            <a href="/">Inicio</a>
+            ${page === "tasks" || page === "newtask"? `<a href="/">Usuario</a>` : `<a href="/login">Iniciar Sesión</a>`}
+            ${page === "tasks" || page === "newtask"? `<a href="/">Cerrar Sesion</a>` : `<a href="/signup">Registrarse</a>`}
+>>>>>>> c235692 (Fixed images and user pages)
         </nav>
     </div>`;
 

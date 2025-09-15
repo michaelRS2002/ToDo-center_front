@@ -141,6 +141,7 @@ export default function Signup() {
           <input type="text" name="firstName" placeholder="Jairo" class="input">
           <label class="label label-required">Apellido</label>
           <input type="text" name="lastName" placeholder="Castro López" class="input">
+
           <label class="label label-required">Edad</label>
           <input type="text" name="age" placeholder="24" class="input">
           <label class="label label-required">Correo</label>
@@ -159,6 +160,7 @@ export default function Signup() {
       </div>
     <footer>
       <a href="/sitemap">Sitemap</a> 
+
     </footer>
     </main>
   `;

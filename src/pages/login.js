@@ -92,6 +92,7 @@ export default function Login() {
       </div>
       <div class="div_logo">
         <img src="./images/logo.png" class="logo" width= "300rem" height="auto">
+
       </div>
     
     <footer>

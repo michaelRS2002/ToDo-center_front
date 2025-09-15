@@ -24,5 +24,6 @@ export const routes = {
   '/editask': Editask,
   '/reset': Reset,
   '/editask': Editask,
+  '/reset': Reset,
   '/examples': Examples,
 };
