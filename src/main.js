@@ -2,13 +2,14 @@ import { routes } from './pages/routes.js';
 import Navbar from './components/navbar.js';
 
 
-function render(path) {
+export function render(path) {
   const app = document.getElementById('app');
+  const url = new URL(window.location.href);
+  const id = url.searchParams.get("id");
 
   if (routes[path]) {
     app.innerHTML = routes[path]();
 
-    // ⚡ Enganchar lógica especial según la ruta
     if (path === "/newtask") {
       import("/utils/newtask.js")
         .then(module => module.default?.())
@@ -37,3 +38,10 @@ document.getElementById('navbar').innerHTML = Navbar();
 
 // Render inicial
 render(window.location.pathname);
+
+window.addEventListener("navigate", (e) => {
+  const path = e.detail;
+  window.history.pushState({}, "", path);
+  render(path);
+});
+

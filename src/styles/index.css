@@ -1442,6 +1442,7 @@ input, button {
     width: 40%;
     margin: 0 auto;     /* centra el bloque que tiene max-width */
     box-sizing: border-box;
+    animation: fadeIn 0.6s ease-in-out;
 }
 
 .task-list {
@@ -1477,19 +1478,20 @@ input, button {
 	border-radius: 1rem;
 	margin-bottom: 1rem;
     flex-direction: column;    /* apila elementos en columna */
+    animation: fadeIn 0.6s ease-in-out;
 }
 
 #tasks-pending .task {
-    background-color: #3d5bf1f6   ;
+    background-color: #FFCDD2   ;
+}
+#tasks-inprocess .task {
+    background-color: #BBDEFB    
 }
 
 #tasks-completed .task  {
-    background-color: #142883e7   
+    background-color: #C8E6C9   
 }
 
-#tasks-inprocess .task {
-    background-color: #1c3cccf3   
-}
 
 element.style {
     margin-bottom: 0px;
@@ -1611,13 +1613,18 @@ element.style {
 }
 
 
-    .boton-fijo:hover {
+.boton-fijo:hover {
       background-color: #29327c;
       transform: translateY(-2px);
       box-shadow: 0 6px 15px rgba(85, 99, 222, 0.4);
-
 }
 
+.no-results label{
+  text-align: center;
+  color: crimson;
+  font-weight: bold;
+  margin-top: 52px;
+}
 
 
 /* ========== MEDIA QUERIES RESPONSIVAS ========== */
@@ -1868,12 +1875,9 @@ element.style {
 
 /* === Inputs & Textarea === */
 .input100,
-#task-date,
-#start-time,
-#end-time,
 #task-status,
 textarea {
-  width: 100%;
+  width: 98%;
   padding: 12px 5px;
   margin-bottom: 18px;
   border: 1px solid #ccc;
@@ -1893,6 +1897,32 @@ textarea:focus {
   border-color: #5563DE;
   box-shadow: 0 0 8px rgba(85, 99, 222, 0.3);
 }
+#task-date,
+#start-time,
+#end-time{
+  width: 90%;
+  padding: 12px 5px;
+  margin-bottom: 18px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#task-status {
+  width: 317%;
+  padding: 12px 5px;
+  margin-bottom: 18px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 
 /* === Textarea Resize === */
 textarea {
@@ -1946,6 +1976,9 @@ textarea {
   .wrap-contact100 h1 {
     font-size: 30px;
   }
+  #task-status {
+  width: 97%;
+}
   .create-btn {
     font-size: 18px;
   }
@@ -1963,6 +1996,9 @@ textarea {
   #task-form label {
     font-size: 18px;
   }
+  #task-status {
+  width: 100%;
+}
   .create-btn {
     font-size: 18px;
     padding: 10px;
@@ -1985,6 +2021,9 @@ textarea {
   #task-date{
     font-size: 16px;
     width: 96%;
+}
+#task-status {
+  width: 100%;
 }
 
   .create-btn {
@@ -2010,11 +2049,149 @@ textarea {
   #task-status {
     font-size: 14px;
   }
+  #task-status {
+  width: 100%;
+}
   .form-group{
     width: 200px;
   }
   .create-btn {
     font-size: 16px;
     padding: 9px;
+  }
+}
+
+/*Edit Task*/
+
+
+.button-group {
+  display: flex;
+  justify-content: center;   /* Centra los botones */
+  gap: 15px;                 /* Espacio entre ellos */
+  margin-top: 20px;          /* Separación del contenido de arriba */
+}
+
+.update-btn,
+.cancel-btn {
+    padding: 12px 1px ;
+    cursor: pointer;
+    text-decoration: none;      /* Quitar subrayado al <a> */
+    border-radius: 12px;
+    transition: 0.3s;
+    width: 56%;
+    cursor: pointer;
+    font-weight: bold;
+    
+}
+
+.update-btn {
+  background: #28a745;   /* Verde */
+  display: inline-block; /* Para que se comporte como botón */
+  color: white;
+  border: none;
+  font-size: 20px;
+}
+
+.cancel-btn {
+  background: #dc3545;   /* Rojo */
+  color: white;
+  display: inline-block; /* Para que se comporte como botón */
+  text-align: center;
+  font-size: 22px;
+}
+
+.cancel-btn:hover {
+  background: #c21a2b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(52, 52, 56, 0.4);
+}
+
+.update-btn:hover {
+  background: #187c30;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(52, 52, 56, 0.4);
+}
+
+#edit-task-form label{
+  display: block;
+  text-align: left;
+  font-size: 18px;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #2c2c2c;
+}
+
+#edit-task-date,
+#edit-start-time,
+#edit-end-time,
+#edit-task-status,
+textarea {
+    width: 80%;
+    padding: 12px 5px;
+    margin-bottom: 18px;
+    outline: none;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;      /* para que respete alineación */
+    margin-left: 0;
+}
+
+.inputedit {
+  width: 98%;
+  min-height: 30px;   /* altura mínima */
+  height: auto;       /* deja que el navegador ajuste */
+  resize: vertical;   /* el usuario puede redimensionar */
+  text-align: left;
+  justify-content: left;
+  padding: 12px 5px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  outline: none;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Responsive */
+
+/* 321px */
+@media (max-width: 320px) {
+  .update-btn,
+  .cancel-btn {
+    width: 100%;        /* botones uno debajo del otro */
+    padding: 10px 4px;
+  }
+  .button-group {
+    gap: 10px;
+  }
+}
+
+/* 481px */
+@media (max-width: 481px) {
+  .update-btn,
+  .cancel-btn {
+    width: 100%;        /* siguen en columna */
+    font-size: 17px;
+    justify-content: center;
+  }
+  .button-group {
+    gap: 12px;
+  }
+}
+
+/* 768px */
+@media (max-width: 768px) {
+  .update-btn {
+    width: 45%;          /* dos en fila */
+    font-size: 18px;
+  }
+  .cancel-btn {
+    width: 45%;          /* dos en fila */
+    font-size: 20px;
+  }
+  .button-group {
+    gap: 12px;
+    justify-content: space-between;
   }
 }

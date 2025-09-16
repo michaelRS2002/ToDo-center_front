@@ -1,12 +1,9 @@
-export default function ediTask(taskId) {
-  // Convertir taskId a número si viene como string
-  const numericTaskId = parseInt(taskId);
-  console.log("En edit")
-  
-  // Cargar las tareas guardadas en localStorage
-  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  const task = tasks.find(t => t.id == numericTaskId); // usar == para comparar
+export default function ediTask() {
+  const numericTaskId = parseInt(localStorage.getItem("taskToEdit"), 10);
+  console.log("En edit", numericTaskId);
 
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const task = tasks.find(t => t.id == numericTaskId);
   // Si no se encuentra la tarea, mostrar error
   if (!task) {
     return `
@@ -31,7 +28,7 @@ export default function ediTask(taskId) {
         <input class="input100" type="text" id="edit-task-name" value="${task.name || ''}" required>
         
         <label>Descripción</label>
-        <textarea class="input100" id="edit-task-desc" placeholder="Descripción opcional">${task.desc || ''}</textarea>
+        <textarea class="inputedit" id="edit-task-desc" placeholder="Agregue una descripción">${task.desc || ''}</textarea>
         
         <div class="form-row">
           <div class="form-group">
@@ -49,16 +46,16 @@ export default function ediTask(taskId) {
           <div class="form-group">
             <label>Estado de Tarea</label>
             <select id="edit-task-status">
-              <option value="pending" ${task.status === "pending" ? "selected" : ""}>Pendiente</option>
-              <option value="inprocess" ${task.status === "inprocess" ? "selected" : ""}>En Proceso</option>
-              <option value="completed" ${task.status === "completed" ? "selected" : ""}>Completado</option>
+              <option value="pending" ${task.status === "pending" ? "selected" : ""}>Por hacer</option>
+              <option value="inprocess" ${task.status === "inprocess" ? "selected" : ""}>Haciendo</option>
+              <option value="completed" ${task.status === "completed" ? "selected" : ""}>Hecho</option>
             </select>
           </div>
         </div>
 
         <div class="button-group">
-          <button type="submit" class="create-btn">✅ Actualizar Tarea</button>
-          <a href="/tasks" class="cancel-btn">❌ Cancelar</a>
+          <button type="submit" class="update-btn">Actualizar</button>
+          <a href="/tasks" class="cancel-btn">Cancelar</a>
         </div>
       </form>
 
