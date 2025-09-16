@@ -24,11 +24,11 @@ export default function User() {
         </div>
       </div>
       <div class="div_logo">
-        <img src="public/images/logo.png" width= "300rem" height="auto">
+        <img src="./images/logo.png" width= "300rem" height="auto">
       </div>
     
     <footer>
-      <a href="sitemap.html">Sitemap</a> 
+      <a href="/sitemap">Sitemap</a>
     </footer>
     </main>
   </body>

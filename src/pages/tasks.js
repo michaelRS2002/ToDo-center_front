@@ -370,8 +370,27 @@ function initializeTasksPage() {
         });
     }
 
-    // Cargar tareas inicialmente
+    // Cargar tareas inicialmente (localStorage primero)
     loadTasks();
+
+    // Luego, obtener tareas del backend y actualizar localStorage y UI
+    (async function fetchAndUpdateTasks() {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch('https://todo-center-back.onrender.com/api/tasks', {
+                headers: token ? { 'Authorization': `Bearer ${token}` } : {}
+            });
+            if (response.ok) {
+                const data = await response.json();
+                if (Array.isArray(data.tasks)) {
+                    localStorage.setItem('tasks', JSON.stringify(data.tasks));
+                    loadTasks();
+                }
+            }
+        } catch (err) {
+            // Silently ignore errors
+        }
+    })();
 
     // Escuchar cambios en localStorage
     window.addEventListener('storage', (e) => {
