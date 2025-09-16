@@ -474,11 +474,7 @@
 }
 
 /* Utilidades */
-.form-row {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
+
 
 .form-col {
   flex: 1;

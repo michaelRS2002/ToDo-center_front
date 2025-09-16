@@ -1482,15 +1482,14 @@ input, button {
 }
 
 #tasks-pending .task {
-    background-color: #3d5bf1f6   ;
+    background-color: #FFCDD2   ;
+}
+#tasks-inprocess .task {
+    background-color: #BBDEFB    
 }
 
 #tasks-completed .task  {
-    background-color: #142883e7   
-}
-
-#tasks-inprocess .task {
-    background-color: #1c3cccf3   
+    background-color: #C8E6C9   
 }
 
 element.style {
