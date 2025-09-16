@@ -26,9 +26,9 @@ export default function Newtask() {
             <div class="form-group">
             <label>Estado de Tarea</label>
             <select id="task-status">
-                <option value="pending" selected>Pendiente</option>
-                <option value="inprocess">En Proceso</option>
-                <option value="completed">Completado</option>
+                <option value="pending" selected>Por hacer</option>
+                <option value="inprocess">Haciendo</option>
+                <option value="completed">Hecho</option>
             </select>
             </div>
         </div>

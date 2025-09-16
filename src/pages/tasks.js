@@ -1,3 +1,4 @@
+
 export default function Tasks() {
     // Retorna el HTML
     const html = `
@@ -80,6 +81,7 @@ function initializeTasksPage() {
     noResultsMsg.style.textAlign = "center";
     noResultsMsg.style.color = "crimson";
     noResultsMsg.style.fontWeight = "bold";
+    
 
     const taskSection = document.querySelector(".tasksection");
     if (taskSection) {
@@ -89,6 +91,57 @@ function initializeTasksPage() {
     // Variables para estadísticas
     let totalTasks = 0;
     let completedTasks = 0;
+
+    document.querySelector(".search-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const query = document.querySelector(".search-input").value.toLowerCase().trim();
+        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+        // Si el input está vacío, mostramos todo de nuevo
+        if (!query) {
+        loadTasks();
+        return;
+        } 
+        // Filtrado por nombre + descripción + estado + fecha
+        const results = tasks.filter(task => 
+            task.name.toLowerCase().includes(query) ||
+            task.desc.toLowerCase().includes(query) ||
+            task.status.toLowerCase().includes(query) ||
+            task.date.includes(query)
+        );
+
+        renderTasks(results); // Función que pinta los resultados en pantalla
+        
+    });
+    function renderTasks(tasks) {
+        // Limpiar los tres contenedores
+        list_el.innerHTML = "";
+        completedListEl.innerHTML = "";
+        inprocessListEl.innerHTML = "";
+
+        if (tasks.length === 0) {
+            // Mostrar mensaje fuera de las listas
+            list_el.innerHTML = "<label class='no-results'>No se encontraron tareas</label>";
+            return;
+        }
+
+        tasks.forEach(task => {
+            const task_el = createTaskElement(task);
+            const task_content_el = task_el.querySelector(".content");
+            const task_input_el = task_el.querySelector(".text");
+
+            if (task.status === "completed") {
+            task_content_el.classList.add("checked");
+            task_input_el.classList.add("textchecked");
+            completedListEl.appendChild(task_el);
+            } else if (task.status === "inprocess") {
+            inprocessListEl.appendChild(task_el);
+            } else {
+            list_el.appendChild(task_el);
+            }
+        });
+    }
 
     // Referencias del DOM para estadísticas
     const numbersEl = document.getElementById("numbers");
@@ -145,6 +198,7 @@ function initializeTasksPage() {
 
     // Función para crear elemento de tarea
     function createTaskElement(taskData) {
+
         const task_el = document.createElement('div');
         task_el.classList.add('task');
         task_el.setAttribute('data-task-id', taskData.id);
@@ -201,17 +255,24 @@ function initializeTasksPage() {
                 completedListEl.appendChild(task_el);
                 updateTaskStatusInStorage(taskData.id, "completed");
             } else {
-                completedTasks--;
-                list_el.appendChild(task_el);
-                updateTaskStatusInStorage(taskData.id, "pending");
+                if (taskData.status === "inprocess") {
+                    completedTasks--;
+                    inprocessListEl.appendChild(task_el);
+                    updateTaskStatusInStorage(taskData.id, "inprocess");}
+                else{
+                    completedTasks--;
+                    list_el.appendChild(task_el);
+                    updateTaskStatusInStorage(taskData.id, "pending");
+                }
             }
             updateStats();
         });
-        task_edit_el.addEventListener('click', (e) => {
-            e.stopPropagation(); // Evitar que se active el click de la tarea
-            
-            // Redirigir a la página de edición con el ID de la tarea
-            window.location.href = `/editask/${taskData.id}`;
+
+        task_edit_el.addEventListener("click", () => {
+        localStorage.setItem("taskToEdit", taskData.id);
+
+        // lanzar un evento que main.js escuche
+        window.dispatchEvent(new CustomEvent("navigate", { detail: "/editask" }));
         });
 
         task_delete_el.addEventListener('click', () => {

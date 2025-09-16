@@ -16,5 +16,6 @@ export const routes = {
   '/sitemap': Sitemap,
   '/tasks': Tasks,
   '/newtask': Newtask,
+  '/editask': Editask,
   '/examples': Examples,
 };
