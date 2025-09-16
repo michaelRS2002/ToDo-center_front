@@ -37,12 +37,18 @@ export default function Rese() {
           showError('Por favor, completa ambos campos.');
           return;
         }
-        if (password.length < 8) {
-          showError('La contraseña debe tener al menos 8 caracteres.');
+        // Strong password: min 8, 1 upper, 1 lower, 1 number, 1 special
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#]).{8,}$/;
+        if (!passwordRegex.test(password)) {
+          showError('La contraseña debe tener al menos 8 caracteres, incluyendo 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial.');
+          passwordInput.value = '';
+          confirmInput.value = '';
           return;
         }
         if (password !== confirmPassword) {
           showError('Las contraseñas no coinciden.');
+          passwordInput.value = '';
+          confirmInput.value = '';
           return;
         }
         try {
