@@ -1,3 +1,42 @@
+/* Popup/Toast for signup feedback */
+.popup-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    min-width: 260px;
+    max-width: 90vw;
+    z-index: 9999;
+    padding: 1.2rem 2.2rem;
+    border-radius: 1.2rem;
+    font-size: 1.1rem;
+    font-family: calibri, sans-serif;
+    color: #fff;
+    background: #222c;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    text-align: center;
+}
+.popup-show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+.popup-error {
+    background: #c0392b;
+}
+.popup-success {
+    background: #27ae60;
+}
+@media (max-width: 480px) {
+    .popup-message {
+        font-size: 1rem;
+        min-width: 180px;
+        padding: 0.7rem 1.2rem;
+    }
+}
 /* Home page */
 
 * {
