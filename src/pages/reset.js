@@ -59,7 +59,7 @@ export default function Rese() {
             showError('Token de restablecimiento no encontrado.');
             return;
           }
-          const response = await fetch('/api/password-reset/reset', {
+          const response = await fetch('https://todo-center-back.onrender.com/api/password-reset/reset', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -103,12 +103,8 @@ export default function Rese() {
         </div>
       </div>
       <div class="div_logo">
-        <img src="/public/images/logo.png" width= "300rem" height="auto">
+        <img src="./images/logo.png" width= "300rem" height="auto">
       </div>
-    
-    <footer>
-      <a href="sitemap.html">Sitemap</a> 
-    </footer>
     </main>
   `;
 }
