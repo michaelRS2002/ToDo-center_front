@@ -171,7 +171,7 @@ export default function Signup() {
         <img src="./images/logo.png" width= "300rem" height="auto">
       </div>
     <footer>
-      <a href="sitemap.html">Sitemap</a> 
+      <a href="/sitemap">Sitemap</a> 
     </footer>
     </main>
   `;
