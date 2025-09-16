@@ -22,5 +22,6 @@ export const routes = {
   '/tasks': Tasks,
   '/newtask': Newtask,
   '/reset': Reset,
+  '/editask': Editask,
   '/examples': Examples,
 };
