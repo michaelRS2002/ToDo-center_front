@@ -1,5 +1,92 @@
 export default function Rese() {
-    return `
+  // Popup logic (same as signup/login)
+  function showPopup(message, type = 'error') {
+    let popup = document.getElementById('popup-message');
+    if (!popup) {
+      popup = document.createElement('div');
+      popup.id = 'popup-message';
+      document.body.appendChild(popup);
+    }
+    popup.className = `popup-message popup-${type} popup-show`;
+    popup.textContent = message;
+    clearTimeout(popup._timeout);
+    popup._timeout = setTimeout(() => {
+      popup.classList.remove('popup-show');
+    }, 3000);
+  }
+
+  function showError(message) {
+    showPopup(message, 'error');
+  }
+  function showSuccess(message) {
+    showPopup(message, 'success');
+  }
+
+  setTimeout(() => {
+    const formInputs = document.querySelector('.form_inputs');
+    const submitBtn = document.querySelector('.submit_button input[type="submit"]');
+    if (submitBtn && formInputs) {
+      submitBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const passwordInput = formInputs.querySelector('input[name="new_password"]');
+        const confirmInput = formInputs.querySelector('input[name="com_password"]');
+        const password = passwordInput.value;
+        const confirmPassword = confirmInput.value;
+        // Validate passwords
+        if (!password || !confirmPassword) {
+          showError('Por favor, completa ambos campos.');
+          return;
+        }
+        // Strong password: min 8, 1 upper, 1 lower, 1 number, 1 special
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#]).{8,}$/;
+        if (!passwordRegex.test(password)) {
+          showError('La contraseña debe tener al menos 8 caracteres, incluyendo 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial.');
+          passwordInput.value = '';
+          confirmInput.value = '';
+          return;
+        }
+        if (password !== confirmPassword) {
+          showError('Las contraseñas no coinciden.');
+          passwordInput.value = '';
+          confirmInput.value = '';
+          return;
+        }
+        try {
+          // Get token from URL (?token=...)
+          const params = new URLSearchParams(window.location.search);
+          const token = params.get('token');
+          if (!token) {
+            showError('Token de restablecimiento no encontrado.');
+            return;
+          }
+          const response = await fetch('/api/password-reset/reset', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              token,
+              nuevaContrasena: password,
+              confirmarContrasena: confirmPassword
+            })
+          });
+          const data = await response.json();
+          if (!response.ok) {
+            showError(data.message || 'No se pudo cambiar la contraseña.');
+          } else {
+            showSuccess('¡Contraseña cambiada exitosamente! Redirigiendo a inicio de sesión...');
+            passwordInput.value = '';
+            confirmInput.value = '';
+            setTimeout(() => {
+              window.location.href = '/login';
+            }, 2000);
+          }
+        } catch (err) {
+          showError('No se pudo conectar con el servidor.');
+        }
+      });
+    }
+  }, 0);
+
+  return `
     <main class="fpassword_main">
       <div class="div_form">
         <h1>
@@ -23,5 +110,5 @@ export default function Rese() {
       <a href="sitemap.html">Sitemap</a> 
     </footer>
     </main>
-    `;
+  `;
 }
