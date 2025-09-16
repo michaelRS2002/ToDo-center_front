@@ -86,7 +86,7 @@ function initializeEditTaskForm(taskId) {
     return;
   }
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     // Obtener valores del formulario
@@ -122,7 +122,22 @@ function initializeEditTaskForm(taskId) {
     }
 
     try {
-      // Cargar tareas del localStorage
+      // PUT al backend
+      const token = localStorage.getItem('token');
+      const response = await fetch(`https://todo-center-back.onrender.com/api/tasks/${taskId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+        },
+        body: JSON.stringify(updatedTask)
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        showError(data.message || 'No se pudo actualizar la tarea.');
+        return;
+      }
+      // Actualizar localStorage
       let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
       
       // Encontrar índice de la tarea a actualizar

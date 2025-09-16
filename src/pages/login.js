@@ -50,7 +50,7 @@ export default function Login() {
         }
         showSuccess('¡Inicio de sesión exitoso! Redirigiendo...');
         setTimeout(() => {
-          window.location.href = '/taskpage';
+          window.location.href = '/tasks';
         }, 2000);
       }
     } catch (err) {
