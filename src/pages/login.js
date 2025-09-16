@@ -1,40 +1,46 @@
 export default function Login() {
+  // Popup logic (same as signup)
+  function showPopup(message, type = 'error') {
+    let popup = document.getElementById('popup-message');
+    if (!popup) {
+      popup = document.createElement('div');
+      popup.id = 'popup-message';
+      document.body.appendChild(popup);
+    }
+    popup.className = `popup-message popup-${type} popup-show`;
+    popup.textContent = message;
+    clearTimeout(popup._timeout);
+    popup._timeout = setTimeout(() => {
+      popup.classList.remove('popup-show');
+    }, 3000);
+  }
+
+  function showError(message) {
+    showPopup(message, 'error');
+  }
+  function showSuccess(message) {
+    showPopup(message, 'success');
+  }
+
   // Función para manejar el login
   const handleLogin = async (email, password) => {
-    const errorDiv = document.getElementById('error-message');
-    const successDiv = document.getElementById('success-message');
-    
-    // Limpiar mensajes anteriores
-    if (errorDiv) {
-      errorDiv.textContent = '';
-      errorDiv.style.display = 'none';
-    }
-    if (successDiv) {
-      successDiv.textContent = '';
-      successDiv.style.display = 'none';
-    }
-
     // Validaciones básicas
     if (!email || !password) {
       showError('Por favor, completa todos los campos.');
       return;
     }
-    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       showError('Por favor, ingresa un correo electrónico válido.');
       return;
     }
-
     try {
       const response = await fetch('http://localhost:3000/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ correo: email, contrasena: password })
       });
-      
       const data = await response.json();
-      
       if (!response.ok) {
         showError(data.message || 'Credenciales incorrectas.');
       } else {
@@ -52,38 +58,10 @@ export default function Login() {
     }
   };
 
-  // Funciones auxiliares para mostrar mensajes
-  const showError = (message) => {
-    let errorDiv = document.getElementById('error-message');
-    if (!errorDiv) {
-      errorDiv = document.createElement('div');
-      errorDiv.id = 'error-message';
-      errorDiv.className = 'message message-error';
-      const form = document.querySelector('.auth-form');
-      form.parentNode.insertBefore(errorDiv, form.nextSibling);
-    }
-    errorDiv.textContent = message;
-    errorDiv.style.display = 'block';
-  };
-
-  const showSuccess = (message) => {
-    let successDiv = document.getElementById('success-message');
-    if (!successDiv) {
-      successDiv = document.createElement('div');
-      successDiv.id = 'success-message';
-      successDiv.className = 'message message-success';
-      const form = document.querySelector('.auth-form');
-      form.parentNode.insertBefore(successDiv, form.nextSibling);
-    }
-    successDiv.textContent = message;
-    successDiv.style.display = 'block';
-  };
-
   // Configurar event listeners después de que el DOM esté listo
   setTimeout(() => {
-    const form = document.querySelector('.auth-form');
-    const submitBtn = document.querySelector('button[type="submit"]');
-    
+    const form = document.querySelector('.form_inputs');
+    const submitBtn = document.querySelector('.submit_button input[type="submit"]');
     if (submitBtn && form) {
       submitBtn.addEventListener('click', async (e) => {
         e.preventDefault();
@@ -113,7 +91,7 @@ export default function Login() {
         <a href="/signup">Crear una cuenta</a>
       </div>
       <div class="div_logo">
-        <img src="public/images/logo.png" class="logo" width= "300rem" height="auto">
+        <img src="./images/logo.png" class="logo" width= "300rem" height="auto">
       </div>
     
     <footer>
