@@ -115,7 +115,7 @@ export default function Signup() {
 
       // Backend request
       try {
-        const response = await fetch('https://todo-center-back.onreder.com/api/auth/register', {
+        const response = await fetch('https://todo-center-back.onrender.com/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
