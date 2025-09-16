@@ -1,48 +1,35 @@
 export default function Signup() {
+  // Popup logic
+  function showPopup(message, type = 'error') {
+    let popup = document.getElementById('popup-message');
+    if (!popup) {
+      popup = document.createElement('div');
+      popup.id = 'popup-message';
+      document.body.appendChild(popup);
+    }
+    popup.className = `popup-message popup-${type} popup-show`;
+    popup.textContent = message;
+    // Remove after 3s
+    clearTimeout(popup._timeout);
+    popup._timeout = setTimeout(() => {
+      popup.classList.remove('popup-show');
+    }, 3000);
+  }
+
   function showError(message) {
-    let errorDiv = document.getElementById('error-message');
-    let successDiv = document.getElementById('success-message');
-    if (!errorDiv) return;
-    errorDiv.textContent = message;
-    errorDiv.style.display = message ? 'block' : 'none';
-    if (successDiv) successDiv.style.display = 'none';
+    showPopup(message, 'error');
   }
   function showSuccess(message) {
-    let errorDiv = document.getElementById('error-message');
-    let successDiv = document.getElementById('success-message');
-    if (!successDiv) return;
-    successDiv.textContent = message;
-    successDiv.style.display = message ? 'block' : 'none';
-    if (errorDiv) errorDiv.style.display = 'none';
+    showPopup(message, 'success');
   }
 
   setTimeout(() => {
     const formInputs = document.querySelector('.form_inputs');
     const submitBtn = document.querySelector('.submit_button input[type="submit"]');
 
-    // Create message containers if they don't exist
-    let errorDiv = document.getElementById('error-message');
-    let successDiv = document.getElementById('success-message');
-    if (!errorDiv) {
-      errorDiv = document.createElement('div');
-      errorDiv.id = 'error-message';
-      errorDiv.style.color = 'red';
-      errorDiv.style.marginTop = '10px';
-      submitBtn.parentNode.appendChild(errorDiv);
-    }
-    if (!successDiv) {
-      successDiv = document.createElement('div');
-      successDiv.id = 'success-message';
-      successDiv.style.color = 'green';
-      successDiv.style.marginTop = '10px';
-      submitBtn.parentNode.appendChild(successDiv);
-    }
-
     submitBtn.addEventListener('click', async function (e) {
       e.preventDefault();
-      showError("");
-      showSuccess("");
-
+      // ...existing code...
       const firstNameInput = formInputs.querySelector('input[name="firstName"]');
       const lastNameInput = formInputs.querySelector('input[name="lastName"]');
       const ageInput = formInputs.querySelector('input[name="age"]');
