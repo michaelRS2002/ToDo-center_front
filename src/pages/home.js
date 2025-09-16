@@ -10,7 +10,7 @@ export default function Home() {
     <header class="content header" id="header">
             <div class="icon">
                 <a href="#">
-                    <img src="public/images/todo ne.png" alt="icono">
+                    <img src="./images/todo ne.png" alt="icono">
                 </a>
             </div>
             <p>Convierte tus ideas en acciones.</p>
@@ -58,7 +58,7 @@ export default function Home() {
             <p>Conoce algunas opiniones de nuestros clientes.</p>
             <div class="box-container2">
                 <div class="box">
-                    <img src="public/images/pic1.jpg" alt="">
+                    <img src="./images/pic1.jpg" alt="">
                     <h3>Juan José</h3>
                     <p>Me ayudó mucho con mis tareas.</p>
                     <div class="stars">
@@ -70,7 +70,7 @@ export default function Home() {
                 </div>
 
                 <div class="box">
-                    <img src="public/images/pic2.jpg" alt="">
+                    <img src="./images/pic2.jpg" alt="">
                     <h3>Ana Sofía</h3>
                     <p>Una página realmente genial para tareas.</p>
                     <div class="stars">
@@ -81,7 +81,7 @@ export default function Home() {
                     </div>
                 </div>
                 <div class="box">
-                    <img src="public/images/pic1.jpg" alt="">
+                    <img src="./images/pic1.jpg" alt="">
                     <h3>Cristian Camilo</h3>
                     <p>Nunca he estado más organizado.</p>
                     <div class="stars">
