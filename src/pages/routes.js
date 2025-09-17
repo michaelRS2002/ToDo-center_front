@@ -11,14 +11,14 @@ import Editask from './editask.js';
 import Reset from './reset.js';
 import Examples from './examples.js';
 export const routes = {
-  
+
   '/': Home,
   '/login': Login,
   '/signup': Signup,
   '/forgot-password': Fpassword,
   '/sitemap': Sitemap,
   '/profile': User,
-  '/profile/edit': UserEdit,
+  '/user-edit': UserEdit,
   '/tasks': Tasks,
   '/newtask': Newtask,
   '/editask': Editask,
