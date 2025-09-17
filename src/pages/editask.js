@@ -88,22 +88,32 @@ function initializeEditTaskForm(taskId) {
     const fecha = document.getElementById("edit-task-date").value;
     const start = document.getElementById("edit-start-time").value;
     const end = document.getElementById("edit-end-time").value;
-    const estado = document.getElementById("edit-task-status").value;
+    const estadoSelect = document.getElementById("edit-task-status").value;
+    // Mapear valores del select a los valores válidos del backend
+    let estadoMap = {
+      'Por hacer': 'Por hacer',
+      'Haciendo': 'Haciendo',
+      'Hecho': 'Hecho',
+      'pending': 'Por hacer',
+      'inprocess': 'Haciendo',
+      'completed': 'Hecho'
+    };
+    const estado = estadoMap[estadoSelect] || estadoSelect;
 
     // Validaciones estrictas frontend
     if (!titulo) {
       alert("❌ El título es requerido");
-      document.getElementById("edit-task-titulo").focus();
+      document.getElementById("edit-task-name").focus();
       return;
     }
     if (titulo.length > 50) {
       alert("❌ El título no puede exceder 50 caracteres");
-      document.getElementById("edit-task-titulo").focus();
+      document.getElementById("edit-task-name").focus();
       return;
     }
     if (detalle.length > 500) {
       alert("❌ El detalle no puede exceder 500 caracteres");
-      document.getElementById("edit-task-detalle").focus();
+      document.getElementById("edit-task-desc").focus();
       return;
     }
     if (!fecha) {
@@ -117,7 +127,7 @@ function initializeEditTaskForm(taskId) {
     today.setHours(0, 0, 0, 0);
     if (inputDate < today) {
       alert("❌ La fecha debe ser futura");
-      document.getElementById("edit-task-fecha").focus();
+      document.getElementById("edit-task-date").focus();
       return;
     }
     // Validar hora formato HH:mm
@@ -136,7 +146,7 @@ function initializeEditTaskForm(taskId) {
     const validStatus = ['Por hacer', 'Haciendo', 'Hecho'];
     if (!validStatus.includes(estado)) {
       alert("❌ Estado inválido");
-      document.getElementById("edit-task-estado").focus();
+      document.getElementById("edit-task-status").focus();
       return;
     }
 
