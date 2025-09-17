@@ -23,12 +23,12 @@ export default function Newtask() {
     if (form) {
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
-        const name = document.getElementById('task-name').value.trim();
-        const desc = document.getElementById('task-desc').value.trim();
-        const date = document.getElementById('task-date').value;
-        const start = document.getElementById('start-time').value;
-        const end = document.getElementById('end-time').value;
-        const status = document.getElementById('task-status').value;
+  const titulo = document.getElementById('task-name').value.trim();
+  const detalle = document.getElementById('task-desc').value.trim();
+  const fecha = document.getElementById('task-date').value;
+  const start = document.getElementById('start-time').value;
+  const end = document.getElementById('end-time').value;
+  const estado = document.getElementById('task-status').value;
 
         if (!name || !date || !start || !end) {
           showError('Por favor, completa todos los campos obligatorios.');
@@ -44,12 +44,12 @@ export default function Newtask() {
               ...(token ? { 'Authorization': `Bearer ${token}` } : {})
             },
             body: JSON.stringify({
-              name,
-              description: desc,
-              date,
+              titulo,
+              detalle,
+              fecha,
               start,
               end,
-              status
+              estado
             })
           });
           const data = await response.json();
@@ -81,29 +81,29 @@ export default function Newtask() {
         <h1>Informacion de Tarea</h1>
         
         <form id="task-form">
-        <label>Titulo</label>
-				<input class="input100" type="text" name="name" placeholder="Escriba el nombre de la tarea..." id="task-name" required>
-        <label>Descripcion</label>
-				<textarea class="input100" name="message" placeholder="Escriba de que se trata su tarea..." id="task-desc"></textarea>
+        <label for="task-name">Titulo</label>
+				<input class="input100" type="text" name="titulo" placeholder="Escriba el nombre de la tarea..." id="task-name" required>
+        <label for="task-desc">Descripcion</label>
+				<textarea class="input100" name="detalle" placeholder="Escriba de que se trata su tarea..." id="task-desc"></textarea>
         <div class="form-row">
             <div class="form-group">
-            <label>Fecha</label>
-            <input type="date" id="task-date" required>
+            <label for="task-date">Fecha</label>
+            <input type="date" id="task-date" name="fecha" required>
             </div>
             <div class="form-group">
-            <label>Inicio</label>
-            <input type="time" id="start-time" required>
+            <label for="start-time">Inicio</label>
+            <input type="time" id="start-time" name="start" required>
             </div>
             <div class="form-group">
-            <label>Fin</label>
-            <input type="time" id="end-time" required>
+            <label for="end-time">Fin</label>
+            <input type="time" id="end-time" name="end" required>
             </div>
             <div class="form-group">
-            <label>Estado de Tarea</label>
-            <select id="task-status">
-                <option value="pending" selected>Pendiente</option>
-                <option value="inprocess">En Proceso</option>
-                <option value="completed">Completado</option>
+            <label for="task-status">Estado de Tarea</label>
+            <select id="task-status" name="estado">
+                <option value="Por hacer" selected>Por hacer</option>
+                <option value="Haciendo">Haciendo</option>
+                <option value="Hecho">Hecho</option>
             </select>
             </div>
         </div>
