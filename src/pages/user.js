@@ -1,51 +1,6 @@
 export default function User() {
   // Elimina el CSS inline, ya está en buttons.css
 
-  setTimeout(() => {
-    // Popup logic
-    function showPopup(message, type = 'error') {
-      let popup = document.getElementById('popup-message');
-      if (!popup) {
-        popup = document.createElement('div');
-        popup.id = 'popup-message';
-        document.body.appendChild(popup);
-      }
-      popup.className = `popup-message popup-${type} popup-show`;
-      popup.textContent = message;
-      clearTimeout(popup._timeout);
-      popup._timeout = setTimeout(() => {
-        popup.classList.remove('popup-show');
-      }, 3000);
-    }
-
-    async function fetchProfile() {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        showPopup('No autenticado. Inicia sesión.', 'error');
-        return;
-      }
-      try {
-        const response = await fetch('https://todo-center-back.onrender.com/api/users/me', {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
-        const data = await response.json();
-        if (!response.ok || !data.data) {
-          showPopup(data.message || 'No se pudo obtener el perfil.', 'error');
-          return;
-        }
-        // Llenar los campos
-        document.querySelector('input[name="names"]').value = data.data.firstName || '';
-        document.querySelector('input[name="surnames"]').value = data.data.lastName || '';
-        document.querySelector('input[name="age"]').value = data.data.age || '';
-        document.querySelector('input[name="email"]').value = data.data.email || '';
-        document.querySelector('input[name="member_since"]').value = data.data.createdAt ? new Date(data.data.createdAt).toLocaleDateString() : '';
-      } catch (err) {
-        showPopup('No se pudo conectar con el servidor.', 'error');
-      }
-    }
-    fetchProfile();
-  }, 0);
-
   return `
 <body>
     <main class="signup_main">
@@ -79,9 +34,74 @@ export default function User() {
     </main>
   </body>
   `;
+}
 
-// Lógica para eliminar perfil con opción de deshacer real (espera 10s antes de borrar)
+// Helpers y lógica de eventos: deben ejecutarse después de que el DOM esté en pantalla
 setTimeout(() => {
+  // Popup feedback
+  function showPopup(message, type = 'error') {
+    let popup = document.getElementById('popup-message');
+    if (!popup) {
+      popup = document.createElement('div');
+      popup.id = 'popup-message';
+      document.body.appendChild(popup);
+    }
+    popup.className = `popup-message popup-${type} popup-show`;
+    popup.textContent = message;
+    clearTimeout(popup._timeout);
+    popup._timeout = setTimeout(() => {
+      popup.classList.remove('popup-show');
+    }, 3000);
+  }
+
+  // Gmail-style undo popup
+  function showUndoPopup(message, onUndo) {
+    let popup = document.getElementById('popup-message');
+    if (!popup) {
+      popup = document.createElement('div');
+      popup.id = 'popup-message';
+      document.body.appendChild(popup);
+    }
+    popup.className = 'popup-message popup-success popup-show';
+    popup.innerHTML = message + '<button id="undo-btn" class="btn btn-delete" style="margin-left:1em;">Deshacer</button>';
+    clearTimeout(popup._timeout);
+    popup._timeout = setTimeout(() => {
+      popup.classList.remove('popup-show');
+    }, 10000);
+    document.getElementById('undo-btn').onclick = () => {
+      popup.classList.remove('popup-show');
+      if (onUndo) onUndo();
+    };
+  }
+
+  // Fetch y llena el perfil
+  async function fetchProfile() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      showPopup('No autenticado. Inicia sesión.', 'error');
+      return;
+    }
+    try {
+      const response = await fetch('https://todo-center-back.onrender.com/api/users/me', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const data = await response.json();
+      if (!response.ok || !data.data) {
+        showPopup(data.message || 'No se pudo obtener el perfil.', 'error');
+        return;
+      }
+      document.querySelector('input[name="names"]').value = data.data.firstName || '';
+      document.querySelector('input[name="surnames"]').value = data.data.lastName || '';
+      document.querySelector('input[name="age"]').value = data.data.age || '';
+      document.querySelector('input[name="email"]').value = data.data.email || '';
+      document.querySelector('input[name="member_since"]').value = data.data.createdAt ? new Date(data.data.createdAt).toLocaleDateString() : '';
+    } catch (err) {
+      showPopup('No se pudo conectar con el servidor.', 'error');
+    }
+  }
+  fetchProfile();
+
+  // Lógica para eliminar perfil con undo
   const deleteBtn = document.getElementById('delete-profile-btn');
   if (deleteBtn) {
     deleteBtn.addEventListener('click', async () => {
@@ -95,13 +115,11 @@ setTimeout(() => {
         showPopup('Debes ingresar tu contraseña', 'error');
         return;
       }
-      // Mostrar popup con opción de deshacer
       let undo = false;
       showUndoPopup('Cuenta será eliminada en 10 segundos. ', () => {
         undo = true;
         showPopup('Eliminación cancelada.', 'success');
       });
-      // Esperar 10 segundos antes de eliminar
       setTimeout(async () => {
         if (undo) return;
         const token = localStorage.getItem('token');
@@ -126,28 +144,7 @@ setTimeout(() => {
         } catch (err) {
           showPopup('No se pudo conectar con el servidor.', 'error');
         }
-      }, 10000); // 10 segundos para deshacer
+      }, 10000);
     });
   }
 }, 0);
-
-// Popup tipo Gmail con opción de deshacer
-function showUndoPopup(message, onUndo) {
-  let popup = document.getElementById('popup-message');
-  if (!popup) {
-    popup = document.createElement('div');
-    popup.id = 'popup-message';
-    document.body.appendChild(popup);
-  }
-  popup.className = 'popup-message popup-success popup-show';
-  popup.innerHTML = message + '<button id="undo-btn" class="btn btn-delete" style="margin-left:1em;">Deshacer</button>';
-  clearTimeout(popup._timeout);
-  popup._timeout = setTimeout(() => {
-    popup.classList.remove('popup-show');
-  }, 10000);
-  document.getElementById('undo-btn').onclick = () => {
-    popup.classList.remove('popup-show');
-    if (onUndo) onUndo();
-  };
-}
-}
