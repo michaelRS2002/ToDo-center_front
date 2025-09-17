@@ -1,6 +1,7 @@
 export default function ediTask() {
   // Redirigir a login si no está autenticado
-  if (!localStorage.getItem('token')) {
+  const path = window.location.pathname;
+  if (!localStorage.getItem('token') && path !== '/login' && path !== '/signup') {
     window.location.href = '/login';
     return '';
   }
