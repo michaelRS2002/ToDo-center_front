@@ -1,4 +1,18 @@
 export default function Newtask() {
+  const path = window.location.pathname;
+if (
+  !localStorage.getItem('token') &&
+  path !== '/login' &&
+  path !== '/signup' &&
+  path !== '/' &&
+  path !== '/forgot-password' &&
+  path !== '/reset' &&
+  path !== '/sitemap'
+) {
+  window.location.href = '/login';
+  return '';
+}
+
   setTimeout(() => {
     // Popup logic
     function showPopup(message, type = 'error') {
