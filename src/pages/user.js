@@ -64,7 +64,7 @@ export default function User() {
           <input type="text" name="member_since" readonly  placeholder="8 years" class="input">
         </div>
         <div class="submit_button">
-          <a class="btn btn-primary" href="/profile/edit">Editar perfil</a>
+          <a class="btn btn-primary" href="/user-edit">Editar perfil</a>
           <a class="btn btn-primary" href="/profile/delete">Eliminar perfil</a>
         </div>
       </div>
