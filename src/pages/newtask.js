@@ -30,6 +30,14 @@ export default function Newtask() {
   const end = document.getElementById('end-time').value;
   const estado = document.getElementById('task-status').value;
 
+        // Mapear valores del select a los valores válidos del backend
+        let estadoMap = {
+          'pending': 'Por hacer',
+          'inprocess': 'Haciendo',
+          'completed': 'Hecho'
+        };
+        const estadoReal = estadoMap[estado] || estado;
+
         // Validaciones estrictas frontend
         if (!titulo) {
           showError('El título es requerido');
@@ -67,7 +75,7 @@ export default function Newtask() {
         }
         // Validar estado
         const validStatus = ['Por hacer', 'Haciendo', 'Hecho'];
-        if (!validStatus.includes(estado)) {
+        if (!validStatus.includes(estadoReal)) {
           showError('Estado inválido');
           return;
         }
@@ -86,7 +94,7 @@ export default function Newtask() {
               fecha,
               start,
               end,
-              estado
+              estado: estadoReal
             })
           });
           const data = await response.json();
@@ -99,18 +107,18 @@ export default function Newtask() {
             } else {
               showError(data.message || 'No se pudo crear la tarea.');
             }
-          } else {
-            showSuccess('¡Tarea creada exitosamente!');
-            // Opcional: agregar la tarea a localStorage para reflejar en la UI sin recargar
-            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-            if (data.data) {
-              tasks.push(data.data);
-              localStorage.setItem('tasks', JSON.stringify(tasks));
-            }
-            setTimeout(() => {
-              window.location.href = '/tasks';
-            }, 1200);
+            return; // No mostrar éxito si hubo error
           }
+          showSuccess('¡Tarea creada exitosamente!');
+          // Opcional: agregar la tarea a localStorage para reflejar en la UI sin recargar
+          let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+          if (data.data) {
+            tasks.push(data.data);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+          }
+          setTimeout(() => {
+            window.location.href = '/tasks';
+          }, 1200);
         } catch (err) {
           showError('No se pudo conectar con el servidor.');
         }
