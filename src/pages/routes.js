@@ -11,7 +11,7 @@ import Editask from './editask.js';
 import Reset from './reset.js';
 import Examples from './examples.js';
 export const routes = {
-
+  
   '/': Home,
   '/login': Login,
   '/signup': Signup,
@@ -23,8 +23,5 @@ export const routes = {
   '/newtask': Newtask,
   '/editask': Editask,
   '/reset': Reset,
-  '/editask': Editask,
-  '/reset': Reset,
-  '/editask': Editask,
   '/examples': Examples,
 };
