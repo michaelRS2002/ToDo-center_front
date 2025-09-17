@@ -1,10 +1,6 @@
 export default function ediTask() {
   // Redirigir a login si no está autenticado
-  const path = window.location.pathname;
-  if (!localStorage.getItem('token') && path !== '/login' && path !== '/signup') {
-    window.location.href = '/login';
-    return '';
-  }
+  
 
   const taskToEditId = localStorage.getItem("taskToEdit");
   console.log("En edit", taskToEditId);
