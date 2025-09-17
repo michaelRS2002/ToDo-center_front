@@ -5,11 +5,18 @@ export default function Navbar() {
     // Navbar HTML
     let navLinks = '';
     if (isLoggedIn) {
-        navLinks = `
-            <a href="/">Inicio</a>
-            <a href="/profile">Usuario</a>
-            <a href="#" id="logout-link">Cerrar Sesión</a>
-        `;
+        const isHome = window.location.pathname === '/';
+        navLinks = isHome
+            ? `
+                <a href="/tasks">Task</a>
+                <a href="/profile">Usuario</a>
+                <a href="#" id="logout-link">Cerrar Sesión</a>
+            `
+            : `
+                <a href="/">Inicio</a>
+                <a href="/profile">Usuario</a>
+                <a href="#" id="logout-link">Cerrar Sesión</a>
+            `;
     } else {
         navLinks = `
             <a href="/login">Iniciar Sesión</a>
@@ -33,10 +40,27 @@ export default function Navbar() {
     setTimeout(() => {
         const logout = document.getElementById('logout-link');
         if (logout) {
-            logout.addEventListener('click', function(e) {
+            logout.addEventListener('click', async function(e) {
                 e.preventDefault();
-                localStorage.removeItem('token');
-                window.location.href = '/login';
+                const token = localStorage.getItem('token');
+                try {
+                    await fetch('https://todo-center-back.onrender.com/api/auth/logout', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token ? `Bearer ${token}` : ''
+                        }
+                    });
+                    localStorage.removeItem('token');
+                    window.location.href = '/login';
+                } catch (err) {
+                    if (window.showPopup) {
+                        window.showPopup('Error al cerrar sesión', 'error');
+                    } else {
+                        alert('Error al cerrar sesión');
+                    }
+                    // Do not remove token or redirect
+                }
             });
         }
         // SPA navigation for navbar links
