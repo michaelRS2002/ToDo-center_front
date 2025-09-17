@@ -24,7 +24,7 @@ export default function ediTask() {
       <h1>✏️ Editar Tarea</h1>
       <form id="edit-task-form" data-id="${task._id || task.id}">
         <label>Título</label>
-        <input class="input100" type="text" id="edit-task-name" value="${task.name || ''}" required>
+  <input class="input100" type="text" id="edit-task-name" value="${task.titulo || ''}" required>
         
         <label>Descripción</label>
         <textarea class="inputedit" id="edit-task-desc" placeholder="Agregue una descripción">${task.desc || ''}</textarea>

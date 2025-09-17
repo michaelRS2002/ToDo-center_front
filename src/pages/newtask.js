@@ -133,26 +133,26 @@ export default function Newtask() {
         <h1>Informacion de Tarea</h1>
         
         <form id="task-form">
-        <label>Titulo</label>
-				<input class="input100" type="text" name="name" placeholder="Escriba el nombre de la tarea..." id="task-name" required>
-        <label>Descripcion</label>
-				<textarea class="input100" name="message" placeholder="Escriba de que se trata su tarea..." id="task-desc"></textarea>
+        <label for="task-name">Titulo</label>
+				<input class="input100" type="text" name="titulo" id="task-name" placeholder="Escriba el nombre de la tarea..." required>
+        <label for="task-desc">Descripcion</label>
+				<textarea class="input100" name="detalle" id="task-desc" placeholder="Escriba de que se trata su tarea..."></textarea>
         <div class="form-row">
             <div class="form-group">
-            <label>Fecha</label>
-            <input type="date" id="task-date" required>
+            <label for="task-date">Fecha</label>
+            <input type="date" id="task-date" name="fecha" required>
             </div>
             <div class="form-group">
-            <label>Inicio</label>
-            <input type="time" id="start-time" required>
+            <label for="start-time">Inicio</label>
+            <input type="time" id="start-time" name="start" required>
             </div>
             <div class="form-group">
-            <label>Fin</label>
-            <input type="time" id="end-time" required>
+            <label for="end-time">Fin</label>
+            <input type="time" id="end-time" name="end" required>
             </div>
             <div class="form-group">
-            <label>Estado de Tarea</label>
-            <select id="task-status">
+            <label for="task-status">Estado de Tarea</label>
+            <select id="task-status" name="estado">
                 <option value="pending" selected>Por hacer</option>
                 <option value="inprocess">Haciendo</option>
                 <option value="completed">Hecho</option>
