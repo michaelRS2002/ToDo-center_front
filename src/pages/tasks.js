@@ -1,9 +1,5 @@
 export default function Tasks() {
-    const path = window.location.pathname;
-    if (!localStorage.getItem('token') && path !== '/login' && path !== '/signup') {
-        window.location.href = '/login';
-        return '';
-    }
+    
 
     // Retorna el HTML
     const html = `
