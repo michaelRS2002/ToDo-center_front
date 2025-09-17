@@ -24,15 +24,15 @@ export default function ediTask() {
       <h1>✏️ Editar Tarea</h1>
       <form id="edit-task-form" data-id="${task._id || task.id}">
         <label>Título</label>
-  <input class="input100" type="text" id="edit-task-name" value="${task.titulo || ''}" required>
+        <input class="input100" type="text" id="edit-task-name" value="${task.titulo || ''}" required>
         
         <label>Descripción</label>
-        <textarea class="inputedit" id="edit-task-desc" placeholder="Agregue una descripción">${task.desc || ''}</textarea>
+        <textarea class="inputedit" id="edit-task-desc" placeholder="Agregue una descripción">${task.detalle || ''}</textarea>
         
         <div class="form-row">
           <div class="form-group">
             <label>Fecha</label>
-            <input type="date" id="edit-task-date" value="${task.date || ''}" required>
+            <input type="date" id="edit-task-date" value="${task.fecha || ''}" required>
           </div>
           <div class="form-group">
             <label>Inicio</label>
@@ -45,9 +45,9 @@ export default function ediTask() {
           <div class="form-group">
             <label>Estado de Tarea</label>
             <select id="edit-task-status">
-              <option value="pending" ${task.status === "pending" ? "selected" : ""}>Por hacer</option>
-              <option value="inprocess" ${task.status === "inprocess" ? "selected" : ""}>Haciendo</option>
-              <option value="completed" ${task.status === "completed" ? "selected" : ""}>Hecho</option>
+              <option value="Por hacer" ${task.estado === "Por hacer" ? "selected" : ""}>Por hacer</option>
+              <option value="Haciendo" ${task.estado === "Haciendo" ? "selected" : ""}>Haciendo</option>
+              <option value="Hecho" ${task.estado === "Hecho" ? "selected" : ""}>Hecho</option>
             </select>
           </div>
         </div>
@@ -159,7 +159,14 @@ function initializeEditTaskForm(taskId) {
           'Content-Type': 'application/json',
           ...(token ? { 'Authorization': `Bearer ${token}` } : {})
         },
-        body: JSON.stringify({ titulo, detalle, fecha, start, end, estado })
+        body: JSON.stringify({
+          titulo,
+          detalle,
+          fecha,
+          start,
+          end,
+          estado
+        })
       });
       const data = await response.json();
       if (!response.ok) {
