@@ -69,7 +69,7 @@ export default function ediTask() {
 
   // Ejecutar el JavaScript después de renderizar
   setTimeout(() => {
-    initializeEditTaskForm(task.id);
+    initializeEditTaskForm(task._id || task.id);
   }, 100);
 
   return html;
