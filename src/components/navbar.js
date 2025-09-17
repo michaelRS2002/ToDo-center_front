@@ -5,18 +5,26 @@ export default function Navbar() {
     // Navbar HTML
     let navLinks = '';
     if (isLoggedIn) {
-        const isHome = window.location.pathname === '/';
-        navLinks = isHome
-            ? `
+        const path = window.location.pathname;
+        if (path === '/profile' || path === '/user-edit') {
+            navLinks = `
+                <a href="/tasks">Tareas</a>
+                <a href="/">Inicio</a>
+                <a href="#" id="logout-link">Cerrar Sesión</a>
+            `;
+        } else if (path === '/') {
+            navLinks = `
                 <a href="/tasks">Tareas</a>
                 <a href="/profile">Usuario</a>
                 <a href="#" id="logout-link">Cerrar Sesión</a>
-            `
-            : `
+            `;
+        } else {
+            navLinks = `
                 <a href="/">Inicio</a>
                 <a href="/profile">Usuario</a>
                 <a href="#" id="logout-link">Cerrar Sesión</a>
             `;
+        }
     } else {
         navLinks = `
             <a href="/login">Iniciar Sesión</a>
