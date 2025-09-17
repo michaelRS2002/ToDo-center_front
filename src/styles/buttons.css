@@ -3,20 +3,7 @@
   background-color: var(--color-danger);
   border-color: var(--color-danger);
   color: var(--color-white);
-  border: none;
-  border-radius: var(--btn-border-radius);
-  margin-left: 1em;
-  font-weight: bold;
-  cursor: pointer;
-  transition: var(--btn-transition);
-  /* Hereda altura, padding y fuente de .btn */
-  padding: var(--btn-padding, 0.5rem 1rem);
-  min-height: 2.5rem;
-  font-size: 0.875rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
+ }
 .btn-delete:hover:not(:disabled) {
   background-color: var(--color-danger-hover);
   border-color: var(--color-danger-hover);
