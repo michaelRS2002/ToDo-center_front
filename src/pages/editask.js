@@ -25,16 +25,28 @@ export default function ediTask() {
     fechaValue = fechaValue.slice(0, 10);
   }
 
+  // Determinar el estado actual en español para el select
+  let estadoActual = task.estado;
+  if (!estadoActual) {
+    // Si viene en inglés, mapear a español
+    const estadoMap = {
+      'pending': 'Por hacer',
+      'inprocess': 'Haciendo',
+      'completed': 'Hecho'
+    };
+    estadoActual = estadoMap[task.status] || '';
+  }
+
   const html = `
   <div class="container-contact100">
     <div class="wrap-contact100">
       <h1>✏️ Editar Tarea</h1>
       <form id="edit-task-form" data-id="${task._id || task.id}">
         <label for="edit-task-name">Título</label>
-  <input class="input100" type="text" id="edit-task-name" name="titulo" value="${task.titulo || ''}" required>
+        <input class="input100" type="text" id="edit-task-name" name="titulo" value="${task.titulo || ''}" required>
         
         <label for="edit-task-desc">Descripción</label>
-  <textarea class="inputedit" id="edit-task-desc" name="detalle" placeholder="Agregue una descripción">${task.detalle || ''}</textarea>
+        <textarea class="inputedit" id="edit-task-desc" name="detalle" placeholder="Agregue una descripción">${task.detalle || ''}</textarea>
         
         <div class="form-row">
           <div class="form-group">
@@ -52,9 +64,9 @@ export default function ediTask() {
           <div class="form-group">
             <label for="edit-task-status">Estado de Tarea</label>
             <select id="edit-task-status" name="estado">
-              <option value="Por hacer" ${task.estado === "Por hacer" ? "selected" : ""}>Por hacer</option>
-              <option value="Haciendo" ${task.estado === "Haciendo" ? "selected" : ""}>Haciendo</option>
-              <option value="Hecho" ${task.estado === "Hecho" ? "selected" : ""}>Hecho</option>
+              <option value="Por hacer" ${estadoActual === "Por hacer" ? "selected" : ""}>Por hacer</option>
+              <option value="Haciendo" ${estadoActual === "Haciendo" ? "selected" : ""}>Haciendo</option>
+              <option value="Hecho" ${estadoActual === "Hecho" ? "selected" : ""}>Hecho</option>
             </select>
           </div>
         </div>
