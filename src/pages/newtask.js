@@ -23,15 +23,63 @@ export default function Newtask() {
     if (form) {
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
-  const titulo = document.getElementById('task-name').value.trim();
-  const detalle = document.getElementById('task-desc').value.trim();
-  const fecha = document.getElementById('task-date').value;
-  const start = document.getElementById('start-time').value;
-  const end = document.getElementById('end-time').value;
-  const estado = document.getElementById('task-status').value;
+        const titulo = document.getElementById('task-name').value.trim();
+        const detalle = document.getElementById('task-desc').value.trim();
+        const fecha = document.getElementById('task-date').value;
+        const start = document.getElementById('start-time').value;
+        const end = document.getElementById('end-time').value;
+        const estadoSelect = document.getElementById('task-status').value;
 
-        if (!name || !date || !start || !end) {
-          showError('Por favor, completa todos los campos obligatorios.');
+        // Mapear valores del select a los valores válidos del backend (ambos idiomas)
+        let estadoMap = {
+          'Por hacer': 'Por hacer',
+          'Haciendo': 'Haciendo',
+          'Hecho': 'Hecho',
+          'pending': 'Por hacer',
+          'inprocess': 'Haciendo',
+          'completed': 'Hecho'
+        };
+        const estadoReal = estadoMap[estadoSelect] || estadoSelect;
+
+        // Validaciones estrictas frontend
+        if (!titulo) {
+          showError('El título es requerido');
+          return;
+        }
+        if (titulo.length > 50) {
+          showError('El título no puede exceder 50 caracteres');
+          return;
+        }
+        if (detalle.length > 500) {
+          showError('El detalle no puede exceder 500 caracteres');
+          return;
+        }
+        if (!fecha) {
+          showError('La fecha es requerida');
+          return;
+        }
+        // Validar fecha futura
+        const inputDate = new Date(fecha);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (inputDate < today) {
+          showError('La fecha debe ser futura');
+          return;
+        }
+        // Validar hora formato HH:mm
+        const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+        if (!start || !timeRegex.test(start)) {
+          showError('La hora de inicio es requerida y debe tener formato HH:mm');
+          return;
+        }
+        if (!end || !timeRegex.test(end)) {
+          showError('La hora de fin es requerida y debe tener formato HH:mm');
+          return;
+        }
+        // Validar estado
+        const validStatus = ['Por hacer', 'Haciendo', 'Hecho'];
+        if (!validStatus.includes(estadoReal)) {
+          showError('Estado inválido');
           return;
         }
 
@@ -49,7 +97,7 @@ export default function Newtask() {
               fecha,
               start,
               end,
-              estado
+              estado: estadoReal
             })
           });
           const data = await response.json();
@@ -101,9 +149,9 @@ export default function Newtask() {
             <div class="form-group">
             <label for="task-status">Estado de Tarea</label>
             <select id="task-status" name="estado">
-                <option value="Por hacer" selected>Por hacer</option>
-                <option value="Haciendo">Haciendo</option>
-                <option value="Hecho">Hecho</option>
+                <option value="pending" selected>Por hacer</option>
+                <option value="inprocess">Haciendo</option>
+                <option value="completed">Hecho</option>
             </select>
             </div>
         </div>
