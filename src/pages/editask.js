@@ -30,27 +30,27 @@ export default function ediTask() {
     <div class="wrap-contact100">
       <h1>✏️ Editar Tarea</h1>
       <form id="edit-task-form" data-id="${task._id || task.id}">
-        <label>Título</label>
+        <label for="edit-task-name">Título</label>
         <input class="input100" type="text" id="edit-task-name" value="${task.titulo || ''}" required>
         
-        <label>Descripción</label>
+        <label for="edit-task-desc">Descripción</label>
         <textarea class="inputedit" id="edit-task-desc" placeholder="Agregue una descripción">${task.detalle || ''}</textarea>
         
         <div class="form-row">
           <div class="form-group">
-            <label>Fecha</label>
+            <label for="edit-task-date">Fecha</label>
             <input type="date" id="edit-task-date" value="${fechaValue}" required>
           </div>
           <div class="form-group">
-            <label>Inicio</label>
+            <label for="edit-start-time">Inicio</label>
             <input type="time" id="edit-start-time" value="${task.start || ''}">
           </div>
           <div class="form-group">
-            <label>Fin</label>
+            <label for="edit-end-time">Fin</label>
             <input type="time" id="edit-end-time" value="${task.end || ''}">
           </div>
           <div class="form-group">
-            <label>Estado de Tarea</label>
+            <label for="edit-task-status">Estado de Tarea</label>
             <select id="edit-task-status">
               <option value="Por hacer" ${task.estado === "Por hacer" ? "selected" : ""}>Por hacer</option>
               <option value="Haciendo" ${task.estado === "Haciendo" ? "selected" : ""}>Haciendo</option>
