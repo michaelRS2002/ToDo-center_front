@@ -40,6 +40,7 @@ export default function User() {
 setTimeout(() => {
   // Popup feedback
   function showPopup(message, type = 'error') {
+    if (typeof document === 'undefined') return;
     let popup = document.getElementById('popup-message');
     if (!popup) {
       popup = document.createElement('div');
@@ -78,7 +79,7 @@ setTimeout(() => {
   async function fetchProfile() {
     const token = localStorage.getItem('token');
     if (!token) {
-      showPopup('No autenticado. Inicia sesión.', 'error');
+      // No mostrar popup ni redirigir ni mostrar error
       return;
     }
     try {
@@ -87,7 +88,7 @@ setTimeout(() => {
       });
       const data = await response.json();
       if (!response.ok || !data.data) {
-        showPopup(data.message || 'No se pudo obtener el perfil.', 'error');
+        // No mostrar popup, solo no llenar datos
         return;
       }
       document.querySelector('input[name="names"]').value = data.data.firstName || '';
@@ -96,7 +97,7 @@ setTimeout(() => {
       document.querySelector('input[name="email"]').value = data.data.email || '';
       document.querySelector('input[name="member_since"]').value = data.data.createdAt ? new Date(data.data.createdAt).toLocaleDateString() : '';
     } catch (err) {
-      showPopup('No se pudo conectar con el servidor.', 'error');
+      // No mostrar popup
     }
   }
   fetchProfile();
@@ -110,7 +111,50 @@ setTimeout(() => {
         showPopup('Debes escribir ELIMINAR para confirmar', 'error');
         return;
       }
-      const password = prompt('Ingresa tu contraseña para confirmar:');
+
+      // Modal de contraseña con input type=password
+      let password = await new Promise((resolve) => {
+        // Crea modal
+        let modal = document.createElement('div');
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100vw';
+        modal.style.height = '100vh';
+        modal.style.background = 'rgba(0,0,0,0.4)';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.zIndex = '9999';
+        modal.innerHTML = `
+          <div style="background:#fff;padding:2em 2em 1.5em 2em;border-radius:10px;box-shadow:0 2px 16px #0002;min-width:300px;max-width:90vw;display:flex;flex-direction:column;align-items:center;">
+            <label style="margin-bottom:0.5em;font-weight:bold;">Ingresa tu contraseña para confirmar:</label>
+            <input id="modal-password-input" type="password" style="padding:0.5em 1em;font-size:1em;width:100%;margin-bottom:1em;border-radius:6px;border:1px solid #ccc;" autofocus>
+            <div style="display:flex;gap:1em;justify-content:center;width:100%;">
+              <button id="modal-password-ok" class="btn btn-primary">Confirmar</button>
+              <button id="modal-password-cancel" class="btn btn-secondary">Cancelar</button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(modal);
+        const input = modal.querySelector('#modal-password-input');
+        input.focus();
+        // Confirmar
+        modal.querySelector('#modal-password-ok').onclick = () => {
+          resolve(input.value);
+          document.body.removeChild(modal);
+        };
+        // Cancelar
+        modal.querySelector('#modal-password-cancel').onclick = () => {
+          resolve('');
+          document.body.removeChild(modal);
+        };
+        // Enter/cancel con teclado
+        input.onkeydown = (e) => {
+          if (e.key === 'Enter') modal.querySelector('#modal-password-ok').click();
+          if (e.key === 'Escape') modal.querySelector('#modal-password-cancel').click();
+        };
+      });
       if (!password) {
         showPopup('Debes ingresar tu contraseña', 'error');
         return;
@@ -146,5 +190,10 @@ setTimeout(() => {
         }
       }, 10000);
     });
+  }
+
+  if (!localStorage.getItem('token')) {
+    window.location.href = '/login';
+    return '';
   }
 }, 0);

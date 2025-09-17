@@ -1,5 +1,10 @@
-
 export default function Tasks() {
+    // Redirigir a login si no hay token
+    if (!localStorage.getItem('token')) {
+        window.location.href = '/login';
+        return '';
+    }
+
     // Retorna el HTML
     const html = `
     <div class="search-card">

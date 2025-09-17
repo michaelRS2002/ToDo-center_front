@@ -1,4 +1,9 @@
 export default function UserEdit() {
+  if (!localStorage.getItem('token')) {
+    window.location.href = '/login';
+    return '';
+  }
+
   setTimeout(() => {
     // Popup logic
     function showPopup(message, type = 'error') {
