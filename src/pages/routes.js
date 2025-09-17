@@ -11,7 +11,7 @@ import Editask from './editask.js';
 import Reset from './reset.js';
 import Examples from './examples.js';
 export const routes = {
-
+  
   '/': Home,
   '/login': Login,
   '/signup': Signup,
@@ -21,7 +21,7 @@ export const routes = {
   '/profile/edit': UserEdit,
   '/tasks': Tasks,
   '/newtask': Newtask,
-  '/reset': Reset,
   '/editask': Editask,
+  '/reset': Reset,
   '/examples': Examples,
 };
