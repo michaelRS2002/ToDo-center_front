@@ -83,12 +83,12 @@ function initializeEditTaskForm(taskId) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     // Obtener valores del formulario
-    const titulo = document.getElementById("edit-task-titulo").value.trim();
-    const detalle = document.getElementById("edit-task-detalle").value.trim();
-    const fecha = document.getElementById("edit-task-fecha").value;
+    const titulo = document.getElementById("edit-task-name").value.trim();
+    const detalle = document.getElementById("edit-task-desc").value.trim();
+    const fecha = document.getElementById("edit-task-date").value;
     const start = document.getElementById("edit-start-time").value;
     const end = document.getElementById("edit-end-time").value;
-    const estado = document.getElementById("edit-task-estado").value;
+    const estado = document.getElementById("edit-task-status").value;
 
     // Validaciones estrictas frontend
     if (!titulo) {
@@ -108,7 +108,7 @@ function initializeEditTaskForm(taskId) {
     }
     if (!fecha) {
       alert("❌ La fecha es obligatoria");
-      document.getElementById("edit-task-fecha").focus();
+      document.getElementById("edit-task-date").focus();
       return;
     }
     // Validar fecha futura
