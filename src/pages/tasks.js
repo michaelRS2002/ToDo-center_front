@@ -103,12 +103,12 @@ function initializeTasksPage() {
         loadTasks();
         return;
         } 
-        // Filtrado por nombre + descripción + estado + fecha
+        // Filtrado por título + descripción + estado + fecha
         const results = tasks.filter(task => 
-            task.name.toLowerCase().includes(query) ||
-            task.desc.toLowerCase().includes(query) ||
-            task.status.toLowerCase().includes(query) ||
-            task.date.includes(query)
+            (task.titulo || '').toLowerCase().includes(query) ||
+            (task.detalle || '').toLowerCase().includes(query) ||
+            (task.estado || '').toLowerCase().includes(query) ||
+            (task.fecha || '').toString().includes(query)
         );
 
         renderTasks(results); // Función que pinta los resultados en pantalla
