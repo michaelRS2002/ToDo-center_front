@@ -18,6 +18,13 @@ export default function ediTask() {
     `;
   }
 
+  // Formatear fecha a yyyy-MM-dd si es necesario
+  let fechaValue = task.fecha || '';
+  if (fechaValue && fechaValue.length > 10) {
+    // Si viene en formato ISO, recorta solo la fecha
+    fechaValue = fechaValue.slice(0, 10);
+  }
+
   const html = `
   <div class="container-contact100">
     <div class="wrap-contact100">
@@ -32,7 +39,7 @@ export default function ediTask() {
         <div class="form-row">
           <div class="form-group">
             <label>Fecha</label>
-            <input type="date" id="edit-task-date" value="${task.fecha || ''}" required>
+            <input type="date" id="edit-task-date" value="${fechaValue}" required>
           </div>
           <div class="form-group">
             <label>Inicio</label>

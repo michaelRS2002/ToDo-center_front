@@ -8,7 +8,7 @@ export default function Navbar() {
         const isHome = window.location.pathname === '/';
         navLinks = isHome
             ? `
-                <a href="/tasks">Task</a>
+                <a href="/tasks">Tareas</a>
                 <a href="/profile">Usuario</a>
                 <a href="#" id="logout-link">Cerrar Sesión</a>
             `
