@@ -23,15 +23,52 @@ export default function Newtask() {
     if (form) {
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
-        const name = document.getElementById('task-name').value.trim();
-        const desc = document.getElementById('task-desc').value.trim();
-        const date = document.getElementById('task-date').value;
-        const start = document.getElementById('start-time').value;
-        const end = document.getElementById('end-time').value;
-        const status = document.getElementById('task-status').value;
+  const titulo = document.getElementById('task-name').value.trim();
+  const detalle = document.getElementById('task-desc').value.trim();
+  const fecha = document.getElementById('task-date').value;
+  const start = document.getElementById('start-time').value;
+  const end = document.getElementById('end-time').value;
+  const estado = document.getElementById('task-status').value;
 
-        if (!name || !date || !start || !end) {
-          showError('Por favor, completa todos los campos obligatorios.');
+        // Validaciones estrictas frontend
+        if (!titulo) {
+          showError('El título es requerido');
+          return;
+        }
+        if (titulo.length > 50) {
+          showError('El título no puede exceder 50 caracteres');
+          return;
+        }
+        if (detalle.length > 500) {
+          showError('El detalle no puede exceder 500 caracteres');
+          return;
+        }
+        if (!fecha) {
+          showError('La fecha es requerida');
+          return;
+        }
+        // Validar fecha futura
+        const inputDate = new Date(fecha);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (inputDate < today) {
+          showError('La fecha debe ser futura');
+          return;
+        }
+        // Validar hora formato HH:mm
+        const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+        if (!start || !timeRegex.test(start)) {
+          showError('La hora de inicio es requerida y debe tener formato HH:mm');
+          return;
+        }
+        if (!end || !timeRegex.test(end)) {
+          showError('La hora de fin es requerida y debe tener formato HH:mm');
+          return;
+        }
+        // Validar estado
+        const validStatus = ['Por hacer', 'Haciendo', 'Hecho'];
+        if (!validStatus.includes(estado)) {
+          showError('Estado inválido');
           return;
         }
 
@@ -44,23 +81,30 @@ export default function Newtask() {
               ...(token ? { 'Authorization': `Bearer ${token}` } : {})
             },
             body: JSON.stringify({
-              name,
-              description: desc,
-              date,
+              titulo,
+              detalle,
+              fecha,
               start,
               end,
-              status
+              estado
             })
           });
           const data = await response.json();
           if (!response.ok) {
-            showError(data.message || 'No se pudo crear la tarea.');
+            // Mostrar errores de validación si existen
+            if (Array.isArray(data.errors) && data.errors.length > 0) {
+              data.errors.forEach(err => {
+                showError(err.msg || err.message || 'Error de validación');
+              });
+            } else {
+              showError(data.message || 'No se pudo crear la tarea.');
+            }
           } else {
             showSuccess('¡Tarea creada exitosamente!');
             // Opcional: agregar la tarea a localStorage para reflejar en la UI sin recargar
             let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-            if (data.task) {
-              tasks.push(data.task);
+            if (data.data) {
+              tasks.push(data.data);
               localStorage.setItem('tasks', JSON.stringify(tasks));
             }
             setTimeout(() => {

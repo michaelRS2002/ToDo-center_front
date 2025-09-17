@@ -382,8 +382,9 @@ function initializeTasksPage() {
             });
             if (response.ok) {
                 const data = await response.json();
-                if (Array.isArray(data.tasks)) {
-                    localStorage.setItem('tasks', JSON.stringify(data.tasks));
+                // Según Swagger, las tareas vienen en data.data
+                if (Array.isArray(data.data)) {
+                    localStorage.setItem('tasks', JSON.stringify(data.data));
                     loadTasks();
                 }
             }
