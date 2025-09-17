@@ -127,18 +127,26 @@ function initializeTasksPage() {
         }
 
         tasks.forEach(task => {
+            // Sincronizar status con estado para compatibilidad visual
+            let status = task.status;
+            if (!status && task.estado) {
+                if (task.estado === "Hecho") status = "completed";
+                else if (task.estado === "Haciendo") status = "inprocess";
+                else status = "pending";
+            }
+            // Renderizar en la columna correcta según estado
             const task_el = createTaskElement(task);
             const task_content_el = task_el.querySelector(".content");
             const task_input_el = task_el.querySelector(".text");
 
-            if (task.status === "completed") {
-            task_content_el.classList.add("checked");
-            task_input_el.classList.add("textchecked");
-            completedListEl.appendChild(task_el);
-            } else if (task.status === "inprocess") {
-            inprocessListEl.appendChild(task_el);
+            if (status === "completed") {
+                task_content_el.classList.add("checked");
+                task_input_el.classList.add("textchecked");
+                completedListEl.appendChild(task_el);
+            } else if (status === "inprocess") {
+                inprocessListEl.appendChild(task_el);
             } else {
-            list_el.appendChild(task_el);
+                list_el.appendChild(task_el);
             }
         });
     }
@@ -316,16 +324,23 @@ function initializeTasksPage() {
         const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
         tasks.forEach(task => {
+            // Sincronizar status con estado para compatibilidad visual
+            let status = task.status;
+            if (!status && task.estado) {
+                if (task.estado === "Hecho") status = "completed";
+                else if (task.estado === "Haciendo") status = "inprocess";
+                else status = "pending";
+            }
             const task_el = createTaskElement(task);
             const task_content_el = task_el.querySelector('.content');
             const task_input_el = task_el.querySelector('.text');
 
-            if (task.status === "completed") {
+            if (status === "completed") {
                 task_content_el.classList.add("checked");
                 task_input_el.classList.add("textchecked");
                 completedListEl.appendChild(task_el);
                 completedTasks++;
-            } else if (task.status === "inprocess") {
+            } else if (status === "inprocess") {
                 inprocessListEl.appendChild(task_el);
             } else {
                 list_el.appendChild(task_el);
