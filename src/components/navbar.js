@@ -8,8 +8,8 @@ export default function Navbar() {
         const path = window.location.pathname;
         if (path === '/profile' || path === '/user-edit') {
             navLinks = `
-                <a href="/tasks">Tareas</a>
                 <a href="/">Inicio</a>
+                <a href="/tasks">Tareas</a>
                 <a href="#" id="logout-link">Cerrar Sesión</a>
             `;
         } else if (path === '/') {
