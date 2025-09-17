@@ -3,10 +3,6 @@
   background-color: var(--color-danger);
   border-color: var(--color-danger);
   color: var(--color-white);
-  /* Hereda tamaño de .btn */
-  padding: 1.1rem 2.2rem;
-  font-size: 1.25rem;
-  min-height: 3.5rem;
 }
 .btn-delete:hover:not(:disabled) {
   background-color: var(--color-danger-hover);
@@ -55,9 +51,9 @@
   line-height: 1.5;
   
   /* Tamaño por defecto (medium) */
-  padding: 1.1rem 2.2rem;
-  font-size: 1.25rem;
-  min-height: 3.5rem;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  min-height: 3rem;
 }
 
 .btn:focus {
