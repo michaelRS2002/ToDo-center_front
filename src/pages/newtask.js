@@ -23,20 +23,23 @@ export default function Newtask() {
     if (form) {
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
-  const titulo = document.getElementById('task-name').value.trim();
-  const detalle = document.getElementById('task-desc').value.trim();
-  const fecha = document.getElementById('task-date').value;
-  const start = document.getElementById('start-time').value;
-  const end = document.getElementById('end-time').value;
-  const estado = document.getElementById('task-status').value;
+        const titulo = document.getElementById('task-name').value.trim();
+        const detalle = document.getElementById('task-desc').value.trim();
+        const fecha = document.getElementById('task-date').value;
+        const start = document.getElementById('start-time').value;
+        const end = document.getElementById('end-time').value;
+        const estadoSelect = document.getElementById('task-status').value;
 
-        // Mapear valores del select a los valores válidos del backend
+        // Mapear valores del select a los valores válidos del backend (ambos idiomas)
         let estadoMap = {
+          'Por hacer': 'Por hacer',
+          'Haciendo': 'Haciendo',
+          'Hecho': 'Hecho',
           'pending': 'Por hacer',
           'inprocess': 'Haciendo',
           'completed': 'Hecho'
         };
-        const estadoReal = estadoMap[estado] || estado;
+        const estadoReal = estadoMap[estadoSelect] || estadoSelect;
 
         // Validaciones estrictas frontend
         if (!titulo) {
@@ -99,26 +102,19 @@ export default function Newtask() {
           });
           const data = await response.json();
           if (!response.ok) {
-            // Mostrar errores de validación si existen
-            if (Array.isArray(data.errors) && data.errors.length > 0) {
-              data.errors.forEach(err => {
-                showError(err.msg || err.message || 'Error de validación');
-              });
-            } else {
-              showError(data.message || 'No se pudo crear la tarea.');
+            showError(data.message || 'No se pudo crear la tarea.');
+          } else {
+            showSuccess('¡Tarea creada exitosamente!');
+            // Opcional: agregar la tarea a localStorage para reflejar en la UI sin recargar
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            if (data.task) {
+              tasks.push(data.task);
+              localStorage.setItem('tasks', JSON.stringify(tasks));
             }
-            return; // No mostrar éxito si hubo error
+            setTimeout(() => {
+              window.location.href = '/tasks';
+            }, 1200);
           }
-          showSuccess('¡Tarea creada exitosamente!');
-          // Opcional: agregar la tarea a localStorage para reflejar en la UI sin recargar
-          let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-          if (data.data) {
-            tasks.push(data.data);
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-          }
-          setTimeout(() => {
-            window.location.href = '/tasks';
-          }, 1200);
         } catch (err) {
           showError('No se pudo conectar con el servidor.');
         }
@@ -134,9 +130,9 @@ export default function Newtask() {
         
         <form id="task-form">
         <label for="task-name">Titulo</label>
-				<input class="input100" type="text" name="titulo" id="task-name" placeholder="Escriba el nombre de la tarea..." required>
+				<input class="input100" type="text" name="titulo" placeholder="Escriba el nombre de la tarea..." id="task-name" required>
         <label for="task-desc">Descripcion</label>
-				<textarea class="input100" name="detalle" id="task-desc" placeholder="Escriba de que se trata su tarea..."></textarea>
+				<textarea class="input100" name="detalle" placeholder="Escriba de que se trata su tarea..." id="task-desc"></textarea>
         <div class="form-row">
             <div class="form-group">
             <label for="task-date">Fecha</label>

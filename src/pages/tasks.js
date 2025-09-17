@@ -198,10 +198,9 @@ function initializeTasksPage() {
 
     // Función para crear elemento de tarea
     function createTaskElement(taskData) {
-
         const task_el = document.createElement('div');
         task_el.classList.add('task');
-        task_el.setAttribute('data-task-id', taskData.id);
+        task_el.setAttribute('data-task-id', taskData._id || taskData.id);
 
         const task_content_el = document.createElement('div');
         task_content_el.classList.add('content');
@@ -209,7 +208,7 @@ function initializeTasksPage() {
         const task_input_el = document.createElement('input');
         task_input_el.classList.add('text');
         task_input_el.type = 'text';
-        task_input_el.value = taskData.name;
+        task_input_el.value = taskData.titulo || '';
         task_input_el.setAttribute('readonly', 'readonly');
 
         task_content_el.appendChild(task_input_el);
@@ -229,7 +228,7 @@ function initializeTasksPage() {
 
         const task_actions_el = document.createElement('div');
         task_actions_el.classList.add('actions');
-        
+
         const task_edit_el = document.createElement('button');
         task_edit_el.classList.add('edit');
         task_edit_el.innerHTML = '<i class="fas fa-edit"></i>';
@@ -253,39 +252,36 @@ function initializeTasksPage() {
             if (task_content_el.classList.contains("checked")) {
                 completedTasks++;
                 completedListEl.appendChild(task_el);
-                updateTaskStatusInStorage(taskData.id, "completed");
+                updateTaskStatusInStorage(taskData._id || taskData.id, "completed");
             } else {
-                if (taskData.status === "inprocess") {
+                if (taskData.estado === "Haciendo" || taskData.status === "inprocess") {
                     completedTasks--;
                     inprocessListEl.appendChild(task_el);
-                    updateTaskStatusInStorage(taskData.id, "inprocess");}
-                else{
+                    updateTaskStatusInStorage(taskData._id || taskData.id, "inprocess");
+                } else {
                     completedTasks--;
                     list_el.appendChild(task_el);
-                    updateTaskStatusInStorage(taskData.id, "pending");
+                    updateTaskStatusInStorage(taskData._id || taskData.id, "pending");
                 }
             }
             updateStats();
         });
 
         task_edit_el.addEventListener("click", () => {
-        localStorage.setItem("taskToEdit", taskData.id);
-
-        // lanzar un evento que main.js escuche
-        window.dispatchEvent(new CustomEvent("navigate", { detail: "/editask" }));
+            localStorage.setItem("taskToEdit", taskData._id || taskData.id);
+            // lanzar un evento que main.js escuche
+            window.dispatchEvent(new CustomEvent("navigate", { detail: "/editask" }));
         });
 
         task_delete_el.addEventListener('click', () => {
-            const confirmDelete = confirm(`🗑️ ¿Eliminar la tarea "${taskData.name}"?`);
+            const confirmDelete = confirm(`🗑️ ¿Eliminar la tarea "${taskData.titulo || ''}"?`);
             if (!confirmDelete) return;
-            
             if (task_content_el.classList.contains("checked")) {
                 completedTasks--;
             }
             totalTasks--;
             updateStats();
-            
-            deleteTaskFromStorage(taskData.id);
+            deleteTaskFromStorage(taskData._id || taskData.id);
             task_el.remove();
         });
 
