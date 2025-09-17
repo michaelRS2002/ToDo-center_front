@@ -23,60 +23,15 @@ export default function Newtask() {
     if (form) {
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
-  const titulo = document.getElementById('task-name').value.trim();
-  const detalle = document.getElementById('task-desc').value.trim();
-  const fecha = document.getElementById('task-date').value;
-  const start = document.getElementById('start-time').value;
-  const end = document.getElementById('end-time').value;
-  const estado = document.getElementById('task-status').value;
+        const name = document.getElementById('task-name').value.trim();
+        const desc = document.getElementById('task-desc').value.trim();
+        const date = document.getElementById('task-date').value;
+        const start = document.getElementById('start-time').value;
+        const end = document.getElementById('end-time').value;
+        const status = document.getElementById('task-status').value;
 
-        // Mapear valores del select a los valores válidos del backend
-        let estadoMap = {
-          'pending': 'Por hacer',
-          'inprocess': 'Haciendo',
-          'completed': 'Hecho'
-        };
-        const estadoReal = estadoMap[estado] || estado;
-
-        // Validaciones estrictas frontend
-        if (!titulo) {
-          showError('El título es requerido');
-          return;
-        }
-        if (titulo.length > 50) {
-          showError('El título no puede exceder 50 caracteres');
-          return;
-        }
-        if (detalle.length > 500) {
-          showError('El detalle no puede exceder 500 caracteres');
-          return;
-        }
-        if (!fecha) {
-          showError('La fecha es requerida');
-          return;
-        }
-        // Validar fecha futura
-        const inputDate = new Date(fecha);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        if (inputDate < today) {
-          showError('La fecha debe ser futura');
-          return;
-        }
-        // Validar hora formato HH:mm
-        const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
-        if (!start || !timeRegex.test(start)) {
-          showError('La hora de inicio es requerida y debe tener formato HH:mm');
-          return;
-        }
-        if (!end || !timeRegex.test(end)) {
-          showError('La hora de fin es requerida y debe tener formato HH:mm');
-          return;
-        }
-        // Validar estado
-        const validStatus = ['Por hacer', 'Haciendo', 'Hecho'];
-        if (!validStatus.includes(estadoReal)) {
-          showError('Estado inválido');
+        if (!name || !date || !start || !end) {
+          showError('Por favor, completa todos los campos obligatorios.');
           return;
         }
 
@@ -89,36 +44,29 @@ export default function Newtask() {
               ...(token ? { 'Authorization': `Bearer ${token}` } : {})
             },
             body: JSON.stringify({
-              titulo,
-              detalle,
-              fecha,
+              name,
+              description: desc,
+              date,
               start,
               end,
-              estado: estadoReal
+              status
             })
           });
           const data = await response.json();
           if (!response.ok) {
-            // Mostrar errores de validación si existen
-            if (Array.isArray(data.errors) && data.errors.length > 0) {
-              data.errors.forEach(err => {
-                showError(err.msg || err.message || 'Error de validación');
-              });
-            } else {
-              showError(data.message || 'No se pudo crear la tarea.');
+            showError(data.message || 'No se pudo crear la tarea.');
+          } else {
+            showSuccess('¡Tarea creada exitosamente!');
+            // Opcional: agregar la tarea a localStorage para reflejar en la UI sin recargar
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            if (data.task) {
+              tasks.push(data.task);
+              localStorage.setItem('tasks', JSON.stringify(tasks));
             }
-            return; // No mostrar éxito si hubo error
+            setTimeout(() => {
+              window.location.href = '/tasks';
+            }, 1200);
           }
-          showSuccess('¡Tarea creada exitosamente!');
-          // Opcional: agregar la tarea a localStorage para reflejar en la UI sin recargar
-          let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-          if (data.data) {
-            tasks.push(data.data);
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-          }
-          setTimeout(() => {
-            window.location.href = '/tasks';
-          }, 1200);
         } catch (err) {
           showError('No se pudo conectar con el servidor.');
         }
@@ -133,29 +81,29 @@ export default function Newtask() {
         <h1>Informacion de Tarea</h1>
         
         <form id="task-form">
-        <label for="task-name">Titulo</label>
-				<input class="input100" type="text" name="titulo" id="task-name" placeholder="Escriba el nombre de la tarea..." required>
-        <label for="task-desc">Descripcion</label>
-				<textarea class="input100" name="detalle" id="task-desc" placeholder="Escriba de que se trata su tarea..."></textarea>
+        <label>Titulo</label>
+				<input class="input100" type="text" name="name" placeholder="Escriba el nombre de la tarea..." id="task-name" required>
+        <label>Descripcion</label>
+				<textarea class="input100" name="message" placeholder="Escriba de que se trata su tarea..." id="task-desc"></textarea>
         <div class="form-row">
             <div class="form-group">
-            <label for="task-date">Fecha</label>
-            <input type="date" id="task-date" name="fecha" required>
+            <label>Fecha</label>
+            <input type="date" id="task-date" required>
             </div>
             <div class="form-group">
-            <label for="start-time">Inicio</label>
-            <input type="time" id="start-time" name="start" required>
+            <label>Inicio</label>
+            <input type="time" id="start-time" required>
             </div>
             <div class="form-group">
-            <label for="end-time">Fin</label>
-            <input type="time" id="end-time" name="end" required>
+            <label>Fin</label>
+            <input type="time" id="end-time" required>
             </div>
             <div class="form-group">
-            <label for="task-status">Estado de Tarea</label>
-            <select id="task-status" name="estado">
-                <option value="pending" selected>Por hacer</option>
-                <option value="inprocess">Haciendo</option>
-                <option value="completed">Hecho</option>
+            <label>Estado de Tarea</label>
+            <select id="task-status">
+                <option value="pending" selected>Pendiente</option>
+                <option value="inprocess">En Proceso</option>
+                <option value="completed">Completado</option>
             </select>
             </div>
         </div>
