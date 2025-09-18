@@ -49,11 +49,13 @@
   white-space: nowrap;
   vertical-align: middle;
   line-height: 1.5;
-  
-  /* Tamaño por defecto (medium) */
   padding: 1rem 2rem;
   font-size: 1rem;
-  min-height: 3rem;
+  margin-top: 15px;
+  padding: 10px 40px;
+  color: #fff;
+  background: #1c3dcc;
+  font-size: 20px;
 }
 
 .btn:focus {

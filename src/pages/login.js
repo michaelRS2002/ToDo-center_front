@@ -76,7 +76,7 @@ export default function Login() {
     <main class="login_main">
       <div class="div_form">
         <h1>
-          Iniciar sesión
+          Iniciar Sesión
         </h1>
         <form class="form_inputs" action="/submit" method="POST">
             <label class="label label-required">Correo</label>
