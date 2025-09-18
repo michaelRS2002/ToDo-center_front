@@ -104,20 +104,20 @@ if (
 
   return `
     <body>
-    <main class="signup_main">
+    <main class="user_main">
       <div class="div_form">
         <h1>
           Ingrese sus nuevos datos
         </h1>
         <div class="form_inputs">
           <label class="label">Nombre</label>
-          <input type="text" name="names" placeholder="Names" class="input">
+          <input type="text" name="names" placeholder="Juan Pedro" class="input">
           <label class="label">Apellido</label>
-          <input type="text" name="surnames" placeholder="Surname" class="input">
+          <input type="text" name="surnames" placeholder="Gonzalez" class="input">
           <label class="label">Edad</label>
-          <input type="number" name="age" placeholder="Age" class="input">
+          <input type="number" name="age" placeholder="18" class="input">
           <label class="label">Email</label>
-          <input type="email" name="email" placeholder="example@gmail.com" class="input">
+          <input type="email" name="email" placeholder="ejemplo@gmail.com" class="input">
         </div>
         <div class="submit_button">
           <input class="btn btn-primary" type="submit" value="Guardar datos">

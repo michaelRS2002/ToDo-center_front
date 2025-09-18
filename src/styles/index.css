@@ -123,6 +123,7 @@ h1{
   width: 100%
 }
 
+
 .div_form>h1{
     margin-bottom: 1rem;
     font-size: 1.5rem;
@@ -436,16 +437,29 @@ footer>a{
 .fpassword_main{
     padding: 1.5rem;
     width: 40rem;
-    height: 24rem;
+    height: 20rem;
     display: flex;
     flex-wrap: nowrap;
-    margin-top: 10rem;
+    margin-top: 11rem;
+}
+
+.fpassword_main>.div_form>.form_inputs>input{
+    margin-bottom: 0;
 }
 
 .signup_main{
     padding: 2rem;
     width: 40rem;
-    height: 38rem;
+    height: 36rem;
+    display: flex;
+    flex-wrap: nowrap;
+    margin-top: 5%;
+}
+
+.user_main{
+    padding: 1.5rem;
+    width: 40rem;
+    height: 34rem;
     display: flex;
     flex-wrap: nowrap;
     margin-top: 6%;
@@ -460,6 +474,11 @@ footer>a{
     width: 100%;
 }
 
+.form_inputs>.label{
+  justify-self: flex-start;
+  margin-left: 10%;
+}
+
 .form_inputs>input{
     margin-bottom: 1.5rem;
     padding:0.5rem;
@@ -469,6 +488,10 @@ footer>a{
     text-align: left;
     background-color: #c3c2c2;
     color: #000000
+}
+
+.signup_main>.div_form>.form_inputs>.input{
+    margin-bottom: 1rem;
 }
 
 .div_form>h1{
@@ -489,6 +512,19 @@ footer>a{
     width: 100%;
 }
 
+#edit-profile-btn{
+  min-height: 0;
+  width: 40%;
+  margin-bottom: 0.5rem;
+}
+
+#delete-profile-btn{
+  min-height: 0;
+  width: 40%;
+  margin-bottom: 0.5rem;
+  margin-left: 1rem
+}
+
 .submit_button>input{
     margin-bottom: 0.75rem;
     width: 75%;
@@ -503,7 +539,6 @@ footer>a{
 
 .fpassword_button{
     width: 100%;
-    margin-top: 5%;
 }
 
 .fpassword_button>input{
@@ -514,6 +549,7 @@ footer>a{
     border-radius: 5%;
     text-shadow: 1px 1px 5px #464545ae;
 }
+
 
 
 .sitemap_title{
@@ -634,6 +670,17 @@ footer>a{
         margin-top: 35%;
     }
 
+    .user_main{
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+      width: 40rem;
+      height: 34rem;
+      max-width: 90%;
+      margin-top: 35%;
+      overflow-x: hidden;
+    }
+
     .fpassword_main{
         display: grid;
         place-items: center;
@@ -641,7 +688,7 @@ footer>a{
         padding: 1.5rem;
         width: 40rem;
         height: 24rem;
-        margin-top: 35%;
+        margin-top: 40%;
     }
 
     .fpassword_main>.div_form{
@@ -1038,6 +1085,17 @@ footer>a{
         margin-top: 8rem;
     }
 
+    .user_main{
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+      width: 40rem;
+      height: 34rem;
+      max-width: 90%;
+      margin-top: 8rem;
+      overflow-x: hidden;
+    }
+
     .fpassword_main{
         display: grid;
         place-items: center;
@@ -1169,6 +1227,15 @@ footer>a{
         margin-top: 12rem;
     }
 
+    .user_main{
+      display: flex;
+      flex-wrap: nowrap;
+      padding: 1.5rem;
+      width: 40rem;
+      height: 34rem;
+      margin-top: 30%;
+    }
+
     .form_inputs{
         margin-left: auto;
         margin-right: auto;
@@ -1263,7 +1330,7 @@ footer>a{
 .search-form {
     display: flex;
     align-items: center;
-    background: #141414;
+    background: #dddddd;
     border-radius: 12px;
     padding: 0px 32px;
     margin-top: 75px;
@@ -1277,7 +1344,7 @@ footer>a{
   background: transparent;
   border: none;
   outline: none;
-  color: #e9ebee;
+  color: #000000;
   font-size: 15px;
 }
 
@@ -1309,19 +1376,24 @@ footer>a{
 .container {
 
     justify-content: center;
-    margin: 12px 0px;
+    /* margin: 12px 0; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* min-height: 100vh; */
+    padding: 12px 0;
+    box-sizing: border-box;
 
 }
 
 .stats-container {
-    padding:  10px;
+    padding:  10px 300px;
     background: #464545ae;
     display: flex;
-    width: 100%;
     justify-content: space-between;
 }
 .details {
-    margin: 2px 60px;
+    margin: 10px 70px 2px;
     margin-top: 10px;
 }
 
@@ -1355,7 +1427,7 @@ footer>a{
 }
 
 .stats-numbers{
-    width: 87%;
+    width: 100%;
 
 }
 #numbers {
@@ -1367,8 +1439,8 @@ footer>a{
     font-size: 30px;
     font-weight:  bold;
     padding: 40px;
-    margin: 11px 290px;
-    width: 11%;
+    margin: 11px 180px;
+    width: 18%;
 }
 
 

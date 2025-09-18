@@ -3,7 +3,7 @@ export default function User() {
 
   return `
 <body>
-    <main class="signup_main">
+    <main class="user_main">
       <div class="div_form">
         <h1>
           Datos del usuario
@@ -21,7 +21,7 @@ export default function User() {
           <input type="text" name="member_since" readonly  placeholder="8 years" class="input">
         </div>
         <div class="submit_button">
-          <a class="btn btn-primary" href="/user-edit">Editar perfil</a>
+          <button class="btn btn-primary" id="edit-profile-btn" onclick="window.location.href='/user-edit'">Editar perfil</button>
           <button class="btn btn-delete" id="delete-profile-btn" type="button">Eliminar perfil</button>
         </div>
       </div>
