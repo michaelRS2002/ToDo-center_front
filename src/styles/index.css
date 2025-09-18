@@ -82,8 +82,8 @@ main{
 }
 
 h1{
-    font-family: calibri;
-    color:#FDF6F0;
+  font-family: calibri;
+  color:#FDF6F0;
 }
 
 .sitemap_main{
@@ -119,8 +119,9 @@ h1{
   display:grid;
   place-items: center;
   text-align: center;
-  margin-right: 2rem;
-  width: 100%
+  width: 100%;
+  height: 95%;
+  margin-top: 3%;
 }
 
 
@@ -139,6 +140,8 @@ h1{
 a {
     font-family: calibri;
     color: #FDF6F0;
+    margin: 0%;
+    padding: 0px;
 }
 
 .head {
@@ -213,16 +216,6 @@ p {
     margin-top: 40px;
 }
 
-.btn {
-    margin-top: 15px;
-    padding: 10px 40px;
-    border: 2px solid #1c3dcc;
-    color: #fff;
-    text-decoration: none;
-    background: #1c3dcc;
-    text-align: center;
-    font-size: 20px;
-}
 
 .btn:hover {
     background: #020202;
@@ -426,12 +419,13 @@ footer>a{
 
 
 .login_main{
+    margin-top: 7%;
     padding: 1.5rem;
     width: 45%;
     height: 30rem;
     display: flex;
     flex-wrap: nowrap;
-    margin-top: 8%;
+    margin-bottom: 3%;
 }
 
 .fpassword_main{
@@ -448,9 +442,9 @@ footer>a{
 }
 
 .signup_main{
-    padding: 2rem;
+    padding: 1rem 2rem;
     width: 40rem;
-    height: 36rem;
+    height: 38rem;
     display: flex;
     flex-wrap: nowrap;
     margin-top: 5%;
@@ -462,11 +456,13 @@ footer>a{
     height: 34rem;
     display: flex;
     flex-wrap: nowrap;
-    margin-top: 6%;
+    margin-top: 7%;
+    margin-bottom: 3%;
+
 }
 
 .form_inputs{
-    margin-top: 1.5rem;
+    margin-top: 2px;
     display:grid;
     place-items: center;
     margin-left: auto;
@@ -480,13 +476,13 @@ footer>a{
 }
 
 .form_inputs>input{
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.1rem;
     padding:0.5rem;
     width: 75%;
     border: none;
     font-family: calibri;
     text-align: left;
-    background-color: #c3c2c2;
+    background-color: #e9e7e7e0;
     color: #000000
 }
 
@@ -496,7 +492,7 @@ footer>a{
 
 .div_form>h1{
     font-size: 1.5rem;
-    margin-bottom: 0rem;
+    margin-bottom: 1rem;
 }
 
 .div_form>a{
@@ -506,7 +502,7 @@ footer>a{
 }
 
 .submit_button{
-    margin-bottom: 1rem;
+    margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
     width: 100%;
@@ -636,7 +632,7 @@ footer>a{
     }
 
     .div_form{
-        margin-right:0
+        margin:0px
     }
 
     .div_form>a{
@@ -655,7 +651,7 @@ footer>a{
         max-width: 90%;
         padding: 1.5rem;
         width: 40rem;
-        height: 32rem;
+        height: 34rem;
         margin-top: 35%;
     }
 
@@ -712,7 +708,7 @@ footer>a{
 
     .submit_button{
         margin-top: 0rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 3rem;
         margin-left: auto;
         margin-right: auto;
         width: 100%;
@@ -926,6 +922,10 @@ footer>a{
         padding: 15px 0;
         margin: 0;
     }
+
+    .login_main{
+      height: auto;
+    }
 }
 
 
@@ -1057,24 +1057,21 @@ footer>a{
   .f-enlaces a {
     margin: 8px 0;
   }
-
-
-
-    .div_logo{
+  
+  .div_logo{
         display:none
-    }
+  }
 
-    .login_main{
+  .login_main{
         display: grid;
         place-items: center;
         max-width: 90%;
         padding: 1.2rem;
         width: 40rem;
-        height: 24rem;
         margin-top: 8rem;
-    }
+  }
 
-    .signup_main{
+  .signup_main{
         display: grid;
         place-items: center;
         padding: 1.5rem;
@@ -1083,7 +1080,7 @@ footer>a{
         width: 40rem;
         height: 24rem;
         margin-top: 8rem;
-    }
+  }
 
     .user_main{
       display: grid;
@@ -1104,20 +1101,19 @@ footer>a{
         width: 40rem;
         height: 16rem;
         margin-top: 8.5rem;
-    }
+  }
 
-    .fpassword_main>.div_form>h1{
+  .fpassword_main>.div_form>h1{
         font-size: 1.25rem;
-    }
-
-
-    .form_inputs{
+  }
+  
+  .form_inputs{
         margin-top: 1rem;
         margin-left: auto;
         margin-right: auto
-    }
+  }
 
-    .form_inputs>input{
+  .form_inputs>input{
         margin-bottom: 1.5rem;
         padding:0.25rem;
         width:100%;
@@ -1126,7 +1122,7 @@ footer>a{
         text-align: left;
         background-color: #c3c2c2;
         color: #000000
-    }
+  }
 
     .div_form>a{
         color:#FDF6F0;
@@ -1374,7 +1370,6 @@ footer>a{
 
 
 .container {
-
     justify-content: center;
     /* margin: 12px 0; */
     display: flex;
@@ -1430,6 +1425,7 @@ footer>a{
     width: 100%;
 
 }
+
 #numbers {
     background: #070707e0;
     display: flex;
@@ -1442,7 +1438,6 @@ footer>a{
     margin: 11px 180px;
     width: 18%;
 }
-
 
 .tittle-task {
 	width: 100%;
