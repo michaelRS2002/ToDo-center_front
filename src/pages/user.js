@@ -63,8 +63,8 @@ setTimeout(() => {
       popup.id = 'popup-message';
       document.body.appendChild(popup);
     }
-    popup.className = 'popup-message popup-success popup-show';
-    popup.innerHTML = message + '<button id="undo-btn" class="btn btn-delete" style="margin-left:1em;">Deshacer</button>';
+    popup.className = 'popup-message popup-error popup-show';
+    popup.innerHTML = message + '<button id="undo-btn" class="btn btn-primary" style="margin-left:1rem;">Deshacer</button>';
     clearTimeout(popup._timeout);
     popup._timeout = setTimeout(() => {
       popup.classList.remove('popup-show');
@@ -193,7 +193,8 @@ setTimeout(() => {
   }
 
   const path = window.location.pathname;
-if (
+
+  if (
   !localStorage.getItem('token') &&
   path !== '/login' &&
   path !== '/signup' &&
