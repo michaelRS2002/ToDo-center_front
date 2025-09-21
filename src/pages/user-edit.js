@@ -1,17 +1,18 @@
 export default function UserEdit() {
   const path = window.location.pathname;
-if (
-  !localStorage.getItem('token') &&
-  path !== '/login' &&
-  path !== '/signup' &&
-  path !== '/' &&
-  path !== '/forgot-password' &&
-  path !== '/reset' &&
-  path !== '/sitemap'
-) {
-  window.location.href = '/login';
-  return '';
-}
+
+  if (
+    !localStorage.getItem('token') &&
+    path !== '/login' &&
+    path !== '/signup' &&
+    path !== '/' &&
+    path !== '/forgot-password' &&
+    path !== '/reset' &&
+    path !== '/sitemap'
+  ) {
+    window.location.href = '/login';
+    return '';
+  }
 
   setTimeout(() => {
     // Popup logic
@@ -104,10 +105,13 @@ if (
 
   return `
     <body>
+    <a href="#" onclick="window.history.back();" class="volver">
+      <i class="fas fa-arrow-left"></i> Volver atrás
+    </a>
     <main class="user_main">
       <div class="div_form">
         <h1>
-          Ingrese sus nuevos datos
+          Cambie Su Informacion
         </h1>
         <div class="form_inputs">
           <label class="label">Nombre</label>
@@ -120,7 +124,7 @@ if (
           <input type="email" name="email" placeholder="ejemplo@gmail.com" class="input">
         </div>
         <div class="submit_button">
-          <input class="btn btn-primary" type="submit" value="Guardar datos">
+          <input class="btn btn-primary" type="submit" value="Guardar Datos">
         </div>
       </div>
       <div class="div_logo">

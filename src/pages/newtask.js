@@ -1,17 +1,18 @@
 export default function Newtask() {
   const path = window.location.pathname;
-if (
-  !localStorage.getItem('token') &&
-  path !== '/login' &&
-  path !== '/signup' &&
-  path !== '/' &&
-  path !== '/forgot-password' &&
-  path !== '/reset' &&
-  path !== '/sitemap'
-) {
-  window.location.href = '/login';
-  return '';
-}
+  if (
+    !localStorage.getItem('token') &&
+    path !== '/login' &&
+    path !== '/signup' &&
+    path !== '/' &&
+    path !== '/forgot-password' &&
+    path !== '/reset' &&
+    path !== '/sitemap'
+  ) {
+    window.location.href = '/login';
+    return '';
+  }
+
 
   setTimeout(() => {
     // Popup logic
@@ -138,6 +139,10 @@ if (
 
   return `
   <div class="container-contact100">
+    <a href="#" onclick="window.history.back();" class="volver">
+      <i class="fas fa-arrow-left"></i> Volver atrás
+    </a>
+
 		<div class="wrap-contact100">
 
         <h1>Informacion de Tarea</h1>

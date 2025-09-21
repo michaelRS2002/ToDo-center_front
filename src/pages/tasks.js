@@ -1,6 +1,4 @@
 export default function Tasks() {
-    
-
     // Retorna el HTML
     const html = `
     <div class="search-card">

@@ -2,11 +2,14 @@ export default function User() {
   // Elimina el CSS inline, ya está en buttons.css
 
   return `
-<body>
+  <body>
+  <a href="#" onclick="window.history.back();" class="volver">
+        <i class="fas fa-arrow-left"></i> Volver atrás
+      </a>
     <main class="user_main">
       <div class="div_form">
         <h1>
-          Datos del usuario
+          Datos de Usuario
         </h1>
         <div class="form_inputs">
           <label class="label">Nombre</label>
@@ -20,9 +23,9 @@ export default function User() {
           <label class="label">Miembro desde</label>
           <input type="text" name="member_since" readonly  placeholder="8 years" class="input">
         </div>
-        <div class="submit_button">
-          <button class="btn btn-primary" id="edit-profile-btn" onclick="window.location.href='/user-edit'">Editar perfil</button>
-          <button class="btn btn-delete" id="delete-profile-btn" type="button">Eliminar perfil</button>
+        <div class="submit_button_edit">
+          <button class="btn-edit" id="edit-profile-btn" onclick="window.location.href='/user-edit'">Editar Perfil</button>
+          <button class="btn-delete" id="delete-profile-btn" type="button">Eliminar Perfil</button>
         </div>
       </div>
       <div class="div_logo">

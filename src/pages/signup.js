@@ -131,6 +131,9 @@ export default function Signup() {
   }, 0);
 
   return `
+  <a href="#" onclick="window.history.back();" class="volver">
+      <i class="fas fa-arrow-left"></i> Volver atrás
+    </a>
     <main class="signup_main">
       <div class="div_form">
         <h1>

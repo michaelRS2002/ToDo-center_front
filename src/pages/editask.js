@@ -1,19 +1,19 @@
 export default function ediTask() {
   // Redirigir a login si no está autenticado
   const path = window.location.pathname;
-if (
-  !localStorage.getItem('token') &&
-  path !== '/login' &&
-  path !== '/signup' &&
-  path !== '/' &&
-  path !== '/forgot-password' &&
-  path !== '/reset' &&
-  path !== '/sitemap'
-) {
-  window.location.href = '/login';
-  return '';
-}
 
+  if (
+    !localStorage.getItem('token') &&
+    path !== '/login' &&
+    path !== '/signup' &&
+    path !== '/' &&
+    path !== '/forgot-password' &&
+    path !== '/reset' &&
+    path !== '/sitemap'
+  ) {
+    window.location.href = '/login';
+    return '';
+  }
 
   const taskToEditId = localStorage.getItem("taskToEdit");
   console.log("En edit", taskToEditId);
@@ -55,9 +55,12 @@ if (
 
   const html = `
   <div class="container-contact100">
+  <a href="#" onclick="window.history.back();" class="volver">
+      <i class="fas fa-arrow-left"></i> Volver atrás
+    </a>
     <div class="wrap-contact100">
       <h1>✏️ Editar Tarea</h1>
-      <form id="edit-task-form" data-id="${task._id || task.id}">
+      <form id="task-form" data-id="${task._id || task.id}">
         <label for="edit-task-name">Título</label>
         <input class="input100" type="text" id="edit-task-name" name="titulo" value="${task.titulo || ''}" required>
         

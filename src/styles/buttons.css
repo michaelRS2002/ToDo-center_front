@@ -1,12 +1,31 @@
 /* Botón eliminar (rojo) */
 .btn-delete {
-  background-color: var(--color-danger);
-  border-color: var(--color-danger);
+  background-color: #dc3545;
+  border-color: #dc3545;
   color: var(--color-white);
+  transition: none;
+  transition: var(--btn-transition);
+
 }
-.btn-delete:hover:not(:disabled) {
-  background-color: var(--color-danger-hover);
-  border-color: var(--color-danger-hover);
+.btn-delete:hover {
+  background-color: #c21a2b;
+  border-color: #c21a2b;
+  color: var(--color-white);
+  box-shadow: 0 6px 15px rgba(57, 57, 59, 0.4);
+}
+
+.btn-edit {
+  transition: var(--btn-transition);
+  background-color: var(--color-success);
+  border-color: var(--color-success);
+  color: var(--color-white) ;
+}
+
+.btn-edit:hover {
+  background-color: var(--color-success-hover);
+  border-color: var(--color-success-hover);
+  color: var(--color-gray-800);
+  box-shadow: 0 6px 15px rgba(57, 57, 59, 0.4);
 }
 /* Variables CSS para fácil personalización */
 :root {
@@ -15,16 +34,16 @@
   --btn-transition: all 0.2s ease-in-out;
   
   /* Colores */
-  --color-primary: #3b82f6;
-  --color-primary-hover: #2563eb;
+  --color-primary: #2563eb;
+  --color-primary-hover: #2150b6;
   --color-secondary: #6b7280;
   --color-secondary-hover: #4b5563;
-  --color-success: #10b981;
-  --color-success-hover: #059669;
+  --color-success: #28a745;
+  --color-success-hover: #187c30;
   --color-warning: #f59e0b;
   --color-warning-hover: #d97706;
-  --color-danger: #ef4444;
-  --color-danger-hover: #dc2626;
+  --color-danger: #dc3545;
+  --color-danger-hover: #c21a2b;
   --color-white: #ffffff;
   --color-gray-100: #f3f4f6;
   --color-gray-200: #e5e7eb;
@@ -76,12 +95,13 @@
 .btn-primary {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
-  color: var(--color-white);
+  color: var(--color-gray-800);
 }
 
 .btn-primary:hover:not(:disabled) {
   background-color: var(--color-primary-hover);
   border-color: var(--color-primary-hover);
+  color: var(--color-gray-800);
 }
 
 .btn-primary:active {
