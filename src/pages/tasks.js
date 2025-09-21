@@ -409,6 +409,22 @@ function initializeTasksPage() {
             loadTasks();
         }
     });
+
+    //Atajos de teclas para usuarios avanzados (heuristica 7)
+    function keyPressHandler(e) {
+      if (e.ctrlKey && e.keyCode == 32) { //presionar CTRL + espacio para crear una nueva tarea
+          window.dispatchEvent(new CustomEvent("navigate", { detail: "/newtask" }));
+      }
+
+      if (e.altKey && e.keyCode == 81) { //presionar ALT + Q para ir al perfil de usuario
+          window.dispatchEvent(new CustomEvent("navigate", { detail: "/profile" }));
+      }
+
+      if (e.keyCode == 36) { //Presionar tecla home o inicio para volver a la landing page
+          window.dispatchEvent(new CustomEvent("navigate", { detail: "/" }));
+      }
+    }
+    window.addEventListener('keydown', keyPressHandler);
 }
 
 
