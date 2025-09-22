@@ -144,7 +144,7 @@ export default function Newtask() {
               window.location.href = '/tasks';
             }, 1200);
           } else {
-            // showError(data.message || 'No se pudo crear la tarea.');
+            showError(data.message || 'No se pudo crear la tarea.');
             return;
           }
         } catch (err) {
