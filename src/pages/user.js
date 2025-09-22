@@ -127,7 +127,7 @@ setTimeout(() => {
         modal.style.left = '0';
         modal.style.width = '100vw';
         modal.style.height = '100vh';
-        modal.style.background = 'rgba(239,68,68,0.15)'; // color-danger con opacidad
+        modal.style.background = 'rgba(239,68,68,0.15)';
         modal.style.display = 'flex';
         modal.style.alignItems = 'center';
         modal.style.justifyContent = 'center';
@@ -163,6 +163,25 @@ setTimeout(() => {
       });
       if (!password) {
         showPopup('Debes ingresar tu contraseña', 'error');
+        return;
+      }
+      // Validar contraseña con backend antes de mostrar undo
+      const token = localStorage.getItem('token');
+      try {
+        let headers = { 'Content-Type': 'application/json' };
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+        const response = await fetch('https://todo-center-back.onrender.com/api/users/validate-password', {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify({ password })
+        });
+        const data = await response.json();
+        if (!response.ok || !data.valid) {
+          showPopup(data.message || 'Contraseña incorrecta.', 'error');
+          return;
+        }
+      } catch (err) {
+        showPopup('No se pudo validar la contraseña.', 'error');
         return;
       }
       let undo = false;
