@@ -131,7 +131,7 @@ export default function Newtask() {
           const data = await response.json();
           if (response.status === 200 || response.status === 201) {
             const successMessage = `✅ Tarea "${titulo}" creada exitosamente!\n📅 Fecha: ${fecha}${start ? `\n🕐 Horario: ${start} - ${end}` : ''}`;
-            showSuccess(successMessage);
+            alert(successMessage);
             // Opcional: agregar la tarea a localStorage para reflejar en la UI sin recargar
             let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
             if (data.task) {
