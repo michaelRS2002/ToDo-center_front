@@ -288,7 +288,7 @@ function initializeTasksPage() {
             window.dispatchEvent(new CustomEvent("navigate", { detail: "/editask" }));
         });
 
-        task_delete_el.addEventListener('click', () => {
+        task_delete_el.addEventListener('click', async () => {
             const confirmDelete = confirm(`🗑️ ¿Eliminar la tarea "${taskData.titulo || ''}"?`);
             if (!confirmDelete) return;
             if (task_content_el.classList.contains("checked")) {
@@ -296,6 +296,22 @@ function initializeTasksPage() {
             }
             totalTasks--;
             updateStats();
+            // Eliminar del backend
+            const token = localStorage.getItem('token');
+            try {
+                const response = await fetch(`https://todo-center-back.onrender.com/api/tasks/${taskData._id || taskData.id}`,
+                    {
+                        method: 'DELETE',
+                        headers: token ? { 'Authorization': `Bearer ${token}` } : {}
+                    }
+                );
+                if (!response.ok) {
+                    alert('No se pudo eliminar la tarea del servidor');
+                }
+            } catch (err) {
+                alert('Error de red al eliminar la tarea');
+            }
+            // Eliminar del localStorage
             deleteTaskFromStorage(taskData._id || taskData.id);
             task_el.remove();
         });
