@@ -69,23 +69,14 @@ setTimeout(() => {
       popup.id = 'popup-message';
       document.body.appendChild(popup);
     }
-    let seconds = 10;
     popup.className = 'popup-message popup-error popup-show';
-    popup.innerHTML = `<span id="undo-msg">${message} <b id="undo-count">${seconds}</b>s.</span><button id="undo-btn" class="btn btn-primary" style="margin-left:1rem;background-color:#3b82f6;border-color:#3b82f6;">Deshacer</button>`;
+    popup.innerHTML = message + '<button id="undo-btn" class="btn btn-primary" style="margin-left:1rem;background-color:#3b82f6;border-color:#3b82f6;">Deshacer</button>';
     clearTimeout(popup._timeout);
-    let countSpan = popup.querySelector('#undo-count');
-    let interval = setInterval(() => {
-      seconds--;
-      if (countSpan) countSpan.textContent = seconds;
-      if (seconds <= 0) clearInterval(interval);
-    }, 1000);
     popup._timeout = setTimeout(() => {
       popup.classList.remove('popup-show');
-      clearInterval(interval);
     }, 10000);
     document.getElementById('undo-btn').onclick = () => {
       popup.classList.remove('popup-show');
-      clearInterval(interval);
       if (onUndo) onUndo();
     };
   }
