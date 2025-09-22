@@ -51,7 +51,7 @@ export default function Newtask() {
           'inprocess': 'Haciendo',
           'completed': 'Hecho'
         };
-        const estadoReal = estadoMap[estadoSelect] || 'Por hacer';
+        const estadoReal = estadoMap[estadoSelect] || estadoSelect;
 
         // Validaciones estrictas frontend
         if (!titulo) {
