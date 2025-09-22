@@ -70,7 +70,7 @@ setTimeout(() => {
       document.body.appendChild(popup);
     }
     popup.className = 'popup-message popup-error popup-show';
-    popup.innerHTML = message + '<button id="undo-btn" class="btn btn-primary" style="margin-left:1rem;">Deshacer</button>';
+    popup.innerHTML = message + '<button id="undo-btn" class="btn btn-primary" style="margin-left:1rem;background-color:#3b82f6;border-color:#3b82f6;">Deshacer</button>';
     clearTimeout(popup._timeout);
     popup._timeout = setTimeout(() => {
       popup.classList.remove('popup-show');
@@ -127,7 +127,7 @@ setTimeout(() => {
         modal.style.left = '0';
         modal.style.width = '100vw';
         modal.style.height = '100vh';
-        modal.style.background = 'rgba(0,0,0,0.4)';
+        modal.style.background = 'rgba(239,68,68,0.15)'; // color-danger con opacidad
         modal.style.display = 'flex';
         modal.style.alignItems = 'center';
         modal.style.justifyContent = 'center';
@@ -137,8 +137,8 @@ setTimeout(() => {
             <label style="margin-bottom:0.5em;font-weight:bold;">Ingresa tu contraseña para confirmar:</label>
             <input id="modal-password-input" type="password" style="padding:0.5em 1em;font-size:1em;width:100%;margin-bottom:1em;border-radius:6px;border:1px solid #ccc;" autofocus>
             <div style="display:flex;gap:1em;justify-content:center;width:100%;">
-              <button id="modal-password-ok" class="btn btn-primary">Confirmar</button>
-              <button id="modal-password-cancel" class="btn btn-secondary">Cancelar</button>
+              <button id="modal-password-ok" class="btn btn-delete" style="min-width:110px;">Eliminar</button>
+              <button id="modal-password-cancel" class="btn btn-primary" style="min-width:110px;">Cancelar</button>
             </div>
           </div>
         `;

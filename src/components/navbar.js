@@ -60,7 +60,16 @@ export default function Navbar() {
                         }
                     });
                     localStorage.removeItem('token');
-                    window.location.href = '/login';
+                    // Popup de éxito antes de redirigir
+                    if (window.showPopup) {
+                        window.showPopup('Cierre de sesión exitoso', 'success');
+                        setTimeout(() => {
+                            window.location.href = '/login';
+                        }, 1200);
+                    } else {
+                        alert('Cierre de sesión exitoso');
+                        window.location.href = '/login';
+                    }
                 } catch (err) {
                     if (window.showPopup) {
                         window.showPopup('Error al cerrar sesión', 'error');
