@@ -69,14 +69,23 @@ setTimeout(() => {
       popup.id = 'popup-message';
       document.body.appendChild(popup);
     }
+    let seconds = 10;
     popup.className = 'popup-message popup-error popup-show';
-    popup.innerHTML = message + '<button id="undo-btn" class="btn btn-primary" style="margin-left:1rem;background-color:#3b82f6;border-color:#3b82f6;">Deshacer</button>';
+    popup.innerHTML = `<span id="undo-msg">${message} <b id="undo-count">${seconds}</b>s.</span><button id="undo-btn" class="btn btn-primary" style="margin-left:1rem;background-color:#3b82f6;border-color:#3b82f6;">Deshacer</button>`;
     clearTimeout(popup._timeout);
+    let countSpan = popup.querySelector('#undo-count');
+    let interval = setInterval(() => {
+      seconds--;
+      if (countSpan) countSpan.textContent = seconds;
+      if (seconds <= 0) clearInterval(interval);
+    }, 1000);
     popup._timeout = setTimeout(() => {
       popup.classList.remove('popup-show');
+      clearInterval(interval);
     }, 10000);
     document.getElementById('undo-btn').onclick = () => {
       popup.classList.remove('popup-show');
+      clearInterval(interval);
       if (onUndo) onUndo();
     };
   }
@@ -165,25 +174,8 @@ setTimeout(() => {
         showPopup('Debes ingresar tu contraseña', 'error');
         return;
       }
-      // Validar contraseña con backend antes de mostrar undo
-      const token = localStorage.getItem('token');
-      try {
-        let headers = { 'Content-Type': 'application/json' };
-        if (token) headers['Authorization'] = `Bearer ${token}`;
-        const response = await fetch('https://todo-center-back.onrender.com/api/users/validate-password', {
-          method: 'POST',
-          headers: headers,
-          body: JSON.stringify({ password })
-        });
-        const data = await response.json();
-        if (!response.ok || !data.valid) {
-          showPopup(data.message || 'Contraseña incorrecta.', 'error');
-          return;
-        }
-      } catch (err) {
-        showPopup('No se pudo validar la contraseña.', 'error');
-        return;
-      }
+      // Solo valida que el campo no esté vacío antes de mostrar undo
+      // El backend validará la contraseña al intentar el DELETE
       let undo = false;
       showUndoPopup('Cuenta será eliminada en 10 segundos. ', () => {
         undo = true;
