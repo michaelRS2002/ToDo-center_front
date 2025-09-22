@@ -133,12 +133,12 @@ setTimeout(() => {
         modal.style.justifyContent = 'center';
         modal.style.zIndex = '9999';
         modal.innerHTML = `
-          <div style="background:#fff;padding:2em 2em 1.5em 2em;border-radius:10px;box-shadow:0 2px 16px #0002;min-width:300px;max-width:90vw;display:flex;flex-direction:column;align-items:center;">
-            <label style="margin-bottom:0.5em;font-weight:bold;">Ingresa tu contraseña para confirmar:</label>
-            <input id="modal-password-input" type="password" style="padding:0.5em 1em;font-size:1em;width:100%;margin-bottom:1em;border-radius:6px;border:1px solid #ccc;" autofocus>
-            <div style="display:flex;gap:1em;justify-content:center;width:100%;">
-              <button id="modal-password-ok" class="btn btn-delete" style="min-width:110px;">Eliminar</button>
-              <button id="modal-password-cancel" class="btn btn-primary" style="min-width:110px;">Cancelar</button>
+          <div style="background:#111;color:#fff;padding:2em 2em 1.5em 2em;border-radius:10px;box-shadow:0 2px 16px #0008;min-width:300px;max-width:90vw;display:flex;flex-direction:column;align-items:center;">
+            <label style=\"margin-bottom:0.5em;font-weight:bold;color:#fff;\">Ingresa tu contraseña para confirmar:</label>
+            <input id=\"modal-password-input\" type=\"password\" style=\"padding:0.5em 1em;font-size:1em;width:100%;margin-bottom:1em;border-radius:6px;border:1px solid #444;background:#222;color:#fff;\" autofocus>
+            <div style=\"display:flex;gap:1em;justify-content:center;width:100%;\">
+              <button id=\"modal-password-ok\" class=\"btn btn-delete\" style=\"min-width:110px;background:#ef4444;border-color:#ef4444;color:#fff;\">Eliminar</button>
+              <button id=\"modal-password-cancel\" class=\"btn btn-primary\" style=\"min-width:110px;background:#3b82f6;border-color:#3b82f6;color:#fff;\">Cancelar</button>
             </div>
           </div>
         `;
