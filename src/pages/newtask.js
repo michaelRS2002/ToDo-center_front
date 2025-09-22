@@ -116,9 +116,7 @@ export default function Newtask() {
             })
           });
           const data = await response.json();
-          if (!response.ok) {
-            showError(data.message || 'No se pudo crear la tarea.');
-          } else {
+          if (response.status === 200 || response.status === 201) {
             showSuccess('¡Tarea creada exitosamente!');
             // Opcional: agregar la tarea a localStorage para reflejar en la UI sin recargar
             let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -129,6 +127,9 @@ export default function Newtask() {
             setTimeout(() => {
               window.location.href = '/tasks';
             }, 1200);
+          } else {
+            showError(data.message || 'No se pudo crear la tarea.');
+            return;
           }
         } catch (err) {
           showError('No se pudo conectar con el servidor.');
