@@ -75,8 +75,8 @@ export default function Newtask() {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         if (inputDate < today) {
-          showError('La fecha debe ser futura');
-          return;
+          const confirmPast = confirm("⚠️ La fecha seleccionada es en el pasado. ¿Continuar?");
+          if (!confirmPast) return;
         }
         // Validar hora formato HH:mm
         const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
@@ -93,6 +93,22 @@ export default function Newtask() {
         if (!validSelectValues.includes(estadoSelect)) {
           showError('Estado inválido');
           return;
+        }
+
+        // Verificar duplicados en localStorage
+        try {
+          let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+          const duplicateTask = tasks.find(t => 
+            t.titulo && t.titulo.toLowerCase() === titulo.toLowerCase() && 
+            t.fecha === fecha
+          );
+          
+          if (duplicateTask) {
+            const confirmDuplicate = confirm(`⚠️ Ya existe una tarea "${titulo}" para ${fecha}. ¿Crear de todas formas?`);
+            if (!confirmDuplicate) return;
+          }
+        } catch (error) {
+          console.log('Error verificando duplicados:', error);
         }
 
         const token = localStorage.getItem('token');
@@ -114,18 +130,21 @@ export default function Newtask() {
           });
           const data = await response.json();
           if (response.status === 200 || response.status === 201) {
-            showSuccess('¡Tarea creada exitosamente!');
+            const successMessage = `✅ Tarea "${titulo}" creada exitosamente!\n📅 Fecha: ${fecha}${start ? `\n🕐 Horario: ${start} - ${end}` : ''}`;
+            showSuccess(successMessage);
             // Opcional: agregar la tarea a localStorage para reflejar en la UI sin recargar
             let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
             if (data.task) {
               tasks.push(data.task);
               localStorage.setItem('tasks', JSON.stringify(tasks));
             }
+            // Limpiar formulario
+            form.reset();
             setTimeout(() => {
               window.location.href = '/tasks';
             }, 1200);
           } else {
-            // showError(data.message || 'No se pudo crear la tarea.');
+            showError(data.message || 'No se pudo crear la tarea.');
             return;
           }
         } catch (err) {

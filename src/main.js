@@ -9,13 +9,6 @@ export function render(path) {
 
   if (routes[path]) {
     app.innerHTML = routes[path]();
-
-    if (path === "/newtask") {
-      import("/utils/newtask.js")
-        .then(module => module.default?.())
-        .catch(err => console.error("Error cargando newtask.js:", err));
-    }
-
   } else {
     app.innerHTML = '<h1>404</h1><p>Página no encontrada.</p>';
   }
