@@ -1,17 +1,18 @@
 export default function UserEdit() {
   const path = window.location.pathname;
-if (
-  !localStorage.getItem('token') &&
-  path !== '/login' &&
-  path !== '/signup' &&
-  path !== '/' &&
-  path !== '/forgot-password' &&
-  path !== '/reset' &&
-  path !== '/sitemap'
-) {
-  window.location.href = '/login';
-  return '';
-}
+
+  if (
+    !localStorage.getItem('token') &&
+    path !== '/login' &&
+    path !== '/signup' &&
+    path !== '/' &&
+    path !== '/forgot-password' &&
+    path !== '/reset' &&
+    path !== '/sitemap'
+  ) {
+    window.location.href = '/login';
+    return '';
+  }
 
   setTimeout(() => {
     // Popup logic
@@ -103,34 +104,40 @@ if (
   }, 0);
 
   return `
-    <body>
-    <main class="signup_main">
+    <a href="#" onclick="window.history.back();" class="volver">
+      <i class="fas fa-arrow-left"></i> Volver atrás
+    </a>
+    <main class="user_main">
       <div class="div_form">
         <h1>
-          Ingrese sus nuevos datos
+          Cambie Su Informacion
         </h1>
         <div class="form_inputs">
           <label class="label">Nombre</label>
-          <input type="text" name="names" placeholder="Names" class="input">
+          <input type="text" name="names" placeholder="Juan Pedro" class="input">
           <label class="label">Apellido</label>
-          <input type="text" name="surnames" placeholder="Surname" class="input">
+          <input type="text" name="surnames" placeholder="Gonzalez" class="input">
           <label class="label">Edad</label>
-          <input type="number" name="age" placeholder="Age" class="input">
+          <input type="number" name="age" placeholder="18" class="input">
           <label class="label">Email</label>
-          <input type="email" name="email" placeholder="example@gmail.com" class="input">
+          <input type="email" name="email" placeholder="ejemplo@gmail.com" class="input">
         </div>
         <div class="submit_button">
-          <input class="btn btn-primary" type="submit" value="Guardar datos">
+          <input class="btn btn-primary" type="submit" value="Guardar Datos">
         </div>
       </div>
       <div class="div_logo">
-        <img src="./images/logo.png" width="300rem" height="auto">
+        <img src="/images/logo.png" width="300rem" height="auto">
       </div>
-    
-    <footer>
-      <a href="/sitemap">Sitemap</a> 
-    </footer>
+  
     </main>
-  </body>
+    <footer>
+      <div class="footer-left">
+        <a href="/sitemap">-Sitemap</a>
+      </div>
+      <div class="footer-right">
+        <a>M3JD INC.</a>
+      </div>
+    </footer>
  `;
 }

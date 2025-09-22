@@ -1,6 +1,4 @@
 export default function Tasks() {
-    
-
     // Retorna el HTML
     const html = `
     <div class="search-card">
@@ -50,6 +48,14 @@ export default function Tasks() {
             </section>
         </div>
     </section>
+    <footer>
+      <div class="footer-left">
+        <a href="/sitemap">-Sitemap</a>
+      </div>
+      <div class="footer-right">
+        <a>M3JD INC.</a>
+      </div>
+    </footer>
     <a href="/newtask" class="boton-fijo">+</a>
     `;
 
@@ -282,7 +288,7 @@ function initializeTasksPage() {
             window.dispatchEvent(new CustomEvent("navigate", { detail: "/editask" }));
         });
 
-        task_delete_el.addEventListener('click', () => {
+        task_delete_el.addEventListener('click', async () => {
             const confirmDelete = confirm(`🗑️ ¿Eliminar la tarea "${taskData.titulo || ''}"?`);
             if (!confirmDelete) return;
             if (task_content_el.classList.contains("checked")) {
@@ -290,6 +296,22 @@ function initializeTasksPage() {
             }
             totalTasks--;
             updateStats();
+            // Eliminar del backend
+            const token = localStorage.getItem('token');
+            try {
+                const response = await fetch(`https://todo-center-back.onrender.com/api/tasks/${taskData._id || taskData.id}`,
+                    {
+                        method: 'DELETE',
+                        headers: token ? { 'Authorization': `Bearer ${token}` } : {}
+                    }
+                );
+                if (!response.ok) {
+                    alert('No se pudo eliminar la tarea del servidor');
+                }
+            } catch (err) {
+                alert('Error de red al eliminar la tarea');
+            }
+            // Eliminar del localStorage
             deleteTaskFromStorage(taskData._id || taskData.id);
             task_el.remove();
         });
@@ -411,6 +433,22 @@ function initializeTasksPage() {
             loadTasks();
         }
     });
+
+    //Atajos de teclas para usuarios avanzados (heuristica 7)
+    function keyPressHandler(e) {
+      if (e.ctrlKey && e.keyCode == 32) { //presionar CTRL + espacio para crear una nueva tarea
+          window.dispatchEvent(new CustomEvent("navigate", { detail: "/newtask" }));
+      }
+
+      if (e.altKey && e.keyCode == 81) { //presionar ALT + Q para ir al perfil de usuario
+          window.dispatchEvent(new CustomEvent("navigate", { detail: "/profile" }));
+      }
+
+      if (e.keyCode == 36) { //Presionar tecla home o inicio para volver a la landing page
+          window.dispatchEvent(new CustomEvent("navigate", { detail: "/" }));
+      }
+    }
+    window.addEventListener('keydown', keyPressHandler);
 }
 
 

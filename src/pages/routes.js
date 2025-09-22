@@ -18,7 +18,7 @@ export const routes = {
   '/forgot-password': Fpassword,
   '/sitemap': Sitemap,
   '/profile': User,
-  '/user-edit': UserEdit,
+  '/profile/edit': UserEdit,
   '/tasks': Tasks,
   '/newtask': Newtask,
   '/editask': Editask,

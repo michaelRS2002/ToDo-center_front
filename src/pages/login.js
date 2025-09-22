@@ -73,10 +73,13 @@ export default function Login() {
   }, 0);
 
   return `
+  <a href="#" onclick="window.history.back();" class="volver">
+      <i class="fas fa-arrow-left"></i> Volver atrás
+    </a>
     <main class="login_main">
       <div class="div_form">
         <h1>
-          Iniciar sesión
+          Iniciar Sesión
         </h1>
         <form class="form_inputs" action="/submit" method="POST">
             <label class="label label-required">Correo</label>
@@ -93,10 +96,15 @@ export default function Login() {
       <div class="div_logo">
         <img src="./images/logo.png" class="logo" width= "300rem" height="auto">
       </div>
-    
-    <footer>
-      <a href="/sitemap">Sitemap</a> 
-    </footer>
     </main>
+
+    <footer>
+      <div class="footer-left">
+        <a href="/sitemap">-Sitemap</a>
+      </div>
+      <div class="footer-right">
+        <a>M3JD INC.</a>
+      </div>
+    </footer>
   `;
 }

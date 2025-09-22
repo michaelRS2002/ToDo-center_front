@@ -110,6 +110,6 @@ export default function Home() {
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
         </div>
-        <p class="copyright">© 2025 M3JD .INC  MAPA DEL SITIO</p>
+        <p class="copyright">© 2025 M3JD .INC</p>
     </section>`;
 }

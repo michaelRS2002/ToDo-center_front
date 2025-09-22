@@ -2,11 +2,13 @@ export default function User() {
   // Elimina el CSS inline, ya está en buttons.css
 
   return `
-<body>
-    <main class="signup_main">
+  <a href="#" onclick="window.history.back();" class="volver">
+        <i class="fas fa-arrow-left"></i> Volver atrás
+      </a>
+    <main class="user_main">
       <div class="div_form">
         <h1>
-          Datos del usuario
+          Datos de Usuario
         </h1>
         <div class="form_inputs">
           <label class="label">Nombre</label>
@@ -20,19 +22,23 @@ export default function User() {
           <label class="label">Miembro desde</label>
           <input type="text" name="member_since" readonly  placeholder="8 years" class="input">
         </div>
-        <div class="submit_button">
-          <a class="btn btn-primary" href="/user-edit">Editar perfil</a>
-          <button class="btn btn-delete" id="delete-profile-btn" type="button">Eliminar perfil</button>
+        <div class="submit_button_edit">
+          <button class="btn-edit" id="edit-profile-btn" onclick="window.location.href='/profile/edit'">Editar Perfil</button>
+          <button class="btn-delete" id="delete-profile-btn" type="button">Eliminar Perfil</button>
         </div>
       </div>
       <div class="div_logo">
         <img src="./images/logo.png" width= "300rem" height="auto">
       </div>
-    <footer>
-      <a href="/sitemap">Sitemap</a>
-    </footer>
     </main>
-  </body>
+    <footer>
+      <div class="footer-left">
+        <a href="/sitemap">-Sitemap</a>
+      </div>
+      <div class="footer-right">
+        <a>M3JD INC.</a>
+      </div>
+    </footer>
   `;
 }
 
@@ -63,8 +69,8 @@ setTimeout(() => {
       popup.id = 'popup-message';
       document.body.appendChild(popup);
     }
-    popup.className = 'popup-message popup-success popup-show';
-    popup.innerHTML = message + '<button id="undo-btn" class="btn btn-delete" style="margin-left:1em;">Deshacer</button>';
+    popup.className = 'popup-message popup-error popup-show';
+    popup.innerHTML = message + '<button id="undo-btn" class="btn btn-primary" style="margin-left:1rem;">Deshacer</button>';
     clearTimeout(popup._timeout);
     popup._timeout = setTimeout(() => {
       popup.classList.remove('popup-show');
@@ -193,7 +199,8 @@ setTimeout(() => {
   }
 
   const path = window.location.pathname;
-if (
+
+  if (
   !localStorage.getItem('token') &&
   path !== '/login' &&
   path !== '/signup' &&
