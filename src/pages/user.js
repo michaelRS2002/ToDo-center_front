@@ -2,7 +2,6 @@ export default function User() {
   // Elimina el CSS inline, ya está en buttons.css
 
   return `
-  <body>
   <a href="#" onclick="window.history.back();" class="volver">
         <i class="fas fa-arrow-left"></i> Volver atrás
       </a>
@@ -24,18 +23,22 @@ export default function User() {
           <input type="text" name="member_since" readonly  placeholder="8 years" class="input">
         </div>
         <div class="submit_button_edit">
-          <button class="btn-edit" id="edit-profile-btn" onclick="window.location.href='/user-edit'">Editar Perfil</button>
+          <button class="btn-edit" id="edit-profile-btn" onclick="window.location.href='/profile/edit'">Editar Perfil</button>
           <button class="btn-delete" id="delete-profile-btn" type="button">Eliminar Perfil</button>
         </div>
       </div>
       <div class="div_logo">
         <img src="./images/logo.png" width= "300rem" height="auto">
       </div>
-    <footer>
-      <a href="/sitemap">Sitemap</a>
-    </footer>
     </main>
-  </body>
+    <footer>
+      <div class="footer-left">
+        <a href="/sitemap">-Sitemap</a>
+      </div>
+      <div class="footer-right">
+        <a>M3JD INC.</a>
+      </div>
+    </footer>
   `;
 }
 

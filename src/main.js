@@ -36,6 +36,8 @@ document.addEventListener('click', onNavClick);
 // Navbar siempre fijo
 document.getElementById('navbar').innerHTML = Navbar();
 
+
+
 // Render inicial
 render(window.location.pathname);
 

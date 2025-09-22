@@ -20,7 +20,11 @@ export default function Sitemap() {
     </main>
 
     <footer>
-      <a>M3JD .INC</a>
-   </footer>
+      <div class="footer-left">
+      </div>
+      <div class="footer-right">
+        <a>M3JD INC.</a>
+      </div>
+    </footer>
     `;
 }

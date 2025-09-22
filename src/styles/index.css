@@ -418,9 +418,11 @@ p {
 
 
 footer {
+    display: flex;
+    flex-wrap: nowrap;
     text-align: left;
     position: fixed;
-    background-color: rgb(58, 58, 58);
+    background-color: #171717;
     left: 0;
     right: 0;
     bottom: 0;
@@ -430,6 +432,15 @@ footer {
 footer>a{
     font-size: 1rem;
     color: #FDF6F0
+}
+
+.footer-left{
+  text-align: left;
+}
+
+.footer-right{
+  margin-left: auto;
+  text-align: right;
 }
 
 .div_logo{
