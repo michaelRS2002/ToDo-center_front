@@ -45,16 +45,13 @@ export default function Newtask() {
         const end = document.getElementById('end-time').value;
         const estadoSelect = document.getElementById('task-status').value;
 
-        // Mapear valores del select a los valores válidos del backend (ambos idiomas)
+        // Mapear valores del select a los valores válidos del backend
         let estadoMap = {
-          'Por hacer': 'Por hacer',
-          'Haciendo': 'Haciendo',
-          'Hecho': 'Hecho',
           'pending': 'Por hacer',
           'inprocess': 'Haciendo',
           'completed': 'Hecho'
         };
-        const estadoReal = estadoMap[estadoSelect] || estadoSelect;
+        const estadoReal = estadoMap[estadoSelect] || 'Por hacer';
 
         // Validaciones estrictas frontend
         if (!titulo) {
@@ -92,8 +89,8 @@ export default function Newtask() {
           return;
         }
         // Validar estado
-        const validStatus = ['Por hacer', 'Haciendo', 'Hecho'];
-        if (!validStatus.includes(estadoReal)) {
+        const validSelectValues = ['pending', 'inprocess', 'completed'];
+        if (!validSelectValues.includes(estadoSelect)) {
           showError('Estado inválido');
           return;
         }
