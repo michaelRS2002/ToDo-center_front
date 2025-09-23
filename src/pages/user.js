@@ -196,7 +196,7 @@ setTimeout(() => {
   }
 
   const path = window.location.pathname;
-
+/*
   if (
   !localStorage.getItem('token') &&
   path !== '/login' &&
@@ -209,5 +209,6 @@ setTimeout(() => {
   window.location.href = '/login';
   return '';
 }
+  */
 
 }, 0);
