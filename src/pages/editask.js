@@ -54,49 +54,49 @@ export default function ediTask() {
   }
 
   const html = `
-  <div class="container-contact100">
-  <a href="#" onclick="window.history.back();" class="volver">
-      <i class="fas fa-arrow-left"></i> Volver atrás
-    </a>
-    <div class="wrap-contact100">
-      <h1>✏️ Editar Tarea</h1>
-      <form id="task-form" data-id="${task._id || task.id}">
-        <label for="edit-task-name">Título</label>
-        <input class="input100" type="text" id="edit-task-name" name="titulo" value="${task.titulo || ''}" required>
-        
-        <label for="edit-task-desc">Descripción</label>
-        <textarea class="inputedit" id="edit-task-desc" name="detalle" placeholder="Agregue una descripción">${task.detalle || ''}</textarea>
-        
-        <div class="form-row">
-          <div class="form-group">
-            <label for="edit-task-date">Fecha</label>
-            <input type="date" id="edit-task-date" name="fecha" value="${fechaValue}" required>
-          </div>
-          <div class="form-group">
-            <label for="edit-start-time">Inicio</label>
-            <input type="time" id="edit-start-time" name="start" value="${task.start || ''}">
-          </div>
-          <div class="form-group">
-            <label for="edit-end-time">Fin</label>
-            <input type="time" id="edit-end-time" name="end" value="${task.end || ''}">
-          </div>
-          <div class="form-group">
-            <label for="edit-task-status">Estado de Tarea</label>
-            <select id="edit-task-status" name="estado">
-              <option value="Por hacer" ${estadoActual === "Por hacer" ? "selected" : ""}>Por hacer</option>
-              <option value="Haciendo" ${estadoActual === "Haciendo" ? "selected" : ""}>Haciendo</option>
-              <option value="Hecho" ${estadoActual === "Hecho" ? "selected" : ""}>Hecho</option>
-            </select>
-          </div>
+<div class="container-contact100">
+<a href="#" onclick="window.history.back();" class="volver">
+    <i class="fas fa-arrow-left"></i> Volver atrás
+  </a>
+  <div class="wrap-contact100">
+    <h1>✏️ Editar Tarea</h1>
+    <form id="edit-task-form" data-id="${task._id || task.id}">
+      <label for="edit-task-name">Título</label>
+      <input class="input100" type="text" id="edit-task-name" name="titulo" value="${task.titulo || ''}" required>
+      
+      <label for="edit-task-desc">Descripción</label>
+      <textarea class="inputedit" id="edit-task-desc" name="detalle" placeholder="Agregue una descripción">${task.detalle || ''}</textarea>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="edit-task-date">Fecha</label>
+          <input type="date" id="edit-task-date" name="fecha" value="${fechaValue}" required>
         </div>
-        <div class="button-group">
-          <button type="submit" class="update-btn">Actualizar</button>
-          <a href="/tasks" class="cancel-btn">Cancelar</a>
+        <div class="form-group">
+          <label for="edit-start-time">Inicio</label>
+          <input type="time" id="edit-start-time" name="start" value="${task.start || ''}">
         </div>
-      </form>
-    </div>
+        <div class="form-group">
+          <label for="edit-end-time">Fin</label>
+          <input type="time" id="edit-end-time" name="end" value="${task.end || ''}">
+        </div>
+        <div class="form-group">
+          <label for="edit-task-status">Estado de Tarea</label>
+          <select id="edit-task-status" name="estado">
+            <option value="Por hacer" ${estadoActual === "Por hacer" ? "selected" : ""}>Por hacer</option>
+            <option value="Haciendo" ${estadoActual === "Haciendo" ? "selected" : ""}>Haciendo</option>
+            <option value="Hecho" ${estadoActual === "Hecho" ? "selected" : ""}>Hecho</option>
+          </select>
+        </div>
+      </div>
+      <div class="button-group">
+        <button type="submit" class="update-btn">Actualizar</button>
+        <a href="/tasks" class="cancel-btn">Cancelar</a>
+      </div>
+    </form>
   </div>
-  `;
+</div>
+`;
 
   // Ejecutar el JavaScript después de renderizar
   setTimeout(() => {
@@ -206,41 +206,62 @@ function initializeEditTaskForm(taskId) {
           estado
         })
       });
-      const data = await response.json();
+      
       if (!response.ok) {
-        if (Array.isArray(data.errors) && data.errors.length > 0) {
-          data.errors.forEach(err => {
+        const errorData = await response.json().catch(() => ({}));
+        console.error('Update error:', errorData);
+        
+        if (Array.isArray(errorData.errors) && errorData.errors.length > 0) {
+          errorData.errors.forEach(err => {
             alert('❌ ' + (err.msg || err.message || 'Error de validación'));
           });
         } else {
-          alert('❌ ' + (data.message || 'No se pudo actualizar la tarea.'));
+          alert('❌ ' + (errorData.message || 'No se pudo actualizar la tarea.'));
         }
         return;
       }
-      // Actualizar localStorage
-      let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-      // Encontrar índice de la tarea a actualizar por _id
-      const taskIndex = tasks.findIndex(t => t._id === taskId || t.id == taskId);
-      if (taskIndex === -1) {
-        alert("❌ Error: Tarea no encontrada");
-        return;
+      
+      const data = await response.json();
+      
+      // Actualizar localStorage solo si el backend confirmó éxito
+      const tasksLS = JSON.parse(localStorage.getItem("tasks")) || [];
+      const taskIndex = tasksLS.findIndex(t => 
+        (t._id && t._id === taskId) || 
+        (t.id && t.id == taskId)
+      );
+      
+      if (taskIndex !== -1) {
+        const originalTask = tasksLS[taskIndex];
+        const updatedTask = { 
+          ...originalTask, 
+          titulo, 
+          detalle, 
+          fecha, 
+          start, 
+          end, 
+          estado,
+          status: estado === "Hecho" ? "completed" : 
+                  estado === "Haciendo" ? "inprocess" : "pending",
+          updatedAt: new Date().toISOString() 
+        };
+        
+        tasksLS[taskIndex] = updatedTask;
+        localStorage.setItem("tasks", JSON.stringify(tasksLS));
+        console.log("Tarea actualizada:", updatedTask);
       }
-      // Mantener algunos campos originales si es necesario
-      const originalTask = tasks[taskIndex];
-      const updatedTask = { ...originalTask, titulo, detalle, fecha, start, end, estado, updatedAt: new Date().toISOString() };
-      tasks[taskIndex] = updatedTask;
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-      console.log("Tarea actualizada:", updatedTask);
+      
       // Mostrar mensaje de éxito
       const successMessage = `✅ Tarea "${titulo}" actualizada exitosamente!\n📅 Fecha: ${fecha}${start ? `\n🕐 Horario: ${start} - ${end}` : ''}`;
       alert(successMessage);
-      // Redirigir a la página principal después de un delay
+      
+      // Redirigir usando el sistema de navegación
       setTimeout(() => {
-        window.location.href = "/tasks";
+        window.dispatchEvent(new CustomEvent("navigate", { detail: "/tasks" }));
       }, 1000);
+      
     } catch (error) {
       console.error("Error al actualizar la tarea:", error);
-      alert("❌ Error al actualizar la tarea. Por favor, intenta de nuevo.");
+      alert("❌ Error de conexión al actualizar la tarea. Por favor, intenta de nuevo.");
     }
   });
 

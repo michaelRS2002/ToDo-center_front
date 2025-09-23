@@ -93,12 +93,12 @@ export default function Rese() {
           Cambiar contraseña
         </h1>
         <div class="form_inputs">
-          <label class="label label-required">Contraseña</label>
+          <label class="label label-required mt-4">Contraseña</label>
           <input type="password" name="new_password" placeholder="******" class="input">
-          <label class="label label-required">Confirmar contraseña</label>
+          <label class="label label-required mt-6">Confirmar contraseña</label>
           <input type="password" name="com_password" placeholder="Confirmar contraseña" class="input">
         </div>
-        <div class="submit_button">
+        <div class="submit_button mt-4">
           <input class="btn btn-primary" type="submit" value="Guardar contraseña">
         </div>
       </div>
@@ -106,5 +106,13 @@ export default function Rese() {
         <img src="./images/logo.png" width= "300rem" height="auto">
       </div>
     </main>
+    <footer>
+      <div class="footer-left">
+        <a href="/sitemap">-Sitemap</a>
+      </div>
+      <div class="footer-right">
+        <a>M3JD INC.</a>
+      </div>
+    </footer>
   `;
 }

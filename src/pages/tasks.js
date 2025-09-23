@@ -48,6 +48,14 @@ export default function Tasks() {
             </section>
         </div>
     </section>
+    <footer>
+      <div class="footer-left">
+        <a href="/sitemap">-Sitemap</a>
+      </div>
+      <div class="footer-right">
+        <a>M3JD INC.</a>
+      </div>
+    </footer>
     <a href="/newtask" class="boton-fijo">+</a>
     `;
 
@@ -252,26 +260,100 @@ function initializeTasksPage() {
         task_el.appendChild(task_actions_el);
 
         // Event listeners
-        task_content_el.addEventListener('click', () => {
+        task_content_el.addEventListener('click', async () => {
+            const oldStatus = task_content_el.classList.contains("checked") ? "completed" : 
+                     (taskData.estado === "Haciendo" || taskData.status === "inprocess") ? "inprocess" : "pending";
+    
             task_content_el.classList.toggle('checked');
             task_input_el.classList.toggle('textchecked');
 
+            let newStatus;
+            let newEstado;
+    
             if (task_content_el.classList.contains("checked")) {
+                newStatus = "completed";
+                newEstado = "Hecho";
                 completedTasks++;
                 completedListEl.appendChild(task_el);
-                updateTaskStatusInStorage(taskData._id || taskData.id, "completed");
             } else {
                 if (taskData.estado === "Haciendo" || taskData.status === "inprocess") {
+                    newStatus = "inprocess";
+                    newEstado = "Haciendo";
                     completedTasks--;
                     inprocessListEl.appendChild(task_el);
-                    updateTaskStatusInStorage(taskData._id || taskData.id, "inprocess");
                 } else {
+                    newStatus = "pending";
+                    newEstado = "Por hacer";
                     completedTasks--;
                     list_el.appendChild(task_el);
-                    updateTaskStatusInStorage(taskData._id || taskData.id, "pending");
                 }
             }
+    
             updateStats();
+    
+            // Actualizar en backend inmediatamente
+            const token = localStorage.getItem('token');
+            try {
+                const response = await fetch(`https://todo-center-back.onrender.com/api/tasks/${taskData._id || taskData.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+                    },
+                    body: JSON.stringify({
+                        titulo: taskData.titulo,
+                        detalle: taskData.detalle,
+                        fecha: taskData.fecha,
+                        start: taskData.start,
+                        end: taskData.end,
+                        estado: newEstado
+                    })
+                });
+                
+                if (!response.ok) {
+                    // Revertir cambios visuales si falla
+                    task_content_el.classList.toggle('checked');
+                    task_input_el.classList.toggle('textchecked');
+                    
+                    if (oldStatus === "completed") {
+                        completedTasks++;
+                        completedListEl.appendChild(task_el);
+                    } else if (oldStatus === "inprocess") {
+                        if (newStatus === "completed") completedTasks--;
+                        inprocessListEl.appendChild(task_el);
+                    } else {
+                        if (newStatus === "completed") completedTasks--;
+                        list_el.appendChild(task_el);
+                    }
+                    
+                    updateStats();
+                    alert('❌ No se pudo actualizar el estado de la tarea');
+                    return;
+                }
+                
+                // Actualizar localStorage solo si backend confirmó
+                updateTaskStatusInStorage(taskData._id || taskData.id, newStatus);
+                
+            } catch (error) {
+                // Revertir cambios si hay error de red
+                task_content_el.classList.toggle('checked');
+                task_input_el.classList.toggle('textchecked');
+                
+                if (oldStatus === "completed") {
+                    completedTasks++;
+                    completedListEl.appendChild(task_el);
+                } else if (oldStatus === "inprocess") {
+                    if (newStatus === "completed") completedTasks--;
+                    inprocessListEl.appendChild(task_el);
+                } else {
+                    if (newStatus === "completed") completedTasks--;
+                    list_el.appendChild(task_el);
+                }
+                
+                updateStats();
+                console.error('Error updating task status:', error);
+                alert('❌ Error de conexión al actualizar la tarea');
+            }
         });
 
         task_edit_el.addEventListener("click", () => {
@@ -280,7 +362,7 @@ function initializeTasksPage() {
             window.dispatchEvent(new CustomEvent("navigate", { detail: "/editask" }));
         });
 
-        task_delete_el.addEventListener('click', () => {
+        task_delete_el.addEventListener('click', async () => {
             const confirmDelete = confirm(`🗑️ ¿Eliminar la tarea "${taskData.titulo || ''}"?`);
             if (!confirmDelete) return;
             if (task_content_el.classList.contains("checked")) {
@@ -288,6 +370,22 @@ function initializeTasksPage() {
             }
             totalTasks--;
             updateStats();
+            // Eliminar del backend
+            const token = localStorage.getItem('token');
+            try {
+                const response = await fetch(`https://todo-center-back.onrender.com/api/tasks/${taskData._id || taskData.id}`,
+                    {
+                        method: 'DELETE',
+                        headers: token ? { 'Authorization': `Bearer ${token}` } : {}
+                    }
+                );
+                if (!response.ok) {
+                    alert('No se pudo eliminar la tarea del servidor');
+                }
+            } catch (err) {
+                alert('Error de red al eliminar la tarea');
+            }
+            // Eliminar del localStorage
             deleteTaskFromStorage(taskData._id || taskData.id);
             task_el.remove();
         });
