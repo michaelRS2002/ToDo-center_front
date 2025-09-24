@@ -161,13 +161,5 @@ export default function Signup() {
         <img src="./images/logo.png" width= "300rem" height="auto">
       </div>
     </main>
-    <footer>
-      <div class="footer-left">
-        <a href="/sitemap">-Sitemap</a>
-      </div>
-      <div class="footer-right">
-        <a>M3JD INC.</a>
-      </div>
-    </footer>
   `;
 }
