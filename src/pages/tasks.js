@@ -48,14 +48,6 @@ export default function Tasks() {
             </section>
         </div>
     </section>
-    <footer>
-      <div class="footer-left">
-        <a href="/sitemap">-Sitemap</a>
-      </div>
-      <div class="footer-right">
-        <a>M3JD INC.</a>
-      </div>
-    </footer>
     <a href="/newtask" class="boton-fijo">+</a>
     `;
 
